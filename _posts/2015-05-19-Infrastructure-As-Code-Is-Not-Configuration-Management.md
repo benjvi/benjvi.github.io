@@ -12,8 +12,8 @@ For the past few months, I have been concerned with deploying complex applicatio
 
 The infrastructure provisioning process is quite a complex one: many different kinds of resources need to be created, and very often one resource must be instantiated before another can start to be built. It is desirable that the resource provisionings that don't depend on each other are performed in parallel, as some provisioning actions can take quite a long time. This sequence of dependency relations can be naturally described as a directed acyclic graph. Let's see the graphs for a couple of example infrastructure configurations:
 
-<img src="/{{site.url}}/img/lync-graph.png" style="min-height:230px"/>
-<img src="/{{site.url}}/img/cluster-coreos.png" style="max-height:230px"/>
+<img src="{{site.url}}/img/lync-graph.png" style="min-height:230px"/>
+<img src="{{site.url}}/img/cluster-coreos.png" style="max-height:230px"/>
 
 These correspond to a Lync installation and a CoreOS cluster, respectively. For the Lync installation (for example), this diagram tells us that the Lync Windows template must be present before the VMs (instances) can be created, as must the networks be present before the VMs are added to them. One VM has an additional volume, so the VM must be ready before that volume can be attached.
 

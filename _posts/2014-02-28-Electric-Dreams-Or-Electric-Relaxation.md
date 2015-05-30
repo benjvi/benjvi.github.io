@@ -15,7 +15,7 @@ This is a story that can be illustrated with two simple graphics.
 
 <div id='chart'>
   <svg style='height:500px'> </svg>
-</div><script src='/{{site.url}}/assets/javascripts/scatter.js' type='text/javascript'></script>
+</div><script src='{{site.url}}/assets/javascripts/scatter.js' type='text/javascript'></script>
 
 This first chart tells the story of the company called Tesla Motors, the upstart who had a breakout success with the Tesla Roadster. Their initial success gave them a great deal of financing and clout which they invested to - again - hit a home run with the Model S. These are both premium cars, and their appeal lies in their advanced nature. This is haute technology - their customers know they are buying into the best thing out there, even if they have to pay a price to do so. They take the state-of-the-art in battery technology, lifted straight from the realms of laptop batteries - and make it work on a grand scale. As a result, the batteries have a much longer range than anything else. The new cars can recharge very quickly, too. Tesla are currently building a supercharger network that allows you to recharge in the same time it takes to refill. There's even an ostentatious (and delightful) 17 inch touchscreen where the dashboard should be. 
 
@@ -25,7 +25,7 @@ The thing that is striking about this picture is how little any other company se
 
 <div id='chart2'>
   <svg style='height:500px'> </svg>
-</div><script src='/{{site.url}}/assets/javascripts/scatter2.js' type='text/javascript'></script>
+</div><script src='{{site.url}}/assets/javascripts/scatter2.js' type='text/javascript'></script>
 
 
 It is here that we find how the rest of the auto industry has chosen to advance things. On the price point. The cost has dropped dramatically for electric vehicles, and the technology advances mean we are getting to the point where the lease pricing model, previously necessary to sell cars with very expensive batteries, is no longer required.

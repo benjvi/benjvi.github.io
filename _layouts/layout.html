@@ -36,15 +36,15 @@
 		<header>
 			<div class="menu">
 				BENJVI
-				 - <a href="/{{site.url}}/">POSTS</a>
+				 - <a href="{{site.url}}/">POSTS</a>
 				{% for cat in site.categories %}
-					- <a href="/{{site.url}}/Categories/{{ cat[0] }}.html">{{ cat[0] }}</a> 
+					- <a href="{{site.url}}/Categories/{{ cat[0] }}.html">{{ cat[0] }}</a> 
 				{% endfor %}
-				 - <a href="/{{site.url}}/profile.html">PROFILE</a>
+				 - <a href="{{site.url}}/profile.html">PROFILE</a>
 				
 			</div>
 			<div class="bannerholder">
-			<img src="/{{site.url}}/img/{{page.image}}" class="banner"/>
+			<img src="{{site.url}}/img/{{page.image}}" class="banner"/>
 			</div>
 			<div class="overlay">
 				<div class="overlaytext"></div>

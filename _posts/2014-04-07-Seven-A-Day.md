@@ -18,9 +18,9 @@ I certainly want to get on board with each of these benefits. But, I have a "pra
 
 ##Step 1: Identify some vegetables that you love
 
-<img src="/{{site.url}}/img/asparagus.jpg" style="max-height:200px"/>
-<img src="/{{site.url}}/img/sauerkraut.jpg" style="max-height:200px"/>
-<img src="/{{site.url}}/img/blueberries.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/asparagus.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/sauerkraut.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/blueberries.jpg" style="max-height:200px"/>
 
 Hopefully, this shouldn't be too hard. Vegetables are not all hateful. There are the lovely crunchy carrots we can eat as a snack, or tomatoes and onions, which form the basis of so many types of sauce or stew you might like to make. There is spinach, which is lovely with garlic and with eggs. Or cabbage, which is the national food of the Germans (in the form of <a href="http://thehealthyeatingsite.com/how-to-make-sauerkraut/">sauerkraut</a>), and for good reason. The Japanese also eat a lot of cabbage in the form of okonomiyaki, when they're not eating edamame or pickled ginger. And, there are many more. Really, this step of identifying what you like is vital to a sensible nutritional plan - as eating things you don't like everyday is unrealistic and, frankly unpleasant.
 
@@ -34,9 +34,9 @@ Most of the common foods sold as convenience lunches have remarkably little vege
 
 ##Step 4: Add some side vegetables to each meal
 
-<img src="/{{site.url}}/img/green-beans.jpg" style="max-height:200px"/>
-<img src="/{{site.url}}/img/carrots.jpg" style="max-height:200px"/>
-<img src="/{{site.url}}/img/edamame.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/green-beans.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/carrots.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/edamame.jpg" style="max-height:200px"/>
 
 A typical main portion of a dish will tend to have around one portion of vegetables (tomato/onion/garlic etc..). For example, in a spaghetti bolognese you have some meat, some tomato in the sauce, and the spaghetti. So, with two main meals a day, that is not going to get you close enough to the target. You can add some green beans, carrots, or a side salad depending on how you feel, and depending on the meal. The more the better - feel liberated to experiment with swedes, radishes, asparagus and whatever weird and wonderful things you can think of.
 
@@ -52,10 +52,10 @@ For hunger pangs that are beginning to bite, you can ward them off with more sub
 
 ##Step 7: Mix things up - Colour is good...more colour is better
 
-<img src="/{{site.url}}/img/spinach.jpg" style="max-height:200px"/>
-<img src="/{{site.url}}/img/cherry-tomatoes.jpg" style="max-height:200px"/>
-<img src="/{{site.url}}/img/swede-soup.jpg" style="max-height:200px"/>
-<img src="/{{site.url}}/img/red-cabbage.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/spinach.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/cherry-tomatoes.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/swede-soup.jpg" style="max-height:200px"/>
+<img src="{{site.url}}/img/red-cabbage.jpg" style="max-height:200px"/>
 
 The natural thing to go for in a diet is variety. Its good to try different things: different flavours, different textures, different combinations. It stops you getting bored. Moreover, I believe that the body naturally craves for a variety of food, so that we consume all the different types of nutrients we need. We get iron from spinach, potassium from bananas, vitamin C from oranges. And the medical advice extends this idea. Since food with different colours contain different types of vitamins, they say that to improve our health, we should try to eat foods of all different types and different colours. This is a good philosophy - of variety, trying new things, of mix-and-match.
 
