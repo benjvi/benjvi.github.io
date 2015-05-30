@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+
+<html>
+  <div class="column">
+	  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Benjamin Vickers" />
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/normalize.css" /> 
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/standard.css" /> 
+		<link rel="stylesheet" type="text/css" href='/blog/assets/css/nv.d3.css' /> 
+		<script src='/blog/assets/javascripts/d3.v3.js'></script>
+		<script src='/blog/assets/javascripts/nv.d3.js'></script>
+		<script src='/blog/assets/javascripts/prettify.js'></script>
+		<script src='/blog/assets/javascripts/stream_layers.js'></script>
+		<title>Repeat Sales means House Prices</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- mathJAX -->
+		<script type="text/javascript" 
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<!-- google analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-55111700-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>		
+	  </head>
+	  <body>
+		<header>
+			<div class="menu">
+				BENJVI
+				 - <a href="/blog/">POSTS</a>
+				
+					- <a href="/blog/Categories/thoughts.html">thoughts</a> 
+				
+					- <a href="/blog/Categories/science.html">science</a> 
+				
+					- <a href="/blog/Categories/arts.html">arts</a> 
+				
+					- <a href="/blog/Categories/technology.html">technology</a> 
+				
+				 - <a href="/blog/profile.html">PROFILE</a>
+				
+			</div>
+			<div class="bannerholder">
+			<img src="/blog/img/ibelonghere.png" class="banner"/>
+			</div>
+			<div class="overlay">
+				<div class="overlaytext"></div>
+				<h1>Repeat Sales means House Prices</h1>
+			</div>
+		</header>
+		<section>
+		  <div class="content">
+  <div id="post">
+    <!--<h1></h1>-->
+	<div class="postcontent">
+		<div class="date">December  7, 2014</div>
+		<p><p>
+There is a problem with the way houses are traded. Since houses are so heterogeneous, it is hard to estimate what they are worth according to any consistent methodology - and it is hard to place them into a trend. If I look at a stock, for example, it is frequently traded so I know that the price I would buy at reflects the market value. The history of its price growth is available and hence we have some clues as to whether this value seems to reflect an underconfident or alternatively an overinflated market (one overinflated might currently growing at 20% per year, for example). However, this is currently not the case for those looking to buy a house - the asking price is the single price point available, and whether it is market value can normally be only determined by the level of interest, by ad hoc comparisons, or by an expensive valuation process. We need a method to be able to value houses on a local basis, whilst taking into account their heterogeneous nature.
+</p>
+<!--more-->
+<h2>Background</h2>
+<p>
+The Repeat Sales Regression method is one very productive approach. It is a widely used methodology for calculating house price indexes -- used for the Case-Schiller Index, the Federal Housing Finance Agency, the UK Official HPI, and many others. Essentially it is a technical tool for aggregating values for highly heterogeneous and rarely traded assets. Clearly - houses are one such set of assets. Over time, house prices in an area, a city or even in a country follow a general trend. But, it is evident that houses even on the most localised level are very different from each other. A decrepid, cramped studio flat may be next to a luxuriously refurbished 5-bed house, so <em>therefore</em> an average price for an area does not tell us very much about the actual price we should expect to pay for any particular property.
+</p>
+<p>
+ Likewise, over a given period, the change in the average price paid in each sale does not indicate an aggregate change in values in the market - since the change in values depends precisely on which houses have been sold. If lower value houses start to be sold more frequently, then this could be misinterpreted as a fall in aggregate market values (actually if we do not correct for this effect we will not know if this is really the trend or not).
+</p>
+<p>
+The Repeat Sales Regression solves these problems. An index is constructed by means of comparison of the price of any sale that takes place with the price paid for the same property at an earlier point in time. Hence, if we assume that the nature of the housing stock is, on aggregate, unchanged, then we are able to construct an index that uses all the available transactional data in order to give an average factor increase at any period covered by the data. This index can furthermore be used for prediction of values for properties that have already been transacted in the dataset.
+</p>
+<p>
+ Since the Land Registry has released transactional data for all house sales since 1995, the data set that is available to inform such an endeavour is by now quite large and quite comprehensive. Publicly available indexes based on this data are available but are geographically too broad in scope to account for heterogeneous trends in the market arising from the neighbourhood level.
+</p>
+<h2>Method</h2>
+<p>
+Lets now look at the construction of the regression:
+</p>
+<ol>
+	<li><p>We format the initial dataset as a sparsely populated matrix with T time periods of equal durations <script type="math/tex">t_0 \ldots t_T</script> and with prices corresponding to residences during N ownership periods  <script type="math/tex">P_{0,t} \ldots P_{N,t}</script> at each time period (N.B. since each property may have more than one ownership in the dataset, to ensure all pricing information is captured we must capture each ownership with a separate matrix row - this will become clearer as we go on). This representation gives us a sensible and intuitive mathematical representation of the data set:</p>
+	 <p><script type="math/tex"> \\\mbox{Pricing Information }D_{N,T}=\left( \begin{array}{ccc}
+	 P_{1,t_0} & P_{1,t_1} & \ldots & P_{1,t_T} \\
+	 P_{2,t_0} & P_{2,t_1} & \ldots & P_{2,t_T} \\
+	 \vdots & \vdots & \ddots & \vdots \\
+	 P_{N,t_0} & P_{N,t_1} & \ldots & P_{N,t_T} \end{array} \right) \\
+	 </script></p>
+	 <p>
+	 N.B. since we specify the time periods are equally spaced we can set <script type="math/tex">t_0=0,t_1=1, \ldots t_T=T</script> for simplicity.</p>
+	</li>
+	<li>We introduce a quantity we want to calculate, this is the vector <script type="math/tex">I_t</script>. This represents the house price index (a scalar value) produced for out sampled population <script type="math/tex">P_0 \ldots P_N</script> at each point in time <script type="math/tex">t=0 \ldots T</script>. This scalar quantity represents the geometric aggregate growth amount at any time t by the ratio <script type="math/tex">I_t/I_0</script>
+	</li>
+	<li>With the terms already set up, hopefully is is clear that we can set up an equation representing our model:
+	<p><script type="math/tex">\frac{P_{n,t_2}}{P_{n,t_1}} = \frac{I_{t_2}}{I_{t_1}} + \varepsilon_n </script></p>
+	Here <script type="math/tex">\varepsilon_n</script> is an idiosyncratic error term representing the deviation of house <em>n</em> from the overall trend in the dataset. In words, therefore this model asserts: "The ratio of the price of a property at time of sale 1, <script type="math/tex">t_1</script> to the price at time of sale 2, <script type="math/tex">t_2</script>, is equal to the ratio of the calculated house price index plus an individual idiosyncratic error term,  <script type="math/tex">\varepsilon_n</script>.
+	</li>
+	<li>By means of a mathematical derivation that we can omit here, the model equation is transformed into a matrix equation:
+	<p><script type="math/tex"> \\ T_{N,T} I_T = L_N </script></p>
+	Where the values in the matrices and vectors are defined as:
+	<p><script type="math/tex">
+	T_{n,t} = \left\{ \begin{array}{ll}
+	 -1 & \mbox{at } t_{houseBought} \\
+	1 & \mbox{at } t_{houseSold}  \\
+	0 & \mbox{otherwise} \end{array} \right. \\
+	L_n = \ln{\frac{P_{n,t_2}}{P_{n,t_1}}} \mbox{ with } t_2 = t_{houseBought}, t_2 = t_{houseSold} \\
+	I_t = \mbox{Price Index Vector} \\
+	</script></p>
+	</li>
+</ol>
+Once we have set up these variables,we will apply a standardized Ordinary Least Squares regression to find the index vector from the Transaction Matrix and the Log Price Vector. This is the output from our model, and shows the general trend for the houses in our model. See some preliminary examples of the results:
+
+<h4>Hammersmith (W6)</h4>
+<div id='hammersmith-chart'>
+  <svg style='height:500px'> </svg>
+</div><script src='/blog/assets/javascripts/houseindexplot.js' type='text/javascript'></script>
+
+<h4>Holland Park (W11)</h4>
+<div id='hollandpark-chart'>
+  <svg style='height:500px'> </svg>
+</div>
+<h4>Shepherd's Bush (W12)</h4>
+<div id='shepherdsbush-chart'>
+  <svg style='height:500px'> </svg>
+</div>
+
+Plotting them together, it is (a little) easier to understand how the trends relate to each other.
+<div id='combined-chart'>
+  <svg style='height:500px'> </svg>
+</div>
+
+A few notes on these graphs:
+<ul>
+	<li>There is a high degree of correlation between the three price trends. The areas are neighbouring each other (although with slightly different demographics) so we expect the same basic trend. But, the only trend difference that seems evident visually is that the growth in Holland Park becomes slightly faster than the growth in Hammersmith.</li>
+	<li>Although we plot overall prices, we might be interested in the rate of return. In which case, it is worth noting that Shepherd's Bush started from a significantly lower price point, so it has not necessarily underperformed here (although we can also see that it has not overperformed).</li>
+	<li>There is a lot of volatility in the indexes measured. This is due to two parts:
+		<ol>
+		<li>There is large variance due to the short time intervals used (one month). We only have limited sales in each period (maybe an average of 6-10) so therefore, we do not have enough information in the individual periods to capture an accurate average price.</li>
+		<li>There is volatility in the market itself. Volatility in a market is often associated with speculation, so this would be useful information. We need to eliminate the confounding variables in order to measure it though.</li>
+		</ol>
+	</li>
+</ul>
+
+<h2>Upcoming Work</h2>
+
+On the basis of this information we can also calculate some more concrete (perhaps more directly useful) metrics: most important would be the predicted price of a house that was already transacted in our dataset. To do this we can now simply input the calculated index values, along with the previous transaction price, into the model equation (step 3 in the construction). We also need to investigate the variance, by lengthening the index periods slightly to reduce model volatility and then making a calculation of the remaining variance. 
+
+<h2>References</h2>
+<ul>
+	<li>
+	Bailey, M., R. Muth, and H. Nourse. 1963. <em>A Regression Method for Real Estate Price Index Construction</em>. Journal of the American Statistical Association 58: 933-942.
+	</li>
+	<li>
+	Case, K., and R. Shiller. 1987. <em>Prices of Single Family Homes Since 1970: New Indexes for Four Cities</em>. New England Economics Review September/October: 45-56. 
+	</li>
+	<li>
+	Goetzmann, W.. 1992. <em>The Accuracy of Real Estate Indices: Repeat Sale Estimators</em>. Journal of Real Estate Finance and Economics 5:5-53.
+	</li>
+	<li>
+	Goetzmann, W.. 1993. <em>Accounting for Taste: Art and Financial Markets over Three Centuries</em>. American Economic Review 83: 1370-1376. 
+	</li>
+	<li>
+	Kuo, C.L.. 1997. <em>A Bayesian Approach to the Construction and Comparison of Alternative House Price indices</em>. Journal of Real Estate Finance and Economics, 14: 113-132.
+	</li>
+	<li>
+	K Graddy, J Hamilton, R Pownall. 2012. <em>Repeat Sales Indexes: Estimation without Assuming that Errors in Asset Returns Are Independently Distributed</em>. Real Estate Economics, 40: 131-166
+	</li>
+</ul></p>
+	</div>
+	
+	<div class="categories">
+	Category: 
+	
+		<a href="/blog/Categories/science.html">science</a>
+	
+	</div>
+	<hr>
+  </div>
+</div>
+
+		</section>
+	  </body>
+	  <footer>
+		<div class="copyright">
+			Benjamin Vickers / 2013 / ©
+		</div>
+		<div class="projects">
+			<!--Projects: <a href="/AmIConnected/">Am I Well Connected</a>-->
+		</div>
+	  </footer>
+  </div>
+</html>

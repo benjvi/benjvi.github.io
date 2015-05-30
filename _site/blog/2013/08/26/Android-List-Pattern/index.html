@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+
+<html>
+  <div class="column">
+	  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Benjamin Vickers" />
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/normalize.css" /> 
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/standard.css" /> 
+		<link rel="stylesheet" type="text/css" href='/blog/assets/css/nv.d3.css' /> 
+		<script src='/blog/assets/javascripts/d3.v3.js'></script>
+		<script src='/blog/assets/javascripts/nv.d3.js'></script>
+		<script src='/blog/assets/javascripts/prettify.js'></script>
+		<script src='/blog/assets/javascripts/stream_layers.js'></script>
+		<title>Android: Editing Lists of Values</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- mathJAX -->
+		<script type="text/javascript" 
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<!-- google analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-55111700-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>		
+	  </head>
+	  <body>
+		<header>
+			<div class="menu">
+				BENJVI
+				 - <a href="/blog/">POSTS</a>
+				
+					- <a href="/blog/Categories/thoughts.html">thoughts</a> 
+				
+					- <a href="/blog/Categories/science.html">science</a> 
+				
+					- <a href="/blog/Categories/arts.html">arts</a> 
+				
+					- <a href="/blog/Categories/technology.html">technology</a> 
+				
+				 - <a href="/blog/profile.html">PROFILE</a>
+				
+			</div>
+			<div class="bannerholder">
+			<img src="/blog/img/ibelonghere.png" class="banner"/>
+			</div>
+			<div class="overlay">
+				<div class="overlaytext"></div>
+				<h1>Android: Editing Lists of Values</h1>
+			</div>
+		</header>
+		<section>
+		  <div class="content">
+  <div id="post">
+    <!--<h1></h1>-->
+	<div class="postcontent">
+		<div class="date">August 26, 2013</div>
+		<p><p>I have been working with lists in the Android app I'm working on, and I found that they have a bit of a learning curve. Its always the case in programming - there are some things, that seem like they should be easy, which can often be quite complicated. And, lists are one of those things in Android: not that intuitive; you have to learn to do things the "Android way". However, after coming to understand the tools that the Android framework gives us, we can quite quickly construct a flexible and robust solution.</p>
+
+<!--more-->
+
+
+<h3>Background - Basic UX</h3>
+
+<p>In keeping with UI patterns on mobile platforms, we should try to keep the screens very simple. So, as a simple phone-centric solution, I created one <code>Activity</code> class which would perform all the activities associated with displaying and updating the multivalued attribute. The object containing the list can be passed in and out quite simply as an extra in the <code>Intent</code>, as this object implements the <code>Parcelable</code> interface.</p>
+
+<h3>Activity Overview</h3>
+
+<p>At the top level, the solution breaks down into two parts:<br/>
+1. Loading a <code>ListView</code> with a customised item view containing <code>EditText</code>'s<br/>
+2. Assign a custom <code>Adapter</code> class which will interface between the elements in the UI and the list we want to manage.</p>
+
+<p>Now, let's break the problem down in more detail.</p>
+
+<h3>Implementing a <code>ListView</code></h3>
+
+<p>Implementing the <code>ListView</code> in itself is not so difficult. First we will define a top level layout for our <code>Activity</code> to use, which must contain the <code>ListView</code> that we will customize. This <code>ListView</code> object by itself only can specify how the items in the list are to be presented (eg the alignment of the list) and not the layout of the individual items in the list. As usual, we use <code>setContentView()</code> to load the class in our <code>Activity</code>. So in my layout resource file below, I take a standard list, and attach to it a header and a footer (defined in external layout files), which will ensure that a button to add additional entries to the list is always present, as well as save and cancel buttons:</p>
+
+<pre><code>&lt;RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"&gt;
+    &lt;include android:id="@+id/header"
+             layout="@layout/list_header_layout"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_alignParentTop="true" /&gt;
+    &lt;include android:id="@+id/footer"
+             layout="@layout/list_footer_layout"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true" /&gt;
+    &lt;ListView android:id="@+id/listinput"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/header"
+              android:layout_above="@id/footer"/&gt;
+&lt;/RelativeLayout&gt;
+</code></pre>
+
+<h3>A Custom Adapter</h3>
+
+<p>After loading the layout file, we must find the <code>ListView</code> object that is defined here so that we can attach a custom <code>Adapter</code> to it in our <code>Activity</code>. This <code>Adapter</code> will define the layout of the items in the list, and it will take care of initialising and updating those layouts. This class can initially seem a little opaque, though we can come to understand it by analysing the contents. There are some boilerplate methods we must add, but of primary importance is the following method that is used to load the layout of individual items in the list:</p>
+
+<pre><code>public View getView(int position, View convertView, ViewGroup parent) {
+    ViewHolder holder;
+
+    if (convertView == null) {
+        holder = new ViewHolder();
+        convertView = mInflater.inflate(R.layout.listitem_multivalueinput, null);
+        holder.attributeValue = (EditText) convertView.findViewById(R.id.attributeValue);
+        holder.attributeDeleteButton=(Button)convertView.findViewById(R.id.deleteValueButton);  
+        convertView.setTag(holder);
+    } else {
+        holder = (ViewHolder) convertView.getTag();
+    }
+
+    //Fill EditText with the value you have in data source
+    holder.attributeValue.setText(myAttributes.get(position).toString());
+    holder.attributeValue.setTag(position);
+    holder.attributeDeleteButton.setTag(position);
+
+    //we need to update adapter once we finish with editing
+    holder.attributeValue.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (!hasFocus){
+                final int position = (Integer) v.getTag();
+                final EditText Caption = (EditText) v;
+                if (!myAttributes.get(position).equals(Caption.getText().toString())) {
+                    myAttributes.add(position, Caption.getText().toString());
+                }
+            }
+        }
+    });
+   holder.attributeDeleteButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final int position = (Integer) v.getTag();
+            myAttributes.remove(position);
+            if (myAttributes.size() &lt; 1) {
+                myAttributes.add("");
+            }
+            notifyDataSetChanged();
+        }
+    });
+    return convertView;
+}
+</code></pre>
+
+<p>There are quite a few things going on here, so lets step through it one by one. Firstly, if we are instantiating a view for the first time, then we need to inflate (load) the view from a layout resource file - which I have defined as <code>listitem_multivalueinput</code>. This file is quite simple, it is just a <code>LinearLayout</code> containing an <code>EditText</code> and a <code>Button</code>:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"&gt;
+    &lt;EditText
+            android:id="@+id/attributeValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:layout_weight="7" /&gt;
+    &lt;Button
+            android:id="@+id/deleteValueButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x"  &lt;!--don't do this--&gt;
+            android:width="0dp"
+            android:layout_weight="1"
+            android:onClick="removeValue"/&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>The next step is to add the <code>EditText</code> and <code>Button</code> objects to a <code>ViewHolder</code> object. <code>ViewHolder</code> is a simple class which contains references to our layout objects. It is commonly used as we use it here, to tie the object references directly to the <code>ListItem</code> <code>View</code>. It is defined as a static class within the <code>Adapter</code>:</p>
+
+<pre><code>static class ViewHolder {
+    private EditText attributeValue;
+    private Button attributeDeleteButton;
+}
+</code></pre>
+
+<p>This reduces the number of calls that need to be made to the relatively expensive <code>findViewbyId()</code> method. Instead, when updating an existing <code>View</code> object, we can just grab the reference and go straight to populating the layout objects.</p>
+
+<p>Finally, once we have added in the initial list value to the <code>EditText</code> and added the position directly onto the <code>EditText</code> and <code>Button</code> objects (as it may be useful to refer to it later!), we will set up the event listeners on the layout objects in the list item. Here we have two:<br/>
+- <code>setFocusOnChangeListener()</code> on the <code>EditText</code>, which will write any altered value back into the underlying list whenever the <code>EditText</code> loses focus<br/>
+- <code>setOnClickListener()</code> on the <code>Button</code>, which removes the value at that position and then calls <code>notifyDataSetChanged()</code> to force the <code>ListView</code> to refresh, in order to reflect the changes</p>
+
+<h3>What's Left</h3>
+
+<p>That covers almost everything - the only thing we have to do now is to decide whether to persist our changes or not. Since changes are being made to our list in realtime as we update the GUI, all we would need to do is save our object and pass it to the next activity - or to cancel changes we can just <code>Finish()</code> our <code>Activity</code> without needing to do anything else.</p>
+
+<h3>Further Improvements</h3>
+
+<p>If we wanted to extend this to make the view format more re-usable, this would be a good feature to include in an Android <code>Fragment</code> - it could match the recommended use of fragments for list and details views quite well. Then we could extend this phone-centric solution to make it more suited to tablets as well. But that will be a topic for another day.</p>
+
+<h2>More Reading</h2>
+
+<p><a href="http://www.vogella.com/articles/AndroidListView/article.html">A Comprehensive Guide to ListViews</a> - with lots of nice diagrams!</p>
+</p>
+	</div>
+	
+	<div class="categories">
+	Category: 
+	
+		<a href="/blog/Categories/technology.html">technology</a>
+	
+	</div>
+	<hr>
+  </div>
+</div>
+
+		</section>
+	  </body>
+	  <footer>
+		<div class="copyright">
+			Benjamin Vickers / 2013 / ©
+		</div>
+		<div class="projects">
+			<!--Projects: <a href="/AmIConnected/">Am I Well Connected</a>-->
+		</div>
+	  </footer>
+  </div>
+</html>

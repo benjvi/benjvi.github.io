@@ -1,17 +1,67 @@
 <!DOCTYPE HTML>
 
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="author" content="Your Name" />
-    <title>{{ page.title }}</title>
-  </head>
-  <body>
-    <header>
-      <h1><a href="/">{{ page.title }}</a></h1>
-    </header>
-    <section>
-      {{ content }}
-    </section>
-  </body>
+  <div class="column">
+	  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Benjamin Vickers" />
+		<link rel="stylesheet" type="text/css" href="/{{site.url}}/assets/css/normalize.css" /> 
+		<link rel="stylesheet" type="text/css" href="/{{site.url}}/assets/css/standard.css" /> 
+		<link rel="stylesheet" type="text/css" href='/{{site.url}}/assets/css/nv.d3.css' /> 
+		<script src='/{{site.url}}/assets/javascripts/d3.v3.js'></script>
+		<script src='/{{site.url}}/assets/javascripts/nv.d3.js'></script>
+		<script src='/{{site.url}}/assets/javascripts/prettify.js'></script>
+		<script src='/{{site.url}}/assets/javascripts/stream_layers.js'></script>
+		<title>{{ page.title }}</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- mathJAX -->
+		<script type="text/javascript" 
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<!-- google analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-55111700-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>		
+	  </head>
+	  <body>
+		<header>
+			<div class="menu">
+				BENJVI
+				 - <a href="/{{site.url}}/">POSTS</a>
+				{% for cat in site.categories %}
+					- <a href="/{{site.url}}/Categories/{{ cat[0] }}.html">{{ cat[0] }}</a> 
+				{% endfor %}
+				 - <a href="/{{site.url}}/profile.html">PROFILE</a>
+				
+			</div>
+			<div class="bannerholder">
+			<img src="/{{site.url}}/img/{{page.image}}" class="banner"/>
+			</div>
+			<div class="overlay">
+				<div class="overlaytext"></div>
+				<h1>{{ page.title }}</h1>
+			</div>
+		</header>
+		<section>
+		  {{ content }}
+		</section>
+	  </body>
+	  <footer>
+		<div class="copyright">
+			Benjamin Vickers / 2013 / ©
+		</div>
+		<div class="projects">
+			<!--Projects: <a href="/AmIConnected/">Am I Well Connected</a>-->
+		</div>
+	  </footer>
+  </div>
 </html>

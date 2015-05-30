@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+
+<html>
+  <div class="column">
+	  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Benjamin Vickers" />
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/normalize.css" /> 
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/standard.css" /> 
+		<link rel="stylesheet" type="text/css" href='/blog/assets/css/nv.d3.css' /> 
+		<script src='/blog/assets/javascripts/d3.v3.js'></script>
+		<script src='/blog/assets/javascripts/nv.d3.js'></script>
+		<script src='/blog/assets/javascripts/prettify.js'></script>
+		<script src='/blog/assets/javascripts/stream_layers.js'></script>
+		<title>science</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- mathJAX -->
+		<script type="text/javascript" 
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<!-- google analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-55111700-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>		
+	  </head>
+	  <body>
+		<header>
+			<div class="menu">
+				BENJVI
+				 - <a href="/blog/">POSTS</a>
+				
+					- <a href="/blog/Categories/thoughts.html">thoughts</a> 
+				
+					- <a href="/blog/Categories/science.html">science</a> 
+				
+					- <a href="/blog/Categories/arts.html">arts</a> 
+				
+					- <a href="/blog/Categories/technology.html">technology</a> 
+				
+				 - <a href="/blog/profile.html">PROFILE</a>
+				
+			</div>
+			<div class="bannerholder">
+			<img src="/blog/img/ibelonghere.png" class="banner"/>
+			</div>
+			<div class="overlay">
+				<div class="overlaytext"></div>
+				<h1>science</h1>
+			</div>
+		</header>
+		<section>
+		  <div class="content">
+  <div class="related">
+      
+		   <div class="postpreview">
+			<div class="postcontent">
+				<div class="date">December  7, 2014</div>
+				<h2><a href="/blog//2014/12/07/House-Prices-With-Repeat-Sales-Regression">Repeat Sales means House Prices</a></h2>
+				<p><p>
+There is a problem with the way houses are traded. Since houses are so heterogeneous, it is hard to estimate what they are worth according to any consistent methodology - and it is hard to place them into a trend. If I look at a stock, for example, it is frequently traded so I know that the price I would buy at reflects the market value. The history of its price growth is available and hence we have some clues as to whether this value seems to reflect an underconfident or alternatively an overinflated market (one overinflated might currently growing at 20% per year, for example). However, this is currently not the case for those looking to buy a house - the asking price is the single price point available, and whether it is market value can normally be only determined by the level of interest, by ad hoc comparisons, or by an expensive valuation process. We need a method to be able to value houses on a local basis, whilst taking into account their heterogeneous nature.
+</p>
+<!--more-->
+<h2>Background</h2>
+<p>
+The Repeat Sales Regression method is one very productive approach. It is a widely used methodology for calculating house price indexes -- used for the Case-Schiller Index, the Federal Housing Finance Agency, the UK Official HPI, and many others. Essentially it is a technical tool for aggregating values for highly heterogeneous and rarely traded assets. Clearly - houses are one such set of assets. Over time, house prices in an area, a city or even in a country follow a general trend. But, it is evident that houses even on the most localised level are very different from each other. A decrepid, cramped studio flat may be next to a luxuriously refurbished 5-bed house, so <em>therefore</em> an average price for an area does not tell us very much about the actual price we should expect to pay for any particular property.
+</p>
+<p>
+ Likewise, over a given period, the change in the average price paid in each sale does not indicate an aggregate change in values in the market - since the change in values depends precisely on which houses have been sold. If lower value houses start to be sold more frequently, then this could be misinterpreted as a fall in aggregate market values (actually if we do not correct for this effect we will not know if this is really the trend or not).
+</p>
+<p>
+The Repeat Sales Regression solves these problems. An index is constructed by means of comparison of the price of any sale that takes place with the price paid for the same property at an earlier point in time. Hence, if we assume that the nature of the housing stock is, on aggregate, unchanged, then we are able to construct an index that uses all the available transactional data in order to give an average factor increase at any period covered by the data. This index can furthermore be used for prediction of values for properties that have already been transacted in the dataset.
+</p>
+<p>
+ Since the Land Registry has released transactional data for all house sales since 1995, the data set that is available to inform such an endeavour is by now quite large and quite comprehensive. Publicly available indexes based on this data are available but are geographically too broad in scope to account for heterogeneous trends in the market arising from the neighbourhood level.
+</p>
+<h2>Method</h2>
+<p>
+Lets now look at the construction of the regression:
+</p>
+<ol>
+	<li><p>We format the initial dataset as a sparsely populated matrix with T time periods of equal durations <script type="math/tex">t_0 \ldots t_T</script> and with prices corresponding to residences during N ownership periods  <script type="math/tex">P_{0,t} \ldots P_{N,t}</script> at each time period (N.B. since each property may have more than one ownership in the dataset, to ensure all pricing information is captured we must capture each ownership with a separate matrix row - this will become clearer as we go on). This representation gives us a sensible and intuitive mathematical representation of the data set:</p>
+	 <p><script type="math/tex"> \\\mbox{Pricing Information }D_{N,T}=\left( \begin{array}{ccc}
+	 P_{1,t_0} & P_{1,t_1} & \ldots & P_{1,t_T} \\
+	 P_{2,t_0} & P_{2,t_1} & \ldots & P_{2,t_T} \\
+	 \vdots & \vdots & \ddots & \vdots \\
+	 P_{N,t_0} & P_{N,t_1} & \ldots & P_{N,t_T} \end{array} \right) \\
+	 </script></p>
+	 <p>
+	 N.B. since we specify the time periods are equally spaced we can set <script type="math/tex">t_0=0,t_1=1, \ldots t_T=T</script> for simplicity.</p>
+	</li>
+	<li>We introduce a quantity we want to calculate, this is the vector <script type="math/tex">I_t</script>. This represents the house price index (a scalar value) produced for out sampled population <script type="math/tex">P_0 \ldots P_N</script> at each point in time <script type="math/tex">t=0 \ldots T</script>. This scalar quantity represents the geometric aggregate growth amount at any time t by the ratio <script type="math/tex">I_t/I_0</script>
+	</li>
+	<li>With the terms already set up, hopefully is is clear that we can set up an equation representing our model:
+	<p><script type="math/tex">\frac{P_{n,t_2}}{P_{n,t_1}} = \frac{I_{t_2}}{I_{t_1}} + \varepsilon_n </script></p>
+	Here <script type="math/tex">\varepsilon_n</script> is an idiosyncratic error term representing the deviation of house <em>n</em> from the overall trend in the dataset. In words, therefore this model asserts: "The ratio of the price of a property at time of sale 1, <script type="math/tex">t_1</script> to the price at time of sale 2, <script type="math/tex">t_2</script>, is equal to the ratio of the calculated house price index plus an individual idiosyncratic error term,  <script type="math/tex">\varepsilon_n</script>.
+	</li>
+	<li>By means of a mathematical derivation that we can omit here, the model equation is transformed into a matrix equation:
+	<p><script type="math/tex"> \\ T_{N,T} I_T = L_N </script></p>
+	Where the values in the matrices and vectors are defined as:
+	<p><script type="math/tex">
+	T_{n,t} = \left\{ \begin{array}{ll}
+	 -1 & \mbox{at } t_{houseBought} \\
+	1 & \mbox{at } t_{houseSold}  \\
+	0 & \mbox{otherwise} \end{array} \right. \\
+	L_n = \ln{\frac{P_{n,t_2}}{P_{n,t_1}}} \mbox{ with } t_2 = t_{houseBought}, t_2 = t_{houseSold} \\
+	I_t = \mbox{Price Index Vector} \\
+	</script></p>
+	</li>
+</ol>
+Once we have set up these variables,we will apply a standardized Ordinary Least Squares regression to find the index vector from the Transaction Matrix and the Log Price Vector. This is the output from our model, and shows the general trend for the houses in our model. See some preliminary examples of the results:
+
+<h4>Hammersmith (W6)</h4>
+<div id='hammersmith-chart'>
+  <svg style='height:500px'> </svg>
+</div><script src='/blog/assets/javascripts/houseindexplot.js' type='text/javascript'></script>
+
+<h4>Holland Park (W11)</h4>
+<div id='hollandpark-chart'>
+  <svg style='height:500px'> </svg>
+</div>
+<h4>Shepherd's Bush (W12)</h4>
+<div id='shepherdsbush-chart'>
+  <svg style='height:500px'> </svg>
+</div>
+
+Plotting them together, it is (a little) easier to understand how the trends relate to each other.
+<div id='combined-chart'>
+  <svg style='height:500px'> </svg>
+</div>
+
+A few notes on these graphs:
+<ul>
+	<li>There is a high degree of correlation between the three price trends. The areas are neighbouring each other (although with slightly different demographics) so we expect the same basic trend. But, the only trend difference that seems evident visually is that the growth in Holland Park becomes slightly faster than the growth in Hammersmith.</li>
+	<li>Although we plot overall prices, we might be interested in the rate of return. In which case, it is worth noting that Shepherd's Bush started from a significantly lower price point, so it has not necessarily underperformed here (although we can also see that it has not overperformed).</li>
+	<li>There is a lot of volatility in the indexes measured. This is due to two parts:
+		<ol>
+		<li>There is large variance due to the short time intervals used (one month). We only have limited sales in each period (maybe an average of 6-10) so therefore, we do not have enough information in the individual periods to capture an accurate average price.</li>
+		<li>There is volatility in the market itself. Volatility in a market is often associated with speculation, so this would be useful information. We need to eliminate the confounding variables in order to measure it though.</li>
+		</ol>
+	</li>
+</ul>
+
+<h2>Upcoming Work</h2>
+
+On the basis of this information we can also calculate some more concrete (perhaps more directly useful) metrics: most important would be the predicted price of a house that was already transacted in our dataset. To do this we can now simply input the calculated index values, along with the previous transaction price, into the model equation (step 3 in the construction). We also need to investigate the variance, by lengthening the index periods slightly to reduce model volatility and then making a calculation of the remaining variance. 
+
+<h2>References</h2>
+<ul>
+	<li>
+	Bailey, M., R. Muth, and H. Nourse. 1963. <em>A Regression Method for Real Estate Price Index Construction</em>. Journal of the American Statistical Association 58: 933-942.
+	</li>
+	<li>
+	Case, K., and R. Shiller. 1987. <em>Prices of Single Family Homes Since 1970: New Indexes for Four Cities</em>. New England Economics Review September/October: 45-56. 
+	</li>
+	<li>
+	Goetzmann, W.. 1992. <em>The Accuracy of Real Estate Indices: Repeat Sale Estimators</em>. Journal of Real Estate Finance and Economics 5:5-53.
+	</li>
+	<li>
+	Goetzmann, W.. 1993. <em>Accounting for Taste: Art and Financial Markets over Three Centuries</em>. American Economic Review 83: 1370-1376. 
+	</li>
+	<li>
+	Kuo, C.L.. 1997. <em>A Bayesian Approach to the Construction and Comparison of Alternative House Price indices</em>. Journal of Real Estate Finance and Economics, 14: 113-132.
+	</li>
+	<li>
+	K Graddy, J Hamilton, R Pownall. 2012. <em>Repeat Sales Indexes: Estimation without Assuming that Errors in Asset Returns Are Independently Distributed</em>. Real Estate Economics, 40: 131-166
+	</li>
+</ul></p>
+			</div>
+			<div class="categories">
+			Category: 
+			
+				<a href="/categories/science.html">science</a>
+			
+			</div>
+		  </div>
+		  <hr>
+      
+		   <div class="postpreview">
+			<div class="postcontent">
+				<div class="date">August 14, 2014</div>
+				<h2><a href="/blog//2014/08/14/Why-We-Spend-Expenses-Wrongly">Why We Spend Expenses Wrongly</a></h2>
+				<p><p>My company, like many others, provides a fixed daily amount to recompense travellers for their daily expenses. On most occasions this ends up being a little more than your expenses naturally sum to. Now, in theory, this means that once you know the duration of that trip (and assuming you trust payroll) you are sure to receive a fixed amount of money. However, people do not quite react accordingly. In particular, there is a tendency to fixate on the daily amount to guide decision-making. When I have been with my colleagues to dinner, we tend to spend more when expenses are being paid than when they are not. People want to spend the allowance - and when they spend the allowance, they stop spending.</p>
+
+<p>According to rational economic theory, this makes no sense at all. The daily allowance has no relevance to your spending - you should spend as you normally would for dinner. Simply, you just buy according to your preferences. However, prospect theory comes in to play to explain this behaviour, as follows.</p>
+
+<!--more-->
+
+
+<p>There is in fact a difference between the way losses and gains are valued. Specifically, it is experienced as being more bad to lose £10 than it is good to gain £10. Intuitively this makes sense - this is the experience that we have, and this fact in turn explains what's going on here. We know there is a certain amount of money set aside for our expenses, and we may feel happy to reallocate that towards dinner. This is not initially <i>experienced</i> as a loss because the money has not been received. When this allocation is spent, the extra is experienced as a loss, which is aversive. Otherwise, if we had received the money in advance, spending like this would also be experienced as a loss and so it would become less attractive to spend money on dinner.</p>
+
+<p>So far, so good. This is a straightforward example of the psychology of loss aversion - and we use prospect theory which tells us that we must identify a person's reference point to be able to know what is seen as a loss and what is a gain. What I find more unusual is the evolution of attitudes towards this. On some of my first business trips, I travelled with an older colleague. He took the view that I have described as rational here (although I may have referred to it at the time as "stingy" or something along those lines). He described something like this story to myself and another colleague - that your expenses should be treated like your own money - and although we disagreed with the sentiment, we did not disagree with the logic. But despite agreeing with his logic, this did not affect the way we actually made our decisions.</p>
+
+<p>Now, there might have been some rational reasons for a discrepancy. We might have had a more strong preference for spending on food, or spending time with amicable colleagues, than he. The novelty of the trip may have made us want to try and make the most of it. But there is still something fundamentally irrational about the choices that I and my younger colleague made - in the places we went to there was nothing special to eat (compared to in London..!) and there is no reason why we shouldn't economize whilst also being sociable. Like people normally tend to do. The choices we made were not bad, but they were certainly not optimal. And, as we now see, they were flawed in a predictable way.</p>
+
+<p>The thing is, over time this tendency has tended to decrease - people who have been travelling longer tend to act more rationally. That is, they tend to make decisions with expenses that are more consistent to decisions they make when spending their own money (although there is still some gap). It is not clear what is driving this shift but it seems quite plausible that it is related to how valuations are made instinctively (by accumulation of positive activity of the Ventral Striatum and negative activity of the Amgydala) vs how decisions are controlled by concious thought-processes. Similarly to when we try and form new habits, it takes some time for our valuations to change. When starting a new habit, for some time we have to consciously remind ourselves and encourage ourselves before - after a few weeks - we might start to instinctively look forward to the new habit routine.</p>
+
+<p>One last thought from a different angle - due to the generally unpredictable and sporadic way that we generally come to receive expenses (as and when travel is required) those receipts might be more highly valued by travellers than they should be. Research into the psychology of gambling has shown that randomly dispensed rewards are more highly than when rewards which are predictable. The reason seems to be that when the unexpected event occurs, the reward centre in the brain activates as a learning mechanism. It is this mechanism that drives the brain to look for patterns in the occurrence of events. In this case, it relies on the expenses being thought of as separate from the travel in order to view them as a reward - generally the disutility of travel tends to be greater than the utility of expenses(depending on the travel destination!) and so this prediction wouldn't be valid.</p>
+</p>
+			</div>
+			<div class="categories">
+			Category: 
+			
+				<a href="/categories/science.html">science</a>
+			
+			</div>
+		  </div>
+		  <hr>
+      
+		   <div class="postpreview">
+			<div class="postcontent">
+				<div class="date">July 16, 2013</div>
+				<h2><a href="/blog//2013/07/16/CK-Theory">Learning about Design with C-K Theory</a></h2>
+				<p><p>C-K ("Concept-Knowledge") theory is a popular and successful model to describe and give insight to the process of design. At its heart, it posits a distinction between the space of knowledge and the space of concepts, and it builds upon this to describe the process of design as a sequence of operations that transform knowledge into concepts, and vice versa.</p>
+
+<p>We may seek to understand it in order to achieve a more structured methodical approach to design, and also to see how the creative design process is unified with the discipline of problem-solving, which might perhaps be considered more scientific in nature.</p>
+
+<!--more-->
+
+
+<h3>Spaces and Sets</h3>
+
+<p>First, we can consider the knowledge space. This contains the set of propositions which have a logical state (True/False/Uncertain) for the designer. So, for example, we might state that, "Chairs usually have four legs", which is a true statement. Or, we could say, "Cars work effectively with square wheels", which we know to be false. We must also say that this set is infinite, as we know that we should be able to expand the set of knowledge without limit. But even the combination of all these propositions does not give us a means of creating a design. We need another component, a concept space.</p>
+
+<p>So, what is this concept space? Well, it is the complement to the knowledge space; it contains the set of propositions which have no logical status, by reference to the knowledge available in the knowledge space. In other words, this concept space contains all possible solutions to the design problem that has been posed. Until the design work has been done, we cannot say if the proposition "object X satisfies the properties P" evaluates to True or False. What is more, we cannot  select a single entity in this concept set - for by doing so, it would follow that the entity satisfied the concept. IE, it would no longer be a concept but a true proposition! Formally, we say that concepts are sets for which the Axiom of Choice is False. This has important consequences for how solutions can be generated in the design process.</p>
+
+<h3>Aside on the Axiom of Choice</h3>
+
+<p>Formally, the axiom of choice is the assertion that:</p>
+
+<pre><code>For any set X of non-empty sets, there exists a choice function F defined on X. This means that for each set Y in X, the function F(Y) is a member of Y. 
+</code></pre>
+
+<p>(<a href="http://www.math.vanderbilt.edu/~schectex/ccc/choice.html">See explanation here</a>). The idea may be considered concretely by the <a href="http://plato.stanford.edu/entries/axiom-choice/notes.html">following situation</a>:</p>
+
+<blockquote><p>A millionaire possesses an infinite number of pairs of shoes, and an infinite number of pairs of socks. One day, in a fit of eccentricity, the millionaire summons his valet and asks him  to select one shoe from each pair. When the valet, accustomed to receiving precise instructions, asks for details as to how to perform the selection, the millionaire suggests that the
+left shoe be chosen from each pair. Next day the millionaire proposes to the valet that he select one sock from each pair. When asked as to how this operation is to be carried out, the
+millionaire is at a loss for a reply, since, unlike shoes, there is no intrinsic way of distinguishing one sock of a pair from the other. In other words, the selection of the socks must  be truly arbitrary.</p></blockquote>
+
+<p>In other words, to make the selection of socks, there is not an explicit choice function. And so, one must invoke the axiom of choice; you assert that it is possible to make a completely arbitrary selection.</p>
+
+<h3>Design</h3>
+
+<p>We have now established the objects that we will work with, and their properties, so now we need to describe the operations that will form the design process.</p>
+
+<h4>1. The Start</h4>
+
+<p>First, there is an operation to create a concept space C from  proposition in K. In other words we transform a problem like "people can't hear me talk when I am outside on my hands-free" into a concept "hands-free with background noise reduction" (lets leave aside for now the possibility that I may be speaking too softly). We see that this concept has the correct form: it is composed of an object which must satisfy a certain set of properties. I.e. those corresponding to hands-free headphones, such as staying in ears, transmitting sound, unobtrusiveness, durability, with the additional specification that background noise must be reduced relative to the speaker's voice by a certain amount. We call the operation to form this concept a disjunction.</p>
+
+<p>Note that this disjunction operation is not uniquely tied to our proposition in K, and so we can specify multiple concepts based on the same problem. Ie In our example, we could come up with the concept, "device to amplify the user's voice", which would solve the same problem.</p>
+
+<h4>2. K->C</h4>
+
+<p>Next, we need to explore our concept space to develop the design. However, here we run into a problem: we are unable to arbitrarily select individual members of the concept set as per our rejection of the axiom of choice. This leaves us with only two operations by which we can "explore": partition and inclusion. In partitioning, we specify additional properties that must be included in the design, whilst by including, we remove properties, to consider a larger super-set of concept designs. Fortunately, just these two operations are needed for the generation of new knowledge and concepts that we consider characteristic of the design process.</p>
+
+<p>To make these partitions, we must draw on propositions that already exist in K to add to our concept C, thus these are again disjunctive C->K operations. So, to "explore" our example further, we may add some properties, saying that the headphones must be of the in-ear type, and the microphone must be small and attached to the earphone wires. We see that this partitioning can be represented as a tree structure, with the nodes above representing super-sets of the nodes that are below them:<br/>
+<img src="/blog/img/CK-simple.jpg" alt="Beginnings of concept development" /><br/>
+These partitioning operations can be characterized as two types: restrictive and expansive. Restrictive partitions are those where the proposition in K is connected to the properties we have already specified for the concept. Ie, in the above, we added some properties that are already associated with hands-free headphones (even though they may not be true for all of them). Thus, to our intuition, they merely seem to restrict the search space.</p>
+
+<p>The expansive partition is precisely the opposite. Although the operation is the same, since we will add a proposition not connected to our existing partitions, many more ideas may be stimulated. It is these sort of partitions that we may think of as being especially creative or innovative. In our example, we could take on an infinite number of ideas. We could, for instance try to make some imitation of the flexible arms that photographers are used for mounting cameras and other equipment, or we could look at trying to add some of the features of an anechoic chamber. These features are not completely off the wall - but they are also features that were not previously associated with a hands-free.</p>
+
+<h4>3. C->K</h4>
+
+<p>By partitioning we have now generated some new ideas. But, as we generate ideas, we may also generate questions, and we will probably find that we will need new knowledge to answer them. So, we have another operation, that operates from C->K. We use our design concept to investigate and find out new facts. So, continuing with our hands-free, we might want to find out whether the flexible arm will work in our case - does it match our requirements in terms of weight, can it be scaled down, can it be attached to a normal wire without creating unacceptable points of stress, etc. We can then go away and consult experts, or conduct experiments on each of these questions.
+<img src="/blog/img/CK-investigations.jpg" alt="Fleshed out ideas with lines of investigation" /><br/>
+If these experiments did not produce a good result, we would go back and expand the set of ideas we are looking at. We partition again, and then do some more experiments, and keep going until we think we have a good design. Then we move into prototyping/testing - at which point we will continue to develop new knowledge and to change the design. And by repeatedly updating our knowledge and concepts we will (hopefully) start to converge on a design solution.</p>
+
+<h4>4. Ending the Design Process</h4>
+
+<p>Our last step will always be a C-K conjunction operator: either we validate our concept, in which case it becomes a valid proposition in K, or we fail to validate it. In this case we could either find the concept proposition to be false - which would mean that the concept cannot possible fulfil all the desired properties, or it could be undecided, which would be to say that, while our lines of investigation did not work out, we did not invalidate the concept as a whole.</p>
+
+<h3>Some Concluding Thoughts</h3>
+
+<p>According to CK theory, this is a complete framework of the design process. As we would desire, there are some areas that are left unspecified in this model, such as how propositions are chosen from K-space to partition our concept set. There must be a large number of strategies that could be used to make this choice, from which the particular one that is used would presumably vary according to the sort of design work and the designer. In other words, we leave room for creativity and generation of original ideas.</p>
+
+<p>CK theory is also interesting in that it appears to unify the process of problem-solving and the process of design. We see that the differences between engineering or science problems as compared to industrial or product design are more a matter of emphasis than of type. There will typically be more effort needed to do the necessary research/experiments to gain the required knowledge in more scientific arenas, and we may find that there are many more restrictive criteria placed on the design. By contrast, in product design, there will be more room, and a greater necessity for, generative, expansive partitions.</p>
+
+<p>By now, we start to see that this is a serious theory with a lot of predictive and descriptive power. Having used it myself only for a brief period, I have become convinced that it constitutes a highly effective methodology for tackling problems. It think that it could prove to be one of the best thinking tools you can put in your mental toolbox.</p>
+
+<h3>Further reading</h3>
+
+<p><em>Excellent exposition of the theory</em>, by Hatchuel &amp; Weil (2003): <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.2301&amp;rep=rep1&amp;type=pdf">A New Approach to Innovative Design: Introduction to C-K Theory</a><br/>
+<em>Alternative exposition</em>, again by Hatchuel &amp; Weil (2002): <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.105.5226&amp;rep=rep1&amp;type=pdf">C-K Theory: Notions and Applications of a Unified Design Theory</a><br/>
+<em>A step-by-step of how CK theory is applied in practice</em>, Hatchuel, LeMasson &amp; Weil (2003): <a href="https://www.google.co.uk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=5&amp;cad=rja&amp;ved=0CF0QFjAE&amp;url=http%3A%2F%2Fm.designsociety.org%2Fdownload-publication%2F19760%2Fc-k_theory_in_practice_lessons_from_industrial_applications&amp;ei=icnwUbSPI8alO8HygbAF&amp;usg=AFQjCNHIqglSQPogtu1axOaWuOP6JV-IAg&amp;sig2=3NvUhx-n0WBsG9vvIIecGQ&amp;bvm=bv.49784469,d.ZWU">C-K Theory in Practice: Lessons From Industrial Applications</a><br/>
+<em>More recent synopsis and expansion on the concepts in CK theory</em>, Ullah et Al (2011): <a href="https://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CDYQFjAB&url=http%3A%2F%2Fwww.researchgate.net%2Fpublication%2F224860049_Rashid_M.M._Ullah_A.M.M.S._Tamaki_J._and_Kubo_A_(2010)._A_Kano_Model_based_Computer_System_for_Respondents_determination_Customer_Needs_Analysis_for_Product_development_Aspects_Management_Science_and_Engineering_Vol.4_(4)_pp.70-74._2010_(Canada%2Ffile%2F9fcfd4fa10339ed71e.pdf&ei=1cnwUYPDKMWUO9ubgbgI&usg=AFQjCNHIqr8v_kfIiYp5fuGdAMbp94IPcA&sig2=SxfvtbsSN9EdpATzHZLDBA">On some unique features of C-K theory of design</a></p>
+</p>
+			</div>
+			<div class="categories">
+			Category: 
+			
+				<a href="/categories/science.html">science</a>
+			
+			</div>
+		  </div>
+		  <hr>
+      
+		   <div class="postpreview">
+			<div class="postcontent">
+				<div class="date">November 11, 2011</div>
+				<h2><a href="/blog//2011/11/11/The-Mechanics-Of-Productivity">The Mechanics of Productivity</a></h2>
+				<p><p>If there's one thing that I was used to at university, as a diligent physics student, it was long study-sessions. No matter how early I tried to start, there was never quite enough time before exams to learn everything as well as I had been used to. I have a perfectionist streak, so this left a feeling of having left things unfinished with me. And I spent some effort in trying to think of how I can avoid this. After having tried out a number of different productivity systems, not entirely successfully, I decided that I needed to learn much more about the underlying psychology behind concentration and studying. And, it turns out that there are a number of fairly simple psychological principles that can help you in forming effective working habits.</p>
+
+<h3>Willpower is a limited resource</h3>
+
+
+<p>There is a psychological phenomenon called 'ego depletion', in which subjects who had needed to exert willpower in a task performed more poorly in a subsequent cognitively demanding test [1]. Since maintaining concentration on a task usually takes some willpower[2], this suggests that maximising the amount of time you spend in work is not always the best way to get the most done. Interestingly, exerting willpower or engaging in heavy cognition lowers blood glucose level, and it has been found that ingestion of glucose helps to counteract the effect of ego
+depletion.That is, a low level of glucose is to be avoided. It is for this reason that I always used to take energy drinks with me to a study session, and, when I was looking at other students around the library, I saw that I was not the only one to have picked up this habit.</p>
+
+<!--more-->
+
+
+<p>So, how does knowing about ego depletion change your approach to working? Well, firstly, these findings validate the notion of 'taking a break'. Specifically, rest and doing things that make you feel good can replenish your reserves of willpower. This could be talking to other people, or watching funny videos, or many other things. You would intuitively expect this to refresh you, and you would be right. However, it was also found that by doing specific activities to regularly 'exercise' their self-control, people were able to decrease the rate of ego depletion; they were able to exercise more self-control[3]. This suggests that you should not just take a break when you are struggling, you should instead "time-box". In other words, you should pre-commit to working for set periods of time, and allow yourself to take short breaks in between. This will allow you to increase your self-control over time. My approach, which I have recently taken up is based on the "Pomodoro technique". For 25 minutes, I focus my attention on a single task, after which I may take a break of 5 minutes. Then repeat this until I have spent the desired amount of time on the task.</p>
+
+<p>The other factor to optimize is your environment. Many people struggle with food - if tempting food is left in front of someone, they may find it difficult to resist it. But, the tempation is the same if the desired object is less tangible, for instance, it could be an enjoyable activity that was made easily accessible to you. Most commonly Facebook, Messaging, Twitter, Reddit, Youtube, Email. These would all fall into this category. The 'nearer' the temptation, the harder it is to resist. So, when you have something to focus on, turn off and/or hide your laptop and smartphone. They do instant gratification too well. I feel the urge to reach for my phone even as I am writing now, and I don't think this urge is one that will go away easily. So, the best solution is to put the temptation further away.</p>
+
+<p>Since, like many people, I do a lot of my work on the computer, I augment this with some more nuanced solutions to this problem. For instance, for writing I am using a full-screen program called OmmWriter so I can't physically see anything else available on my PC. To go even further, there are a number of programs available that will block a set of websites so that they don't distract you.</p>
+
+<h3>People have a very limited working memory</h3>
+
+
+<p>You can only manipulate between 4-8 concepts at any one time[4]. So, if you are tackling complicated problems, you need some way to capture everything external to the task you are working on right now, so that you can fully utilize your working memory. For me, the most important issue when you are trying to focus is being able to quickly record tangential ideas that come into my mind. For, if you pursue them, then you will lose your original train of thought, but if you do not you may well forget them due to your state of narrowly focused attention. I use Evernote as a tool for storing unsorted ideas, and Workflowy as a tool for organising my projects, so I tend to record my thoughts in one of the two places. Both are excellent, highly flexible and intuitive pieces of software.</p>
+
+<p>Another consequence of having a small working memory is that we need to define tasks very narrowly in order to be most effective. David Allen in GTD particularly emhasizes this idea, exhorting the reader to slice up tasks into a series of directly actionable 'next steps'[5]. For, imposing this structure on the task makes the actual execution of each step much easier. Programmers also talk about these ideas, albeit in different terms. Well-structured code decouples the separate functions that constitute a program from each other, which means that the programmer only has to focus on one function at a time. Of course, he has to put in some extra effort to think up this structure, but this will pay for itself over time. If they are highly structured, programs will contain a lot of information about what the next steps to take should be.</p>
+
+<h3>'Priming' is extremely powerful, and it effects almost everything that you do</h3>
+
+
+<p>Priming is the exposition of an idea to a person. So if you ask someone to solve an anagram, and the words they have to construct were: 'elderly', 'retired', and 'bygone' then you find that they act differently following the exercise, due to the activation of the concept of 'oldness' in their mind. A study was done priming people in this way, and it was found that these subjects walked more slowly on their way out of the experiment than on the way in. Because old people walk slowly. The point is, we are sensitive to the influences of our environment, and just by perceiving it, we are subconciously induced to act differently.</p>
+
+<p>The question is, what parts of our environment do we pay attention to, and which parts can we actually control? Experiments have shown that objects in a room can influence how people act, but in general it seems unreasonably difficult to exert this level of control. Perhaps better to focus on two things: the environment that you work in and the people you associate with. These are clearly linked: as a student I almost always worked at the library, which in itself is strongly associated with studiousness, and the people I met there were also working hard (the majority of them), which reinforced the association. I think you can also get benefits from associating with a community that is only virtual. It sets you expectation of what is normal - for example, from reading Hacker News you might start to think that its normal to start your own business, and believe that its quite possible to program the MVP by yourself.</p>
+
+<h3>People are naturally lazy</h3>
+
+
+<p></p>
+
+<p>Especialy when it comes to thinking. Its very rare that we have to do something very demanding[6]. When we spend time doing an activity, our brains naturally find more efficient ways to do them, which gradually get hardwired into the brain. For example, after a while of using a concept, you may become able to visualise it and see how it is linked to other ideas that you know about. Your brain is able to morph this new idea into a form you find easier processing, such as visual-spatial information. The problems that are really hard to tackle are those that are
+novel, and require concious deliberation by the reasoning portion of the brain. The interesting thing is that even when we have to tackle novel problems, we are not aware of the way in which we naturally try to tackle them in order to use as little effort as possible.</p>
+
+<p>This ties in with the idea of time-boxing - periods of work need to be balanced with periods of rest. It has been my observation that the more difficult the work is, the longer the periods of rest need to be. Also, it is nice to be reassured that you don't have to be doing hard things all the time. There's plenty of room, even to be great, just by doing hard things some of the time.</p>
+
+<h3>There is a 'flow' state you can access by working on engaging tasks</h3>
+
+
+<p>If you are working on a challenge which is well-suited to your skills, then it can absorb you completely. All your efforts become devoted to the task; you are no longer exerting willpower to keep yourself focussed. This is a very enjoyable state to be in, and the most productive state to be in. Hence, you should devote some of your energies to trying to increase how often you are in 'flow'. Whilst I can't yet figure out how to tie them together, I do have some basic strategies to achieving this. A simple pointer would be to keep your breaks relatively short, so you don't lose focus.</p>
+
+<p>You should tackle problems in the appropriate order, by the level of difficulty. For example, quite recently I was trying to learn how to build websites that serve dynamic content. I didn't jump straight into building the idea that I had had, instead I followed some basic tutorials and worked out the basic structure that I'd have to follow in building such a website. From there, I was able to start building my (fairly simple) idea. Now, and in future, I will be able to take on more complicated projects in this domain. More importantly, I was able to become absorbed in what I was doing at each stage of the process. If I had jumped straight into building my own projects, then I would have made little progress and would have quickly grown frustrated.</p>
+
+<p>How should you best curtail a working session when you are in flow, so you can easily pick up where you left off? The most important thing is to stop when there is still a clear next step you could take. And you need to write it down, so you can use it to jog your memory when you come back to the task.To be in flow, its also important to be in a good state of mind. So, you should be awake, and alert [7] and receptive to the ideas that you are dealing with. If you have a distain for the problem you're working on then, naturally, it will be harder to be absorbed in it.</p>
+
+<h3>In Conclusion</h3>
+
+
+<p>Together, these points constitute the most important principles about productivity I have learnt so far. These principles are fairly universal, but since every person's mind is diffierent, how exactly to apply these principles must vary from person to person. And, advice about productivity must inevitably lead to another question, which is: How do you decide what sort of work you should be doing? As the management scholar Peter Drucker said, “There is nothing so useless as doing efficiently that which should not be done at all.” But perhaps that is a topic for another time.</p>
+
+<h3>Notes</h3>
+
+
+<p>[1] Fom the book, "Thinking, Fast and Slow", written by the psychologist Daniel Kahneman. As you might expect, this book paints a very insightful picture of the mind, from a scientific perspective.</p>
+
+<p>[2] I refer to <a href="http://psych.ut.ee/~nek/isiksus/Baumeister%202002.pdf">this</a> excellently written review in writing this section. It is old, but seems to adequately, if not decisively, address more recent developments, including <a href="http://www.ncbi.nlm.nih.gov/pubmed/20876879">criticisms</a> of the model.</p>
+
+<p>[3] Thinking Fast and Slow, Location 701 (Kindle)</p>
+
+<p>[4] The <a href="http://en.wikipedia.org/wiki/Working_memory#Capacity">wikipedia article</a> on this topic is quite good:</p>
+
+<p>[5] My other favorite tip from GTD is this: if a task will take less than 2 minutes do it immediately, otherwise add it to your to-do list. I have found this simple maxim to be tremendously useful.</p>
+
+<p>[6] Demanding tasks used in psychological experiments are often deceptively simple. Take the Add1 task. Take 4 random numbers, then every three seconds add one and say the new number. without writing it down. If you are like me then you will find that this is very challenging</p>
+
+<p>[7] Some people seem to say that some drugs, Modafinil in particular, can make it easier to be engaged by tasks - due to the increased alertness it induces in the user. Regardless of the risk/rewards of this particular drug, the implications of this sort of self-augmentation are very interesting.</p>
+</p>
+			</div>
+			<div class="categories">
+			Category: 
+			
+				<a href="/categories/science.html">science</a>
+			
+			</div>
+		  </div>
+		  <hr>
+      
+  </div>
+</div>
+		</section>
+	  </body>
+	  <footer>
+		<div class="copyright">
+			Benjamin Vickers / 2013 / ©
+		</div>
+		<div class="projects">
+			<!--Projects: <a href="/AmIConnected/">Am I Well Connected</a>-->
+		</div>
+	  </footer>
+  </div>
+</html>

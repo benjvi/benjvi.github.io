@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+
+<html>
+  <div class="column">
+	  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Benjamin Vickers" />
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/normalize.css" /> 
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/standard.css" /> 
+		<link rel="stylesheet" type="text/css" href='/blog/assets/css/nv.d3.css' /> 
+		<script src='/blog/assets/javascripts/d3.v3.js'></script>
+		<script src='/blog/assets/javascripts/nv.d3.js'></script>
+		<script src='/blog/assets/javascripts/prettify.js'></script>
+		<script src='/blog/assets/javascripts/stream_layers.js'></script>
+		<title>Using Vim: Just the Essentials</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- mathJAX -->
+		<script type="text/javascript" 
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<!-- google analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-55111700-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>		
+	  </head>
+	  <body>
+		<header>
+			<div class="menu">
+				BENJVI
+				 - <a href="/blog/">POSTS</a>
+				
+					- <a href="/blog/Categories/thoughts.html">thoughts</a> 
+				
+					- <a href="/blog/Categories/science.html">science</a> 
+				
+					- <a href="/blog/Categories/arts.html">arts</a> 
+				
+					- <a href="/blog/Categories/technology.html">technology</a> 
+				
+				 - <a href="/blog/profile.html">PROFILE</a>
+				
+			</div>
+			<div class="bannerholder">
+			<img src="/blog/img/ibelonghere.png" class="banner"/>
+			</div>
+			<div class="overlay">
+				<div class="overlaytext"></div>
+				<h1>Using Vim: Just the Essentials</h1>
+			</div>
+		</header>
+		<section>
+		  <div class="content">
+  <div id="post">
+    <!--<h1></h1>-->
+	<div class="postcontent">
+		<div class="date">September  1, 2013</div>
+		<p><p>Vim is a text editor with a lot of history and a lot of advocates. It is also universally available on Unix-based systems. And, for this reason, some things become much easier when you know how to use it. It is more confusing initially than other editors - after not using it for a while and coming back to it I have found myself perplexed as how to actually edit the text! But, there are only a small number of things you need to remember to use it effectively.</p>
+
+<!--more-->
+
+
+<h3>Ensure vim can write to file</h3>
+
+<p>On Unix boxes, you can run <code>sudo vim [filename]</code> to run the editor with elevated privileges. Depending on the privileges set on the file, this may or not be necessary.</p>
+
+<p>Alternatively, if you open a file and discover you don't have permission to write it, you can save it with sudo using the following Vim command: <code>:w !sudo tee %</code>.</p>
+
+<h3>Command and Append Modes</h3>
+
+<p>The keys you press have different functions depending on which of the two modes you are in. At first, you will start off in command mode. In this mode, the keyboard buttons are used to send different commands to the editor. You are still able to navigate the text with the arrow keys or h,j,k,l (left, down, up, right).</p>
+
+<p>You may change to the Append mode by entering one of the following commands:</p>
+
+<ul>
+<li><code>a</code> - append, start writing from the next character position</li>
+<li><code>i</code> - insert, starts writing from the current character</li>
+<li><code>o</code> - start writing from a new line</li>
+</ul>
+
+
+<p>In the append mode you may use the keyboard in the "normal" way, to enter text into the document. Then, to return to control mode, you press the Esc key.</p>
+
+<h3>Essential Commands - Saving</h3>
+
+<ul>
+<li><code>:w</code> will save (write) the file</li>
+<li><code>:wq</code> or <code>:x</code> will save and exit</li>
+<li><code>:q!</code> will exit and discard changes</li>
+<li><code>:w newfile</code> will save the text to newfile</li>
+</ul>
+
+
+<h3>Very Useful Commands - Navigation</h3>
+
+<ul>
+<li><code>*</code> or <code>#</code> will search for the next/previous instance of the currently selected word</li>
+<li><code>/astring</code> will search for "astring" in the file</li>
+<li><code>ctrl + o</code> restores the position before the search was made</li>
+<li><code>w</code> and <code>b</code> move forward/backwards one word</li>
+<li><code>^</code> and <code>$</code> move to the start/end of a line</li>
+</ul>
+
+
+<h3>Very Useful Commands - Editing</h3>
+
+<ul>
+<li><code>~</code> toggles the case of the selected character</li>
+<li><code>J</code> joins the following line to the current line</li>
+<li><code>dd</code> cuts ("deletes") the current line</li>
+<li><code>y</code> copies ("yanks") the current line</li>
+<li><code>p</code> and <code>P</code> paste before/after the cursor</li>
+</ul>
+
+
+<h3>More</h3>
+
+<ul>
+<li><code>.</code> repeats the previous command</li>
+<li><code>:help</code> provides additional information - there is much more than is described here!</li>
+<li><a href="http://www.viemu.com/a-why-vi-vim.html">Here</a> is some further information on the benefits of using Vim and more details on how you can make the most of it</li>
+</ul>
+
+</p>
+	</div>
+	
+	<div class="categories">
+	Category: 
+	
+		<a href="/blog/Categories/technology.html">technology</a>
+	
+	</div>
+	<hr>
+  </div>
+</div>
+
+		</section>
+	  </body>
+	  <footer>
+		<div class="copyright">
+			Benjamin Vickers / 2013 / ©
+		</div>
+		<div class="projects">
+			<!--Projects: <a href="/AmIConnected/">Am I Well Connected</a>-->
+		</div>
+	  </footer>
+  </div>
+</html>

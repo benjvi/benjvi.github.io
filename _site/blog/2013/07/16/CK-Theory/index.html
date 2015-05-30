@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+
+<html>
+  <div class="column">
+	  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Benjamin Vickers" />
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/normalize.css" /> 
+		<link rel="stylesheet" type="text/css" href="/blog/assets/css/standard.css" /> 
+		<link rel="stylesheet" type="text/css" href='/blog/assets/css/nv.d3.css' /> 
+		<script src='/blog/assets/javascripts/d3.v3.js'></script>
+		<script src='/blog/assets/javascripts/nv.d3.js'></script>
+		<script src='/blog/assets/javascripts/prettify.js'></script>
+		<script src='/blog/assets/javascripts/stream_layers.js'></script>
+		<title>Learning about Design with C-K Theory</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<!-- mathJAX -->
+		<script type="text/javascript" 
+		src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+		<!-- google analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-55111700-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>		
+	  </head>
+	  <body>
+		<header>
+			<div class="menu">
+				BENJVI
+				 - <a href="/blog/">POSTS</a>
+				
+					- <a href="/blog/Categories/thoughts.html">thoughts</a> 
+				
+					- <a href="/blog/Categories/science.html">science</a> 
+				
+					- <a href="/blog/Categories/arts.html">arts</a> 
+				
+					- <a href="/blog/Categories/technology.html">technology</a> 
+				
+				 - <a href="/blog/profile.html">PROFILE</a>
+				
+			</div>
+			<div class="bannerholder">
+			<img src="/blog/img/ibelonghere.png" class="banner"/>
+			</div>
+			<div class="overlay">
+				<div class="overlaytext"></div>
+				<h1>Learning about Design with C-K Theory</h1>
+			</div>
+		</header>
+		<section>
+		  <div class="content">
+  <div id="post">
+    <!--<h1></h1>-->
+	<div class="postcontent">
+		<div class="date">July 16, 2013</div>
+		<p><p>C-K ("Concept-Knowledge") theory is a popular and successful model to describe and give insight to the process of design. At its heart, it posits a distinction between the space of knowledge and the space of concepts, and it builds upon this to describe the process of design as a sequence of operations that transform knowledge into concepts, and vice versa.</p>
+
+<p>We may seek to understand it in order to achieve a more structured methodical approach to design, and also to see how the creative design process is unified with the discipline of problem-solving, which might perhaps be considered more scientific in nature.</p>
+
+<!--more-->
+
+
+<h3>Spaces and Sets</h3>
+
+<p>First, we can consider the knowledge space. This contains the set of propositions which have a logical state (True/False/Uncertain) for the designer. So, for example, we might state that, "Chairs usually have four legs", which is a true statement. Or, we could say, "Cars work effectively with square wheels", which we know to be false. We must also say that this set is infinite, as we know that we should be able to expand the set of knowledge without limit. But even the combination of all these propositions does not give us a means of creating a design. We need another component, a concept space.</p>
+
+<p>So, what is this concept space? Well, it is the complement to the knowledge space; it contains the set of propositions which have no logical status, by reference to the knowledge available in the knowledge space. In other words, this concept space contains all possible solutions to the design problem that has been posed. Until the design work has been done, we cannot say if the proposition "object X satisfies the properties P" evaluates to True or False. What is more, we cannot  select a single entity in this concept set - for by doing so, it would follow that the entity satisfied the concept. IE, it would no longer be a concept but a true proposition! Formally, we say that concepts are sets for which the Axiom of Choice is False. This has important consequences for how solutions can be generated in the design process.</p>
+
+<h3>Aside on the Axiom of Choice</h3>
+
+<p>Formally, the axiom of choice is the assertion that:</p>
+
+<pre><code>For any set X of non-empty sets, there exists a choice function F defined on X. This means that for each set Y in X, the function F(Y) is a member of Y. 
+</code></pre>
+
+<p>(<a href="http://www.math.vanderbilt.edu/~schectex/ccc/choice.html">See explanation here</a>). The idea may be considered concretely by the <a href="http://plato.stanford.edu/entries/axiom-choice/notes.html">following situation</a>:</p>
+
+<blockquote><p>A millionaire possesses an infinite number of pairs of shoes, and an infinite number of pairs of socks. One day, in a fit of eccentricity, the millionaire summons his valet and asks him  to select one shoe from each pair. When the valet, accustomed to receiving precise instructions, asks for details as to how to perform the selection, the millionaire suggests that the
+left shoe be chosen from each pair. Next day the millionaire proposes to the valet that he select one sock from each pair. When asked as to how this operation is to be carried out, the
+millionaire is at a loss for a reply, since, unlike shoes, there is no intrinsic way of distinguishing one sock of a pair from the other. In other words, the selection of the socks must  be truly arbitrary.</p></blockquote>
+
+<p>In other words, to make the selection of socks, there is not an explicit choice function. And so, one must invoke the axiom of choice; you assert that it is possible to make a completely arbitrary selection.</p>
+
+<h3>Design</h3>
+
+<p>We have now established the objects that we will work with, and their properties, so now we need to describe the operations that will form the design process.</p>
+
+<h4>1. The Start</h4>
+
+<p>First, there is an operation to create a concept space C from  proposition in K. In other words we transform a problem like "people can't hear me talk when I am outside on my hands-free" into a concept "hands-free with background noise reduction" (lets leave aside for now the possibility that I may be speaking too softly). We see that this concept has the correct form: it is composed of an object which must satisfy a certain set of properties. I.e. those corresponding to hands-free headphones, such as staying in ears, transmitting sound, unobtrusiveness, durability, with the additional specification that background noise must be reduced relative to the speaker's voice by a certain amount. We call the operation to form this concept a disjunction.</p>
+
+<p>Note that this disjunction operation is not uniquely tied to our proposition in K, and so we can specify multiple concepts based on the same problem. Ie In our example, we could come up with the concept, "device to amplify the user's voice", which would solve the same problem.</p>
+
+<h4>2. K->C</h4>
+
+<p>Next, we need to explore our concept space to develop the design. However, here we run into a problem: we are unable to arbitrarily select individual members of the concept set as per our rejection of the axiom of choice. This leaves us with only two operations by which we can "explore": partition and inclusion. In partitioning, we specify additional properties that must be included in the design, whilst by including, we remove properties, to consider a larger super-set of concept designs. Fortunately, just these two operations are needed for the generation of new knowledge and concepts that we consider characteristic of the design process.</p>
+
+<p>To make these partitions, we must draw on propositions that already exist in K to add to our concept C, thus these are again disjunctive C->K operations. So, to "explore" our example further, we may add some properties, saying that the headphones must be of the in-ear type, and the microphone must be small and attached to the earphone wires. We see that this partitioning can be represented as a tree structure, with the nodes above representing super-sets of the nodes that are below them:<br/>
+<img src="/blog/img/CK-simple.jpg" alt="Beginnings of concept development" /><br/>
+These partitioning operations can be characterized as two types: restrictive and expansive. Restrictive partitions are those where the proposition in K is connected to the properties we have already specified for the concept. Ie, in the above, we added some properties that are already associated with hands-free headphones (even though they may not be true for all of them). Thus, to our intuition, they merely seem to restrict the search space.</p>
+
+<p>The expansive partition is precisely the opposite. Although the operation is the same, since we will add a proposition not connected to our existing partitions, many more ideas may be stimulated. It is these sort of partitions that we may think of as being especially creative or innovative. In our example, we could take on an infinite number of ideas. We could, for instance try to make some imitation of the flexible arms that photographers are used for mounting cameras and other equipment, or we could look at trying to add some of the features of an anechoic chamber. These features are not completely off the wall - but they are also features that were not previously associated with a hands-free.</p>
+
+<h4>3. C->K</h4>
+
+<p>By partitioning we have now generated some new ideas. But, as we generate ideas, we may also generate questions, and we will probably find that we will need new knowledge to answer them. So, we have another operation, that operates from C->K. We use our design concept to investigate and find out new facts. So, continuing with our hands-free, we might want to find out whether the flexible arm will work in our case - does it match our requirements in terms of weight, can it be scaled down, can it be attached to a normal wire without creating unacceptable points of stress, etc. We can then go away and consult experts, or conduct experiments on each of these questions.
+<img src="/blog/img/CK-investigations.jpg" alt="Fleshed out ideas with lines of investigation" /><br/>
+If these experiments did not produce a good result, we would go back and expand the set of ideas we are looking at. We partition again, and then do some more experiments, and keep going until we think we have a good design. Then we move into prototyping/testing - at which point we will continue to develop new knowledge and to change the design. And by repeatedly updating our knowledge and concepts we will (hopefully) start to converge on a design solution.</p>
+
+<h4>4. Ending the Design Process</h4>
+
+<p>Our last step will always be a C-K conjunction operator: either we validate our concept, in which case it becomes a valid proposition in K, or we fail to validate it. In this case we could either find the concept proposition to be false - which would mean that the concept cannot possible fulfil all the desired properties, or it could be undecided, which would be to say that, while our lines of investigation did not work out, we did not invalidate the concept as a whole.</p>
+
+<h3>Some Concluding Thoughts</h3>
+
+<p>According to CK theory, this is a complete framework of the design process. As we would desire, there are some areas that are left unspecified in this model, such as how propositions are chosen from K-space to partition our concept set. There must be a large number of strategies that could be used to make this choice, from which the particular one that is used would presumably vary according to the sort of design work and the designer. In other words, we leave room for creativity and generation of original ideas.</p>
+
+<p>CK theory is also interesting in that it appears to unify the process of problem-solving and the process of design. We see that the differences between engineering or science problems as compared to industrial or product design are more a matter of emphasis than of type. There will typically be more effort needed to do the necessary research/experiments to gain the required knowledge in more scientific arenas, and we may find that there are many more restrictive criteria placed on the design. By contrast, in product design, there will be more room, and a greater necessity for, generative, expansive partitions.</p>
+
+<p>By now, we start to see that this is a serious theory with a lot of predictive and descriptive power. Having used it myself only for a brief period, I have become convinced that it constitutes a highly effective methodology for tackling problems. It think that it could prove to be one of the best thinking tools you can put in your mental toolbox.</p>
+
+<h3>Further reading</h3>
+
+<p><em>Excellent exposition of the theory</em>, by Hatchuel &amp; Weil (2003): <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.2301&amp;rep=rep1&amp;type=pdf">A New Approach to Innovative Design: Introduction to C-K Theory</a><br/>
+<em>Alternative exposition</em>, again by Hatchuel &amp; Weil (2002): <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.105.5226&amp;rep=rep1&amp;type=pdf">C-K Theory: Notions and Applications of a Unified Design Theory</a><br/>
+<em>A step-by-step of how CK theory is applied in practice</em>, Hatchuel, LeMasson &amp; Weil (2003): <a href="https://www.google.co.uk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=5&amp;cad=rja&amp;ved=0CF0QFjAE&amp;url=http%3A%2F%2Fm.designsociety.org%2Fdownload-publication%2F19760%2Fc-k_theory_in_practice_lessons_from_industrial_applications&amp;ei=icnwUbSPI8alO8HygbAF&amp;usg=AFQjCNHIqglSQPogtu1axOaWuOP6JV-IAg&amp;sig2=3NvUhx-n0WBsG9vvIIecGQ&amp;bvm=bv.49784469,d.ZWU">C-K Theory in Practice: Lessons From Industrial Applications</a><br/>
+<em>More recent synopsis and expansion on the concepts in CK theory</em>, Ullah et Al (2011): <a href="https://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CDYQFjAB&url=http%3A%2F%2Fwww.researchgate.net%2Fpublication%2F224860049_Rashid_M.M._Ullah_A.M.M.S._Tamaki_J._and_Kubo_A_(2010)._A_Kano_Model_based_Computer_System_for_Respondents_determination_Customer_Needs_Analysis_for_Product_development_Aspects_Management_Science_and_Engineering_Vol.4_(4)_pp.70-74._2010_(Canada%2Ffile%2F9fcfd4fa10339ed71e.pdf&ei=1cnwUYPDKMWUO9ubgbgI&usg=AFQjCNHIqr8v_kfIiYp5fuGdAMbp94IPcA&sig2=SxfvtbsSN9EdpATzHZLDBA">On some unique features of C-K theory of design</a></p>
+</p>
+	</div>
+	
+	<div class="categories">
+	Category: 
+	
+		<a href="/blog/Categories/science.html">science</a>
+	
+	</div>
+	<hr>
+  </div>
+</div>
+
+		</section>
+	  </body>
+	  <footer>
+		<div class="copyright">
+			Benjamin Vickers / 2013 / ©
+		</div>
+		<div class="projects">
+			<!--Projects: <a href="/AmIConnected/">Am I Well Connected</a>-->
+		</div>
+	  </footer>
+  </div>
+</html>
