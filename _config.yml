@@ -5,3 +5,4 @@ rdiscount extensions: [smart]
 categories: [Technology, Thinking, Arts, Science, Fitness]
 excerpt_separator: "<!--more-->"
 destination: _site
+url: http://www.benjvi.com
