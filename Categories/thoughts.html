@@ -10,13 +10,13 @@ image: ibelonghere.png
 		   <div class="postpreview">
 			<div class="postcontent">
 				<div class="date">{{ post.date | date: "%B %e, %Y" }}</div>
-				<h2><a href="/blog/{{ post.url }}">{{ post.title }}</a></h2>
+				<h2><a href="{{site.url}}/{{ post.url }}">{{ post.title }}</a></h2>
 				<p>{{ post.content }}</p>
 			</div>
 			<div class="categories">
 			Category: 
 			{% for tag in post.categories   %}
-				<a href="/categories/{{ tag }}.html">{{tag}}</a>
+				<a href="{{site.url}}/categories/{{ tag }}.html">{{tag}}</a>
 			{% endfor %}
 			</div>
 		  </div>
