@@ -34,6 +34,7 @@ It was a great couple of days at Kubecon - so much going on, so many great speak
 
 ## Things to Investigate
 
+- Kubernetes 1.2 is coming out very soon so its time to set up a cluster for testing!
 - How to make it so we don't have repeated replica sets for test/prod? Will configMaps be enough, how can I parameterize the different labels and different image versions?
 - How will Ubernetes work and how complex will it be? Will it meet all my use cases (primarily around HA for different types of applications)?
 - How do Network Policies work? Do we need to use Project Calico as a backend to enforce the policies or are there other options?
