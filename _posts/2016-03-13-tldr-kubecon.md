@@ -4,7 +4,7 @@ title: "TL/DR: Kubecon"
 categories: [technology]
 ---
 
-It was a great couple of days at Kubecon - so much going on, so many great speakers and so much to process! Surely I missed quite a lot, given that there was four tracks, but this is my summary and synthesis of some of the major (and minor) points that were being discussed. 
+It was a great couple of days at Kubecon - so much going on, so many great speakers and so much to process! Surely I missed quite a lot, given that there was four tracks, but this is my summary and synthesis of some of the major (and minor) points that I learned. 
 <!--more-->
 1. The short description of Kubernetes: "an opinionated framework for building distributed systems". Also the new Kubernetes overview [here](http://kubernetes.io/docs/whatisk8s/) is very good
 2. How Kubernetes differs from Docker swarm + compose: more opinionated and more feature-rich. Part of this comes from their provenance - Kubernetes defines its own APIs specifically for distributed systems whereas docker overloads/extends the existing APIs.
