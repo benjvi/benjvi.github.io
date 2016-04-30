@@ -37,7 +37,7 @@ This paper is way too long to be summarized in a single blog post, but there are
 
 - It's possible to enforce the immutable container model in Docker with the --read-only flag (this may require also making mounts for temporary app data in /tmp and /run)
 
-- Linked to an [interesting piece from Jessie Frazzelle](https://blog.jessfraz.com/post/docker-containers-on-the-desktop/) about running desktop programs with Docker, which is a pretty unorthodox way of running Docker but (kind-of) makes sense.
+- Linked to an [interesting piece from Jessie Frazelle](https://blog.jessfraz.com/post/docker-containers-on-the-desktop/) about running desktop programs with Docker, which is a pretty unorthodox way of running Docker but (kind-of) makes sense.
 
 Overall, its an interesting read and the single takeaway, if there is one, is that containers contribute significantly to the security of running processes. They are not necessarily an approach for hardware virtualization (in multi-tenant situations that would probably still be preferred) but they do provide meaningful isolation and flexibility for running applications. In many use-cases, that is just what is required.
 
