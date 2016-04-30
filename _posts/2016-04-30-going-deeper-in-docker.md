@@ -5,7 +5,7 @@ categories: [technology]
 image: ibelonghere.png
 ---
 
-There's been a couple of awesome resources come out in Docker over the last week or so. First was the ["Hitler uses Docker" video](https://www.youtube.com/watch?v=PivpCKEiQOQ), which gives a sample of the common complaints that people have about Docker distilled down into a couple of minutes. And some of the complaints are totally valid! Watching this video really made me want to understand better the status of the many claims being made. How often do problems come from abuse of the technology, how often from missing features, and how often from fundamental limitations? To do this we need to look underneath the orchestration tools and the packaging format and look at the technologies that are being built upon.
+There's been a couple of awesome resources come out in Docker over the last few weeks. First was the ["Hitler uses Docker" video](https://www.youtube.com/watch?v=PivpCKEiQOQ), which gives a sample of the common complaints that people have about Docker distilled down into a couple of minutes. And some of the complaints are totally valid! Watching this video really made me want to understand better the status of the many claims being made. How often do problems come from abuse of the technology, how often from missing features, and how often from fundamental limitations? To do this we need to look underneath the orchestration tools and the packaging format and look at the technologies that are being built upon.
 
 <!--more-->
 
