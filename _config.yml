@@ -1,7 +1,6 @@
 auto: true
-markdown: rdiscount
+markdown: kramdown
 permalink: /:year/:month/:day/:title
-rdiscount extensions: [smart]
 categories: [Technology, Thinking, Arts, Science, Fitness]
 excerpt_separator: "<!--more-->"
 destination: _site
