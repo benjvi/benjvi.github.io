@@ -36,22 +36,33 @@ In this googly world, people really don't have to think about versions very much
 Pros:
 + Simple, no worrying about versions
 + Standard, well-known workflow
-+ Works pretty well when 
++ Works pretty well when dependency updates can be controlled
+
 Cons:
-- Build will break all the time when any dependency makes a breaking change
-- Build could permanently break if a project is deleted from Github
+- Build will break if *any* dependency makes a breaking change
+- If a project is deleted from Github, the build would break and it might be difficult to fix
 - Difficult to use with privately-hosted repos
 - Awkward to work with forked repos
 
 ## Vendoring - "do the simplest thing that could possibly work (if you're not sure what to do yet)"
 
-Go 1.6 introduced vendoring, which allowsyou to install dependencies into the `vendor/` directory in your project. Dependencies in that folder will supercede dependencies in the `$GOPATH`. There is no support built into the language itself for how to install the dependencies, nor is there any support for versions of those vendored dependencies. But, including dependencies in a vendor folder is enough to 
+Go 1.6 introduced vendoring, which allows you to install dependencies into the `vendor/` directory in your project. Dependencies in that folder will supercede dependencies in the `$GOPATH`. There is no support built into the language itself for how to install the dependencies, nor is there any support for versions of those vendored dependencies. But, including dependencies in a vendor folder is at least enough to make builds reproducible, provided that we check the vendored dependencies into version control. Like this, the build will no longer break due to dependency updates.
+
+If the libraries have their own independent versions, then by including them we are lowering the cohesion of our repository. If we are running a standalone application, the consequences of this are perhaps something we can live with:
+ - Holding more duaplicated copies of libraries between projects. A tool like Maven can store a specific versions of a library in a local cache or just in a remote repository [TODO: check wha tmaven does] which might be preferable
+ - Adds spurious commits with large changesets for dependency updates, which makes it harder to parse the repo history 
+ - Makes it possible for developers to add changes to dependencies by directly monkey-patching in our repo
+
+However, if we are building a library we can create more serious issues. If packages in the `vendor/` folder themself have a `vendor/` folder these would also be added to the $GOPATH. This is all well and good [until the same dependency is in the main project and one of the dependencies](https://github.com/mattfarina/golang-broken-vendor). If this happens the build will break. the Go toolchain only allows one version of a package on the classpath and doesn't have any means to resolve conflicts. As a result, its generally discouraged from vendoring dependencies in libraries. 
+
+For libraries, it would be OK to leave them without dependencies checked in if there were some way to express version preferences. Then the consuming application could be responsible for holding all the vendored dependencies. Package managers normally hadnle this process of dependency resolution  in other languages via tools like Maven, Ivy and pip. So, we also need a similar tool for Go. Fortunately developers have been busy building a whole plethora of dependency management tools. 
 
 Reproducible Builds With Glide et al.
 
 Glide is a tool that brings (most of) the best practices of dependency management from other languages into Go. [This article](https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.vncgoe4yu) written by one of the authors of Glide explains the design thinking behing Glide pretty well. Similar ideas seem to be driving the design of other tools like godeps and gb. 
 
 What is still missing in Go is the idea of immutable packages. Although Glide is able to download from a specific commit, and specific version ranges identifiable by git tags, it still relies on being able to download repos from Github. Fortunately, Golang 1.5 defines a standard for vendoring, which is a 'good enough' solution, and dovetails nicely with Glide.
+
 
 Vendoring: So Golang
 
@@ -73,3 +84,9 @@ http://engineeredweb.com/blog/2015/go-packages-need-release-versions/
 http://engineeredweb.com/blog/2016/monorepo-dangers/
 
 https://divan.Github.io/posts/leftpad_and_go/
+
+http://www.gigamonkeys.com/flowers/
+
+https://danluu.com/monorepo/
+
+
