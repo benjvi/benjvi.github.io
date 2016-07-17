@@ -57,6 +57,7 @@ Cons:
 Go 1.6 introduced vendoring, which allows you to install dependencies into the `vendor/` directory in your project. Dependencies in that folder will supersede dependencies in the `$GOPATH`. There is no support built into the language itself for how to install the dependencies, nor is there any support for versions of those vendored dependencies. But, including dependencies in a vendor folder is at least enough to make builds reproducible, provided that we check the vendored dependencies into version control. Like this, the build will no longer break due to dependency updates.
 
 If the libraries have their own independent versions, then by including them we are lowering the cohesion of our repository. If we are running a standalone application, the consequences of this are perhaps something we can live with: 
+
  - Holding more duplicated copies of libraries between projects. A tool like Maven can store a specific versions of a library in a local cache or just in a remote repository  which might be preferable
  - Adds spurious commits with large changesets for dependency updates, which makes it harder to parse the repo history 
  - Makes it possible for developers to add changes to dependencies by directly monkey-patching in our repo
