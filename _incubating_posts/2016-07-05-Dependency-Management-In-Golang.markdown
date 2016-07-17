@@ -72,7 +72,7 @@ Cons:
 
 Glide is a tool that brings (most of) the best practices of dependency management from other languages into Go. [This article](https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.vncgoe4yu) written by one of the authors of Glide explains the design thinking behing Glide pretty well. Similar ideas seem to be driving the design of other tools like godeps and gb, but glide seems to be one of the most mature out there.
 
-Adding a new dependency with `glide get` will add a reference in the glide.yaml with the package path, and will add the current commit from the HEAD of the default branch into the glide.lock. When someone else downloads the repository, that can be sure to use the same version as you by running `glide install`. Glide can also install dependencies into the `vendor/' folder, so if you check that in you have no reason to run `glide install` at all.
+Adding a new dependency with `glide get` will add a reference in the glide.yaml with the package path, and will add the current commit from the HEAD of the default branch into the glide.lock. `glide.yaml` represents the depedency preferences being expressed by the software, and `glide.lock` represents the specific versions resolved by glide, that are used in the build. When someone else downloads the repository, that can be sure to use the same version as you by running `glide install`, which installs dependencies based on `glide.lock`. Glide can also install dependencies into the `vendor/` folder, so if you check that in you have no reason to run `glide install` at all.
 
 It is also possible to specify acceptable version ranges in the glide.yaml, which will constrain the dependency resolution performed by `glide update`. Versioning informatino about repos is obtained by inspecting git tags with the standard format "v[0-9]+([0-9]+.[0-9]+)?". Another nice feature is the ability to specify repository aliases for your dependencies - so if you are maintaining a forked dependency you can just add the alias to glide.yaml instead of rewriting all your imports.
 
@@ -87,7 +87,7 @@ TODO: check that doing 'hard flattening' fixes the build but soft flattening doe
 Pros:
 + Aliasing makes working with forks easier
 + Versioning allows for resolution and conflict-avoidance for transitive dependencies
-
++ [SemVer is good](http://engineeredweb.com/blog/2015/go-packages-need-release-versions/) for distributing software
 Cons:
 - Lots of flags to work with, default behaviour isn't always what you want or need
 - Not all conflicts can be fixed, updating versions can still be painful
@@ -97,9 +97,9 @@ Cons:
 
 With Glide, we can finally build a project to do reproducible builds regardless of whether our project is a excutable, a library, or both. Specifying versions, we can get away from some of the pain of managing a large dependency tree manually. However, there is a lot of complexity we now have to manage, and while dealing with copmlexity is often a sign of a robust approach to making software, we might wish to be in the position of the Google developers who seem to have a much easier time. And if you're still not convinced, perhaps [this article](https://danluu.com/monorepo/) extolling the virtues of monorepos might be enough to convince you.
 
-There are some good reasons why constructing a monorepo might be reckless for an average organization. At Google, there has been a large investment in CD and testing which helps to track the impact of changes and ensures that commits don't break things. Without this investment, things coudl be quite hairy, as an errant commit could break not just one project, but all the downstream projects as well. 
+There are some good reasons why constructing a monorepo might be reckless for an average organization. At Google, there has been a large investment in CD and testing which helps to track the impact of changes and ensures that commits don't break things. Without this investment, things coudl be quite hairy, as an errant commit could break not just one project, but all the downstream projects as well. Even Twitter [had problems](http://engineeredweb.com/blog/2015/go-packages-need-release-versions/) with implementing their monorepo (monorepi, at one point). 
 
-Nevertheless, for the adventurous developer with an appetite for testing and an aversion to versions, I'd like to suggest an alternative model that she could use. There seems to be less tooling dedicated to maturing this monorepo-based approach, but it might just work:
+Nevertheless, for the adventurous developer with an appetite for testing and an aversion to versions, I'd like to suggest an alternative model that she could use. There seems to be less tooling dedicated to maturing this monorepo-based approach, but it *might* work:
 
 - There will be an alternative to `go get` which will fork the original project into your Organization's account if the fork does not already exist (this will also fork transitive dependencies)
 - Each new project using a forked dependency will register itself as a user of that dependency (this could be a config file in the dependency repo) 
@@ -107,18 +107,4 @@ Nevertheless, for the adventurous developer with an appetite for testing and an 
 - Updates to each dependency must go through a PR process which triggers tests for each dependent project as a pre-requisite to acceptance (there may be Dragons here)
 - Should be able to update client code and dependency in a single atomic commit whenever breaking changes occur
 
-REDO: Not sure how this would scale, but it should be feasible to set up such a system for relatively small numbers of projects. This model would maintain the advantages of having individual shreable projects with the simplicity of a monorepo setup. The fact that you control when dependencies are updated and have some information about whether 
-
-## More reading
-
-http://engineeredweb.com/blog/2015/go-packages-need-release-versions/
-
-http://engineeredweb.com/blog/2016/monorepo-dangers/
-
-https://divan.Github.io/posts/leftpad_and_go/
-
-http://www.gigamonkeys.com/flowers/
-
-https://danluu.com/monorepo/
-
-
+These start off sounding pretty easy, but the last two points cover a lot of ground. The last point is always cited as one of the big wins of monorepo systems and it is likely to be especially tricky to get working across multiple git repos. But, if you're not put off by that, this approach is for you (or maybe you can find a better approach)!
