@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "New Year's Resolutions 2016"
-categories: [Thoughts]
+categories: [thoughts]
 image: ibelonghere.png
 ---
 

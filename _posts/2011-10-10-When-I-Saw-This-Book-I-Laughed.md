@@ -1,7 +1,7 @@
 ---
 layout: post
 title: When I saw this book I laughed. But when I started to read...
-categories: [Thoughts]
+categories: [thoughts]
 image: tube.jpg
 ---
 

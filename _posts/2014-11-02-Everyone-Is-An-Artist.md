@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Everyone Is An Artist"
-categories: [Arts] 
+categories: [arts] 
 ---
 
 "Everyone is an artist". This is a highly interesting quote. Because, on the face of it, it is clearly untrue. Not everyone is a painter, not everyone is a sculptor, nor is everyone a draughtsman. In fact, most people are none of these things. But, although these are extremely important as mediums, these are not pre-requisites for art. Art, in its purest form, is about the expression of the intangible aspects of the world we live in. This is what is really interesting -  what is seen by one person cannot ordinarily be seen by anyone else. You may capture an image, but it is rather more difficult to capture a subjective experience.   

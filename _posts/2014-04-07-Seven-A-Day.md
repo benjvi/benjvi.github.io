@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Seven-A-Day
-categories: [Thoughts]
+categories: [thoughts]
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Why You Shouldn't Pretend to Be A Monorepo
-categories: [Technology]
+categories: [technology]
 image: ibelonghere.jpg
 ---
 

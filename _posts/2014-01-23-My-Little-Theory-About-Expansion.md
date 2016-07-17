@@ -1,7 +1,7 @@
 ---
 layout: post
 title: My Little Theory About Expansion
-categories: [Thoughts]
+categories: [thoughts]
 
 ---
 
