@@ -1,6 +1,6 @@
-# Dependency Management in Golang, Or Why Monorepos are not for you
+# Dependency Management in Golang, Or Why You Shouldn't Pretend to Be A Monorepo
 
-Ever since the inception of Go, the dependency management has worked quite differently from in other lagnuages. Although Go had the ambition to bake in a standardised dependency managment process, that process seems to have been based on the authors experience working in Google. Unfortunately, things work differently in Google than in other places, and so the default approach has always been disliked by the majority of developers. This has led to the development of a multitude of dependency management tools being developed, and as yet the community has not quite arrived at a de facto standard. This leaves the new Golang developer with some learning to do in order to choose the best tool for the job.
+Dependency management in Go has always worked quite differently from in other lagnuages. Although Go baked in a standardised dependency managment process, it seems to have been based on the authors' experience working in Google. Unfortunately, things work differently in Google than in other places, and so the default approach is disliked by the majority of developers. This has led to a reliance on ad hoc and third-party approaches, and as yet the community has not arrived at a de facto standard. This leaves the new Golang developer with some learning to do in order to choose the best tool for the job.
 
 ## Default: *Go Get Github*
 
@@ -13,12 +13,12 @@ When using `go get`, dependencies are copied into a single tree structure under 
 There are a couple of problems with this. One I discovered while I was trying to maintain a fork of the [Terraform project](github.com/hashicorp/terraform) [1]. This is a very large and active project with lots of dependencies. Every time I would do a build, new versions of the dependencies would be pulled in, and the build would break. Although there were many people around to fix the main repo, it was not uncommon for it to also be broken due for the same reason. In fairness to the terraform contributors, this is no longer the case as they introduced vendored dependencies at the start of this year. 
 
 Using single global versions of a package also caused difficulty in maintaining a fork. I was also at times using a forked version of a dependency of Terraform, and the solutino to used forked packages is to rewrite all the import paths in your repo. This doesn't sound ideal, but what would happen was this:
-  1. MAking changes in a fork, find a bug. Think that it doesn't seem like something specific to the changes I made, so decide to check Terraform master
+  1. While making changes in my Terraform fork, I find a bug. Think that it doesn't seem like something specific to the changes I made, so decide to check Terraform master
   2. Checkout master and try to build, but build fails. 
   3. Realize that I also made changes to the dependency. Can't remember whether I made the import paths to point to the forked repo, or I cloned my forked repo in place of the original repo, so check the package paths in the Terraform source files. 
-  4 . Find I made my changes in the original dependency, so that could be why master doesn't build.
-  5. Checkout master in the dependency and manage to build master
-  6. By this point, I forgot the problem I'd had that I was meant to be checking in master
+  4. Find I made my changes in the original dependency, so that could be why master doesn't build.
+  5. Checkout master in the dependency and manage to build master.
+  6. By this point, I forgot the problem I'd had that I was meant to be checking in master. 
 If each package held some information about its own dependencies, making these kinds of forks that touch multiple repos would have been much easier.
 
 There is one more problem that thankfully, I didn't encounter. Since repos on Github are not immutable, `go get` will fail if any project you're dependent on is deleted. So, #leftpadgate could also occur in Go projects. Although culturally, golang developers are less likely to import a load of small, arguably unnecessary, and more-likely-to-be-deleted dependencies, there was no protection in the toolchain. Until Go 1.6, that is, when vendoring was officially introduced.
@@ -29,7 +29,7 @@ I like to believe that every argument has a counter-argument. And oftern the rea
 
 Famously, Google works with a monorepo (did I mention that already?). Developers generally commit directl onto the mainline. Feature flags are preferred to feature branches. For each dependecy that is required, there is a single canonical version that is checked into the mainline. When libraries need to be updated, that is done with a single commit. For that commit to succeed, the tests must pass not only for the library itself, but also for all the projects that use the library.
 
-In this googly world, people really don't have to think about versions very much. Since everyone is just looking at the mainline HEAD, the overriding priority is to make sure that *everything* in the monorepo works after each commit. As a result, they emphasize test coverage and their CD infrastructure over versioning. Compared to working in such a monorepo, developing open-source software, integrating multiple projects seems like [a pain](https://github.com/chrisvana/repobuild/wiki/Motivation). i
+In this googly world, people really don't have to think about versions very much. Since everyone is just looking at the mainline HEAD, the overriding priority is to make sure that *everything* in the monorepo works after each commit. As a result, they emphasize test coverage and their CD infrastructure over versioning. Compared to working in such a monorepo, developing open-source software, integrating multiple projects seems like [a pain](https://github.com/chrisvana/repobuild/wiki/Motivation).
 
 ### Verdict
 
@@ -70,11 +70,44 @@ Cons:
 
 ## Reproducible Builds With Glide et al.
 
-Glide is a tool that brings (most of) the best practices of dependency management from other languages into Go. [This article](https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.vncgoe4yu) written by one of the authors of Glide explains the design thinking behing Glide pretty well. Similar ideas seem to be driving the design of other tools like godeps and gb. 
+Glide is a tool that brings (most of) the best practices of dependency management from other languages into Go. [This article](https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527#.vncgoe4yu) written by one of the authors of Glide explains the design thinking behing Glide pretty well. Similar ideas seem to be driving the design of other tools like godeps and gb, but glide seems to be one of the most mature out there.
 
-What is still missing in Go is the idea of immutable packages. Although Glide is able to download from a specific commit, and specific version ranges identifiable by git tags, it still relies on being able to download repos from Github. Fortunately, Golang 1.5 defines a standard for vendoring, which is a 'good enough' solution, and dovetails nicely with Glide.
+Adding a new dependency with `glide get` will add a reference in the glide.yaml with the package path, and will add the current commit from the HEAD of the default branch into the glide.lock. When someone else downloads the repository, that can be sure to use the same version as you by running `glide install`. Glide can also install dependencies into the `vendor/' folder, so if you check that in you have no reason to run `glide install` at all.
+
+It is also possible to specify acceptable version ranges in the glide.yaml, which will constrain the dependency resolution performed by `glide update`. Versioning informatino about repos is obtained by inspecting git tags with the standard format "v[0-9]+([0-9]+.[0-9]+)?". Another nice feature is the ability to specify repository aliases for your dependencies - so if you are maintaining a forked dependency you can just add the alias to glide.yaml instead of rewriting all your imports.
+
+### Flattening
+
+Although this allows a library to specify its own version dependencies (Glide will also manage transitive dependencies using glide.yaml) it does not solve the problem with libraries having their own vendored dependencies. This could be required if the library can also be distributed as an executable. In this case, glide needs to resolve a single version of each package and make it easy to manage that set. There are some complexities here (as there always are with transitive dependencies) but what we want is a single version of a dependency in the project `vendor/` folder, or an error if an unresolvable conflict is found. So, even if a conflict is present between vendored dependencies, Glide shhoudl be able to fix that by redoing the dependency resolution and removing the obsoleted vendor packages. Glide has a solution for this with the `--strip-vendor` option, but this is perhaps one area where the default begaviour is too conservative. There is some good discussion on these issues [here](https://github.com/Masterminds/glide/issues/303).
+
+TODO: check that doing 'hard flattening' fixes the build but soft flattening doesnt
+
+### Verdict
+
+Pros:
++ Aliasing makes working with forks easier
++ Versioning allows for resolution and conflict-avoidance for transitive dependencies
+
+Cons:
+- Lots of flags to work with, default behaviour isn't always what you want or need
+- Not all conflicts can be fixed, updating versions can still be painful
+- Non-standard (but seems to be gaining popularity)
 
 ## A DIY Approach For Monorepo Enthusiasts
+
+With Glide, we can finally build a project to do reproducible builds regardless of whether our project is a excutable, a library, or both. Specifying versions, we can get away from some of the pain of managing a large dependency tree manually. However, there is a lot of complexity we now have to manage, and while dealing with copmlexity is often a sign of a robust approach to making software, we might wish to be in the position of the Google developers who seem to have a much easier time. And if you're still not convinced, perhaps [this article](https://danluu.com/monorepo/) extolling the virtues of monorepos might be enough to convince you.
+
+There are some good reasons why constructing a monorepo might be reckless for an average organization. At Google, there has been a large investment in CD and testing which helps to track the impact of changes and ensures that commits don't break things. Without this investment, things coudl be quite hairy, as an errant commit could break not just one project, but all the downstream projects as well. 
+
+Nevertheless, for the adventurous developer with an appetite for testing and an aversion to versions, I'd like to suggest an alternative model that she could use. There seems to be less tooling dedicated to maturing this monorepo-based approach, but it might just work:
+
+- There will be an alternative to `go get` which will fork the original project into your Organization's account if the fork does not already exist (this will also fork transitive dependencies)
+- Each new project using a forked dependency will register itself as a user of that dependency (this could be a config file in the dependency repo) 
+- We will create a glide.yaml which provides an alias to the forked repo
+- Updates to each dependency must go through a PR process which triggers tests for each dependent project as a pre-requisite to acceptance (there may be Dragons here)
+- Should be able to update client code and dependency in a single atomic commit whenever breaking changes occur
+
+REDO: Not sure how this would scale, but it should be feasible to set up such a system for relatively small numbers of projects. This model would maintain the advantages of having individual shreable projects with the simplicity of a monorepo setup. The fact that you control when dependencies are updated and have some information about whether 
 
 ## More reading
 
