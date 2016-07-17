@@ -41,11 +41,13 @@ In this Googly world, people really don't have to think about versions very much
 ### Verdict
 
 Pros: 
+
 + Simple, no worrying about versions
 + Standard, well-known workflow
 + Works pretty well when dependency updates can be controlled
 
 Cons: 
+
 - Build will break if *any* dependency makes a breaking change
 - If a project is deleted from Github, the build would break and it might be difficult to fix
 - Awkward to work with forked repos
@@ -91,14 +93,16 @@ Although this allows a library to specify its own version dependencies (Glide wi
 ### Verdict
 
 Pros: 
+
 + Aliasing makes working with forks easier
 + Versioning allows for resolution and conflict-avoidance for transitive dependencies
 + [SemVer is good](http://engineeredweb.com/blog/2015/go-packages-need-release-versions/) for distributing software
 
 Cons: 
- - Lots of flags to work with, default behaviour isn't always what you want or need
- - Not all conflicts can be fixed, updating versions can still be painful
- - Non-standard (but seems to be gaining popularity)
+
+- Lots of flags to work with, default behaviour isn't always what you want or need
+- Not all conflicts can be fixed, updating versions can still be painful
+- Non-standard (but seems to be gaining popularity)
 
 ## A DIY Approach For Monorepo Enthusiasts
 
