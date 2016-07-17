@@ -129,7 +129,7 @@ Pros:
 + Easier to keep dependencies up-to-date
 + No-one likes versions anyway
 + A little ambition is not a bad thing
-+ YOLO
++ Monorepos are cool, and YOLO
 
 Cons:
 
