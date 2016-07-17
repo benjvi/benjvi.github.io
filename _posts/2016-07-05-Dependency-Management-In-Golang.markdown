@@ -107,3 +107,15 @@ Nevertheless, for the adventurous developer with an appetite for testing and an 
 - Should be able to update client code and dependency in a single atomic commit whenever breaking changes occur
 
 These start off sounding pretty easy, but the last two points cover a lot of ground. The last point in particular is always cited as one of the big wins of monorepo systems and it is likely to be especially tricky to get working across multiple git repos. But, if you're not put off by that, this approach is for you! Or, maybe you can find a better approach! There are lots of benefits to using a monorepo. It's unfortunate that its still so difficult right now.
+
+### Verdict
+
+Pros:
++ Will end up with a simpler well-known workflow
++ No-one likes versions
++ A little ambition is not a bad thing
++ YOLO
+
+Cons:
+- This is a long road, full of pain and suffering
+- You might end up writing your own VCS
