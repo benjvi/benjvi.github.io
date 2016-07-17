@@ -1,7 +1,12 @@
-# Dependency Management in Golang, Or Why You Shouldn't Pretend to Be A Monorepo
+---
+layout: post
+title: Dependency Management in Golang, Or Why You Shouldn't Pretend to Be A Monorepo
+categories: [Technology]
+image: ibelonghere.jpg
+---
 
 Dependency management in Go has always worked quite differently from in other languages. Although Go baked in a standardised dependency management process, it seems to have been based on the authors' experience working in Google. Unfortunately, things work differently in Google than in other places, and so the default approach is disliked by the majority of developers. This has led to a reliance on ad hoc and third-party approaches, and as yet the community has not arrived at a de facto standard. This leaves the new Golang developer with some learning to do in order to choose the best tool for the job.
-
+<!--more-->
 ## Default: *Go Get Github*
 
 By default, Go dependencies are downloaded with `go get`. Go get will resolve all the package paths in your codebase as URLs pointing to Github, Bitbucket, Google or Golang repos. The project will be cloned and the package will be by default in the same state as the HEAD of the default branch. 
