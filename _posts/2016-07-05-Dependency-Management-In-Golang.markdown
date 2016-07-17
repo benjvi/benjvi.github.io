@@ -125,8 +125,9 @@ These start off sounding pretty easy, but the last two points cover a lot of gro
 
 Pros:
 
-+ Will end up with a simpler well-known workflow
-+ No-one likes versions
++ Will end up with a simpler workflow
++ Easier to keep dependencies up-to-date
++ No-one likes versions anyway
 + A little ambition is not a bad thing
 + YOLO
 
