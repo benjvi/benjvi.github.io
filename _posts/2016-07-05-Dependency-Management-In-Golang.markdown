@@ -5,7 +5,7 @@ categories: [Technology]
 image: ibelonghere.jpg
 ---
 
-Dependency management in Go has always worked quite differently from in other languages. Although Go baked in a standardised dependency management process, it seems to have been based on the authors' experience working in Google. Unfortunately, things work differently in Google than in other places, and so the default approach is disliked by the majority of developers. This has led to a reliance on ad hoc and third-party approaches, and as yet the community has not arrived at a de facto standard. This leaves the new Golang developer with some learning to do in order to choose the best tool for the job.
+Dependency management in Go has always worked quite differently from in other languages. Although Go baked in a standardised dependency management process, it seems to have been based on the authors' experience working in Google. Unfortunately, things work differently in Google than in other places, and so the default approach is found lacking by most developers. This has led to a reliance on ad hoc and third-party approaches, and as yet the community has not arrived at a de facto standard. This leaves the new Golang developer with some learning to do in order to choose the best tool for the job.
 <!--more-->
 
 ## Default: *Go Get Github*
