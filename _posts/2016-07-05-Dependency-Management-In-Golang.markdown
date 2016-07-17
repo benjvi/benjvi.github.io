@@ -7,6 +7,7 @@ image: ibelonghere.jpg
 
 Dependency management in Go has always worked quite differently from in other languages. Although Go baked in a standardised dependency management process, it seems to have been based on the authors' experience working in Google. Unfortunately, things work differently in Google than in other places, and so the default approach is disliked by the majority of developers. This has led to a reliance on ad hoc and third-party approaches, and as yet the community has not arrived at a de facto standard. This leaves the new Golang developer with some learning to do in order to choose the best tool for the job.
 <!--more-->
+
 ## Default: *Go Get Github*
 
 By default, Go dependencies are downloaded with `go get`. Go get will resolve all the package paths in your codebase as URLs pointing to Github, Bitbucket, Google or Golang repos. The project will be cloned and the package will be by default in the same state as the HEAD of the default branch. 
@@ -38,22 +39,23 @@ In this Googly world, people really don't have to think about versions very much
 
 ### Verdict
 
-Pros:
+Pros: 
+
 + Simple, no worrying about versions
 + Standard, well-known workflow
 + Works pretty well when dependency updates can be controlled
 
-Cons:
+Cons: 
+ 
 - Build will break if *any* dependency makes a breaking change
 - If a project is deleted from Github, the build would break and it might be difficult to fix
-- Difficult to use with privately-hosted repos
 - Awkward to work with forked repos
 
 ## Vendoring - "do the simplest thing that could possibly work (if you're not sure what to do yet)"
 
 Go 1.6 introduced vendoring, which allows you to install dependencies into the `vendor/` directory in your project. Dependencies in that folder will supersede dependencies in the `$GOPATH`. There is no support built into the language itself for how to install the dependencies, nor is there any support for versions of those vendored dependencies. But, including dependencies in a vendor folder is at least enough to make builds reproducible, provided that we check the vendored dependencies into version control. Like this, the build will no longer break due to dependency updates.
 
-If the libraries have their own independent versions, then by including them we are lowering the cohesion of our repository. If we are running a standalone application, the consequences of this are perhaps something we can live with:
+If the libraries have their own independent versions, then by including them we are lowering the cohesion of our repository. If we are running a standalone application, the consequences of this are perhaps something we can live with: 
  - Holding more duplicated copies of libraries between projects. A tool like Maven can store a specific versions of a library in a local cache or just in a remote repository  which might be preferable
  - Adds spurious commits with large changesets for dependency updates, which makes it harder to parse the repo history 
  - Makes it possible for developers to add changes to dependencies by directly monkey-patching in our repo
@@ -65,10 +67,12 @@ For libraries, it would be OK to leave them without dependencies checked in if t
 ### Verdict
 
 Pros:
+
 + Simple to understand, no extra setup needed
 + Reproducible builds for applications, and not vulnerable to third-party updates
 
 Cons:
+ 
 - No help in setting up and updating dependencies
 - Libraries are problematic
 - Dirtying the source repository
@@ -88,14 +92,15 @@ Although this allows a library to specify its own version dependencies (Glide wi
 ### Verdict
 
 Pros:
+
 + Aliasing makes working with forks easier
 + Versioning allows for resolution and conflict-avoidance for transitive dependencies
 + [SemVer is good](http://engineeredweb.com/blog/2015/go-packages-need-release-versions/) for distributing software
 
 Cons:
-- Lots of flags to work with, default behaviour isn't always what you want or need
-- Not all conflicts can be fixed, updating versions can still be painful
-- Non-standard (but seems to be gaining popularity)
+ - Lots of flags to work with, default behaviour isn't always what you want or need
+ - Not all conflicts can be fixed, updating versions can still be painful
+ - Non-standard (but seems to be gaining popularity)
 
 ## A DIY Approach For Monorepo Enthusiasts
 
@@ -116,11 +121,13 @@ These start off sounding pretty easy, but the last two points cover a lot of gro
 ### Verdict
 
 Pros:
+
 + Will end up with a simpler well-known workflow
 + No-one likes versions
 + A little ambition is not a bad thing
 + YOLO
 
 Cons:
+
 - This is a long road, full of pain and suffering
 - You might end up writing your own VCS
