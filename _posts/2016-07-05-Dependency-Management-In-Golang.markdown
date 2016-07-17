@@ -16,7 +16,7 @@ When using `go get`, dependencies are copied into a single tree structure under 
 
 ### Problems Doing Open-Source Projects
 
-There are a couple of problems with this. One I discovered while I was trying to maintain a fork of the [Terraform project](github.com/hashicorp/Terraform) [1]. This is a very large and active project with lots of dependencies. Every time I would do a build, new versions of the dependencies would be pulled in, and the build would break. Although there were many people around to fix the main repo, it was not uncommon for it to also be broken due for the same reason. In fairness to the Terraform contributors, this is no longer the case as they introduced vendored dependencies at the start of this year. 
+There are a couple of problems with this. One I discovered while I was trying to maintain a fork of the [Terraform project](http://www.github.com/hashicorp/Terraform) [1]. This is a very large and active project with lots of dependencies. Every time I would do a build, new versions of the dependencies would be pulled in, and the build would break. Although there were many people around to fix the main repo, it was not uncommon for it to also be broken due for the same reason. In fairness to the Terraform contributors, this is no longer the case as they introduced vendored dependencies at the start of this year. 
 
 Using single global versions of a package also caused difficulty in maintaining a fork. I was also at times using a forked version of a dependency of Terraform, and the solution to used forked packages is to rewrite all the import paths in your repo. This doesn't sound ideal, but what would happen was this:
 
