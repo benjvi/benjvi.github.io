@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Why We Spend Expenses Wrongly
-categories: [Science] 
+categories: [science] 
 ---
 My company, like many others, provides a fixed daily amount to recompense travellers for their daily expenses. On most occasions this ends up being a little more than your expenses naturally sum to. Now, in theory, this means that once you know the duration of that trip (and assuming you trust payroll) you are sure to receive a fixed amount of money. However, people do not quite react accordingly. In particular, there is a tendency to fixate on the daily amount to guide decision-making. When I have been with my colleagues to dinner, we tend to spend more when expenses are being paid than when they are not. People want to spend the allowance - and when they spend the allowance, they stop spending.  
 

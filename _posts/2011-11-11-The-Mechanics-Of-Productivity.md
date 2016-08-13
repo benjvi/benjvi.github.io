@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The Mechanics of Productivity
-categories: [Science]
+categories: [science]
 image: tube.jpg
 ---
 
