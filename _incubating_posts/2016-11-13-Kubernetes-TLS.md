@@ -13,6 +13,8 @@ In previous blog posts we have seen the components of Kubernetes and how easy it
 
 The first thing we want to do is to make sure that an attacker who has gained access to the cluster network cannot intercept confidential information such as that passed from the kubelet to the apiserver.
 
+ ![Black Hat Cat]({{site.url}}/img/blackhatcat.jpg)
+
 There is also a converse communcation, where the apiserver connects to the kubelet, such as when running `kubectl exec`.
 
 In the general case, the apiserver will also need to connect to remote etcd nodes as well so this communication needs to be encrypted. etcd is intended to be encapsulated by the api server so direct access shouldn't  be enabled. etcd stores information about the state of the cluster, including secrets files which at the moment are not encrypted in etcd. etcd nodes, being clustered, also need to talk directly to each other.
