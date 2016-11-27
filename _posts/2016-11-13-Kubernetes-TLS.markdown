@@ -1,24 +1,27 @@
 ---
 layout: post
-title: "Securing communications in Kubernetes clusters"
+title: "Securing communications in Kubernetes"
 categories: [Technology]
 image: ibelonghere.jpg
 ---
 
-As more and more companies are bringing Kubernetes clusters to production, we are seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. For today's post we will look at one of the areas where best practices are quite well understood. That is, how privacy and authentication is provided for communication between cluster components. 
+As more and more organisations are bringing Kubernetes clusters to production, we are seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. For today's post we will look at one of the areas where best practices are quite well understood. That is, how privacy and authentication is provided for communication between cluster components. 
 
 <!--more-->
 
 ### Eavesdropping
 
-The first thing we want to do is to make sure that an attacker who has gained access to the cluster network cannot intercept confidential information. 
  ![Black Hat Cat]({{site.url}}/img/blackhatcat.jpg)
+
+The first thing we want to do is to make sure that an attacker who has gained access to the cluster network cannot intercept confidential information. 
 
 One of the most important communication channels is the connection of the kubelet to the apiserver. This is how the kubelet can get the information it needs to run the pods according to the desired state specified by the scheduler. There is also a connection in the opposite direction, where the apiserver connects to the kubelet, such as when running `kubectl exec`.
 
 etcd is used to store information about the state of the cluster, including secrets files which at the moment are not encrypted in etcd. This means that access to etcd must be tightly restricted. etcd nodes, being clustered, also need to talk directly to each other, so accessibility from and communication over the network is unavoidable. 
 
 Normally, the apiserver will need to connect to remote etcd nodes so this also needs to be secured. etcd is intended to be encapsulated by the api server so direct access shouldn't be enabled. Some other technologies also make use of etcd to store information and so may tempt you to reuse the same etcd cluster. One example is flannel which needs a distributed store for maintaining its overlay network configuration. However, this is bad for security as this means the worker nodes now all require access to read and write into (parts of) etcd. 
+
+![Kubernetes Architecture]({{site.url}}/img/kubernetesarchitecture.png)
 
 ### Locking down unprivileged users
 
@@ -42,11 +45,11 @@ TLS is the answer for most of these problems. In fact, it is specifically engine
 
 *scheduler* 
 
--  supports client certs for connecting to api server
+-  Supports client certs for connecting to api server
 
 *controller-manager* 
 
--  supports client certs for connecting to api server 
+-  Supports client certs for connecting to api server 
 
 #### Worker
 
@@ -57,7 +60,7 @@ TLS is the answer for most of these problems. In fact, it is specifically engine
 
 *kube-proxy* 
 
--  supports client certs for connecting to api server (why does this connect to api server??)
+-  Supports client certs for connecting to api server (why does this connect to api server??)
 
 The documentation on some of these capabilities is pretty poor, but at least for the components that connect to the API server, the authorization information can usually be loaded through [kubeconfig](http://kubernetes.io/docs/user-guide/kubeconfig-file/). 
 
@@ -71,7 +74,7 @@ The documentation on some of these capabilities is pretty poor, but at least for
 
 -  By default, access to the docker socket is [secured by the permissions of the containing folder](http://man7.org/linux/man-pages/man7/unix.7.html) (by default it is only accessible by docker group users (??))
 -  If remote access is required, it can be accessed over https using a server side cert. Clients may authenticate with a client cert
--  All authenticated users can do anything; they become root-equivalent on the host 
+-  All authenticated users can do anything, they become root-equivalent on the host 
 
 ### Minimum privilege on the cluster API
 
@@ -83,7 +86,7 @@ This requirement also drives the need to add privileges for the scheduler to use
 
 ### Still want more?
 
-The threat model and mitigation for the core components is hopefully now a little clearer. However, there's still some work to do.  There are lots of other services that may need to be securely connected to a kubernetes cluster which are currently less standardized. If using RBAC in the cluster, there needs to be a connection to a identity provider using oidc, or the api server can simply delegate authentication to a different server. Similarly, we have not spoken about monitoring or log aggregation. Or, if using a cloud provider, there needs to be an authorized cluster user to perform actions like mounting volumes. 
+The threat model and mitigation for the core components is hopefully now a little clearer. However, there's still some work to do.  There are lots of other services that may need to be securely connected to a kubernetes cluster which are currently less standardized. If using RBAC in the cluster, there needs to be a connection to a identity provider using OIDC, or the api server can simply delegate authentication to a different server. Similarly, we have not spoken about monitoring or log aggregation. Or, if using a cloud provider, there needs to be an authorized cluster user to perform actions like mounting volumes. 
 
 ### Useful Links
 
