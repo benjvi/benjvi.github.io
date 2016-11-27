@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Securing communications within Kubernetes clusters"
+title: "Securing communications in Kubernetes clusters"
 categories: [Technology]
 image: ibelonghere.jpg
 ---
 
-More and more companies are bringing Kubernetes clusters to production, we areo seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see my colleague Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. For today's post we will look at one of the areas where best practices are quite well understood. That is, how privacy and authentication is provided for communications between cluster components. 
+More and more companies are bringing Kubernetes clusters to production, we are seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. For today's post we will look at one of the areas where best practices are quite well understood. That is, how privacy and authentication is provided for communications between cluster components. 
 
 <!--more-->
 
@@ -14,15 +14,15 @@ More and more companies are bringing Kubernetes clusters to production, we areo 
 The first thing we want to do is to make sure that an attacker who has gained access to the cluster network cannot intercept confidential information. 
  ![Black Hat Cat]({{site.url}}/img/blackhatcat.jpg)
 
-One of the most important communication channels is the connection of the kubelet to the apiserver. This is how the kubelet can get the information it needs to run the pods according to the desired state specified by the scheduler. There is also a reverse connection, where the apiserver connects to the kubelet, such as when running `kubectl exec`.
+One of the most important communication channels is the connection of the kubelet to the apiserver. This is how the kubelet can get the information it needs to run the pods according to the desired state specified by the scheduler. There is also a connection in the opposite direction, where the apiserver connects to the kubelet, such as when running `kubectl exec`.
 
-In the general case, the apiserver will also need to connect to remote etcd nodes as well so this communication needs to be encrypted. etcd is intended to be encapsulated by the api server so direct access shouldn't be enabled. In particular, if using flannel for networking it may be tempting to reuse the same etcd cluster for the flannel backing store, however, this is bad for security as this means the worker nodes now all require access to read and write into (parts of) etcd. 
+etcd is used to store information about the state of the cluster, including secrets files which at the moment are not encrypted in etcd. This means that access to etcd must be tightly restricted. etcd nodes, being clustered, also need to talk directly to each other, so accessibility from and communication over the network is unavoidable. 
 
-etcd stores information about the state of the cluster, including secrets files which at the moment are not encrypted in etcd. etcd nodes, being clustered, also need to talk directly to each other.  
+Normally, the apiserver will need to connect to remote etcd nodes so this also needs to be secured. etcd is intended to be encapsulated by the api server so direct access shouldn't be enabled. Some other technologies also make use of etcd to store information and so may tempt you to reuse the same etcd cluster. One example is flannel which needs a distributed store for maintaining its overlay network configuration. However, this is bad for security as this means the worker nodes now all require access to read and write into (parts of) etcd. 
 
 ### Locking down unprivileged users
 
-There is some other communication between components, but it should be just local communication on the master node, which is less worrying. In general there are few reasons a non-admin user should be logged into a master node. 
+There are other communication channels between components, but it should all be on localhost, which means we only need to protect against already logged-on users. Conveniently, there are few reasons a non-admin user should be logged into a master node. 
 
 Nevertheless, for defense in depth reasons it is good to secure the communication between master node components too. This is an area which hasn't been too well supported until recently (see [issue #13598](https://github.com/kubernetes/kubernetes/issues/13598)). 
 
@@ -34,21 +34,21 @@ TLS is the answer for most of these problems. In fact, it is specifically engine
 
 #### Master
 
-api server
+apiserver  
  - Supports server certs for serving the API, and clients can authenticate with client certs
  - Supports client certs for connecting to etcd
  - Supports client certs for connecting to kubelet
-scheduler
+scheduler  
  - supports client certs for connecting to api server
-controller-manager
+controller-manager  
  - supports client certs for connecting to api server 
 
 #### Worker
 
-kubelet
+kubelet  
  - Supports server certs enabling connections for `kubectl exec`, and clients can authenticate with client certs
  - Supports client certs for connecting to api server
-kube-proxy
+kube-proxy  
 - supports client certs for connecting to api server (why does this connect to api server??)
 
 The documentation on some of these capabilities is pretty poor, but at least for the components that connect to the API server, the authorization information can usually be loaded through [kubeconfig](http://kubernetes.io/docs/user-guide/kubeconfig-file/). 
@@ -73,15 +73,15 @@ This requirement also drives the need to add privileges for the scheduler to use
 
 [What privileges does the controller-manager need in the api server??]
 
-### Still want more??
+### Still want more?
 
-The threat model and mitigation for the core components is hopefully now a little clearer. However, there's still some work to do!  There are lots of other services that may need to be securely connected to a kubernetes cluster which are currently less standardized. If using RBAC in the cluster, there needs to be a connection to a identity provider using oidc, or the api server can simply delegate authentication to a different server. Similarly, we have not spoken about monitoring or log aggregation. Or, if using a cloud provider, there needs to be an authorized cluster user to perform actions like mounting volumes. 
+The threat model and mitigation for the core components is hopefully now a little clearer. However, there's still some work to do.  There are lots of other services that may need to be securely connected to a kubernetes cluster which are currently less standardized. If using RBAC in the cluster, there needs to be a connection to a identity provider using oidc, or the api server can simply delegate authentication to a different server. Similarly, we have not spoken about monitoring or log aggregation. Or, if using a cloud provider, there needs to be an authorized cluster user to perform actions like mounting volumes. 
 
 ### Useful Links
 
-[Don't run as root inside of Docker containers](http://blog.dscpl.com.au/2015/12/don-run-as-root-inside-of-docker.html)
-[SSL and TLS: A Beginners Guide](https://uk.sans.org/reading-room/whitepapers/protocols/ssl-tls-beginners-guide-1029)
-[OWASP TLS Guidelines](https://www.owasp.org/index.php/Transport_Layer_Protection_Cheat_Sheet)
-[Example ABAC policy file for Kubernetes API](https://github.com/kubernetes/kubernetes/blob/master/pkg/auth/authorizer/abac/example_policy_file.jsonl)
-[etcd security model](https://coreos.com/etcd/docs/latest/security.html)
-[Protect the Docker socket](https://docs.docker.com/engine/security/https/)
+[Don't run as root inside of Docker containers](http://blog.dscpl.com.au/2015/12/don-run-as-root-inside-of-docker.html)  
+[SSL and TLS: A Beginners Guide](https://uk.sans.org/reading-room/whitepapers/protocols/ssl-tls-beginners-guide-1029)  
+[OWASP TLS Guidelines](https://www.owasp.org/index.php/Transport_Layer_Protection_Cheat_Sheet)  
+[Example ABAC policy file for Kubernetes API](https://github.com/kubernetes/kubernetes/blob/master/pkg/auth/authorizer/abac/example_policy_file.jsonl)  
+[etcd security model](https://coreos.com/etcd/docs/latest/security.html)  
+[Protect the Docker socket](https://docs.docker.com/engine/security/https/)  
