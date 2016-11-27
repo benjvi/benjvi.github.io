@@ -5,7 +5,7 @@ categories: [Technology]
 image: ibelonghere.jpg
 ---
 
-More and more companies are bringing Kubernetes clusters to production, we are seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. For today's post we will look at one of the areas where best practices are quite well understood. That is, how privacy and authentication is provided for communications between cluster components. 
+As more and more companies are bringing Kubernetes clusters to production, we are seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. For today's post we will look at one of the areas where best practices are quite well understood. That is, how privacy and authentication is provided for communication between cluster components. 
 
 <!--more-->
 
@@ -34,36 +34,39 @@ TLS is the answer for most of these problems. In fact, it is specifically engine
 
 #### Master
 
-apiserver  
- - Supports server certs for serving the API, and clients can authenticate with client certs
- - Supports client certs for connecting to etcd
- - Supports client certs for connecting to kubelet
+apiserver 
+-  Supports server certs for serving the API, and clients can authenticate with client certs
+-  Supports client certs for connecting to etcd
+-  Supports client certs for connecting to kubelet
+
 scheduler  
- - supports client certs for connecting to api server
+-  supports client certs for connecting to api server
+
 controller-manager  
- - supports client certs for connecting to api server 
+-  supports client certs for connecting to api server 
 
 #### Worker
 
 kubelet  
- - Supports server certs enabling connections for `kubectl exec`, and clients can authenticate with client certs
- - Supports client certs for connecting to api server
+-  Supports server certs enabling connections for `kubectl exec`, and clients can authenticate with client certs
+-  Supports client certs for connecting to api server
+
 kube-proxy  
-- supports client certs for connecting to api server (why does this connect to api server??)
+-  supports client certs for connecting to api server (why does this connect to api server??)
 
 The documentation on some of these capabilities is pretty poor, but at least for the components that connect to the API server, the authorization information can usually be loaded through [kubeconfig](http://kubernetes.io/docs/user-guide/kubeconfig-file/). 
 
 #### etcd
 
-- Supports server certs for presenting to clients, and clients can authenticate with client certs
-- Support server/client certs for peer communication
-- Can set permissions for authenticated users [based on key prefixes](https://coreos.com/etcd/docs/latest/auth_api.html#key-value-resources) 
+-  Supports server certs for presenting to clients, and clients can authenticate with client certs
+-  Support server/client certs for peer communication
+-  Can set permissions for authenticated users [based on key prefixes](https://coreos.com/etcd/docs/latest/auth_api.html#key-value-resources) 
 
 #### Docker
 
-- By default, access to the docker socket is [secured by the permissions of the containing folder](http://man7.org/linux/man-pages/man7/unix.7.html) (by default it is only accessible by docker group users (??))
-- If remote access is required, it can be accessed over https using a server side cert. Clients may authenticate with a client cert
-- All authenticated users can do anything; they become root-equivalent on the host 
+-  By default, access to the docker socket is [secured by the permissions of the containing folder](http://man7.org/linux/man-pages/man7/unix.7.html) (by default it is only accessible by docker group users (??))
+-  If remote access is required, it can be accessed over https using a server side cert. Clients may authenticate with a client cert
+-  All authenticated users can do anything; they become root-equivalent on the host 
 
 ### Minimum privilege on the cluster API
 
