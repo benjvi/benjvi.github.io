@@ -34,28 +34,28 @@ TLS is the answer for most of these problems. In fact, it is specifically engine
 
 #### Master
 
-apiserver 
+*apiserver* 
 
 -  Supports server certs for serving the API, and clients can authenticate with client certs
 -  Supports client certs for connecting to etcd
 -  Supports client certs for connecting to kubelet
 
-scheduler 
+*scheduler* 
 
 -  supports client certs for connecting to api server
 
-controller-manager 
+*controller-manager* 
 
 -  supports client certs for connecting to api server 
 
 #### Worker
 
-kubelet 
+*kubelet* 
 
 -  Supports server certs enabling connections for `kubectl exec`, and clients can authenticate with client certs
 -  Supports client certs for connecting to api server
 
-kube-proxy 
+*kube-proxy* 
 
 -  supports client certs for connecting to api server (why does this connect to api server??)
 
