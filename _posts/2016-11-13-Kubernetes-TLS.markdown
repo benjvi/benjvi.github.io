@@ -35,7 +35,7 @@ On the worker nodes, the docker daemon is the main point to be protected, as it 
 
 ![We Love TLS]({{site.url}}/img/welovetls.jpg)
 
-TLS is the answer for most of these problems. In fact, it is specifically engineered for providing privacy between communicating applications. Although it has not always been the case, happily, all the components of a kubernetes cluster now support TLS. Listing out all the requirements we specified so far, the actual capabilities look like this: 
+TLS is the answer for most of these problems. In fact, did you know it is specifically engineered for providing privacy between communicating applications? Although it has not always been the case, happily, all the components of a kubernetes cluster now support TLS. Listing out all the requirements we specified so far, the actual capabilities look like this: 
 
 #### Master
 
