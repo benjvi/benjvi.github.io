@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why You Shouldn't Pretend to Be A Monorepo
+title: Monorepos just dont work everywhere
 categories: [technology]
 image: ibelonghere.jpg
 ---
