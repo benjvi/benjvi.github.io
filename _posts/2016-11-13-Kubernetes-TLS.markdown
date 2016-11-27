@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Securing communications in Kubernetes"
-categories: [Technology]
+categories: [technology]
 image: ibelonghere.jpg
 ---
 
