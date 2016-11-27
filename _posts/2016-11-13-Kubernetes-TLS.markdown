@@ -5,7 +5,7 @@ categories: [Technology]
 image: ibelonghere.jpg
 ---
 
-As more and more organisations are bringing Kubernetes clusters to production, we are seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. For today's post we will look at one of the areas where best practices are quite well understood. That is, how privacy and authentication is provided for communication between cluster components. 
+As more and more organisations are bringing Kubernetes clusters to production, we are seeing a lot more concerns about availability and security surfacing. And while there are quite a number of tutorials and scripts for bringing up out there for getting up and running (see Lorenzo's very thorough and understandable guide), it remains relatively difficult to bring up a maintainable setup that also follows best practices. In this post we will look at an  areas where best practices are quite well understood but documentation is unfortunately still a bit lacking. That is, how privacy and authentication can be provided for communication between cluster components. 
 
 <!--more-->
 
