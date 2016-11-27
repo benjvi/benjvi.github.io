@@ -47,8 +47,8 @@ when you;ve noticed you;ve ifallen into a negative frame of mind it can be helpf
 One mantra I use is "discomfort brings the possibility to find new space". When I have an aversive emotional reaction, this can calm me down and allow me to reconsider whats going on right now. this can help me to stay with something challenging, despite the discomfort. And this embodies a profound truth that resonates with me: we perform uncomfortable actions in the hope that there will be a qualitative change in our experience. With the right actions, these do happen.
 
 For other situations there are different mantras, which ohopefilly correspond to a skillful waty of approaching the situation. A few other mantras I like are:
-- 
-- 
+- "Emotions aren't infectious, there's no need to run away when you sense negative emotions"
+- "The difference between strong and weak social networks is based simply on whether you think you belong or not"
 - 
 
 ## Bringing it all together
