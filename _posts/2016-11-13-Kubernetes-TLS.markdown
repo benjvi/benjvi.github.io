@@ -78,7 +78,7 @@ The documentation on some of these capabilities is pretty poor, but at least for
 -  If remote access is required, it can be accessed over https using a server side cert. Clients may authenticate with a client cert
 -  All authenticated users can do anything, they become root-equivalent on the host 
 
-### Least privilege on the cluster API
+### Least privilege in Kubernetes management
 
 There is the possibility that one of the worker nodes could be compromised which would mean that an attacker could do anything that the kubelet can do. This drives the need to give the minimum possible privileges for the kubelet, and for that we need client side authentication. This is normally implemented using client side cerificates. 
 
