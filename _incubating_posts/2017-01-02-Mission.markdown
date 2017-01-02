@@ -7,8 +7,7 @@ image: ibelonghere.png
 
 "begin with the end in mind" - stephen covey
 
-- In DevOps we are typically constructing platforms for delivery and associated systems rather than products or platforms for external users
-- Effectiveness for a business theoretically means ability to decrease costs and increase revenue 
+ Effectiveness for a business theoretically means ability to decrease costs and increase revenue 
 - In practice, businesses build their own ideology and worldviews and seek to maximise their own ideosyncratic metrics of business value
 - An unexamined dedication to building quality software is subjugated to direct or indirect strategies to maximise business value
 - From a [moral relativist](http://www.philosophybasics.com/branch_moral_relativism.html) POV this may be fine - [economic value](https://en.wikipedia.org/wiki/Value_(economics)) and [consumer surplus](https://en.wikipedia.org/wiki/Economic_surplus) is presumably being produced by a business that remains a going concern (as well as producer surplus)
@@ -17,7 +16,7 @@ image: ibelonghere.png
 - What might we value as engineers? How do we connect the elegance of a well-conceived and well-engineered software systems to moral values like generosity, kindness and love?  
 - Very often success is defined by the effectiveness of the system rather than its purpose 
   - System is built to replace something else, looking for greater efficiency 
-In DevOps
+- In DevOps we are typically constructing platforms for delivery and associated systems rather than products or platforms for external users
   - Centralised infrastructure provisioning with long turnaround cycles stymies autonomy and disempower peoples. It can cause alienation and even lead to conflict
   - Lack of feedback in the sfotware development process slows down learning and makes the process of developing software both less efficient and less enjoyable
   - We value flow and quick, learnable, composable software can encourage flow. Bloated, unintuitive and arbitary interfaces discourage flow
