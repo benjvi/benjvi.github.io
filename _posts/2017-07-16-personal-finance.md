@@ -148,4 +148,4 @@ I'm pretty happy with the results that I can get out of this. The main problem, 
 
 Also, I don't actually mind too much to eyeball sets of numeric values, but it does make things more intuitive to have some nice charts. A tool like sqlchart might be worth investigating.
 
-P.S. I have added the code for this on github here in case someone finds it useful :) (unfortunately I can't add all the categorizing because the rules are pretty personal)
+P.S. I have added the code for this on github [here](https://github.com/benjvi/personal-finance-machine) in case someone finds it useful :) (unfortunately I can't add all the categorizing because the rules are pretty personal)
