@@ -6,6 +6,7 @@ image: ibelonghere.png
 ---
 
 I have been working for a few years in technology now, mostly in what's most commonly called platform engineering. And having been working for a few years I've noticed that, on a day-to-day basis, few of the challenges I encounter seem to directly relate to the actual impact of our work on people's lives. This is not something that is specific to this domain, I suppose. Rather it should be common to most types of engineering. After all we are supposed to be doing practical, quantifiable things to shape the world, and subjective things like feelings and emotions are just too nebulous to be of any use to us. Furthermore, there's a division of labour, and our strengths as engineers lie in our abstract reasoning and attention-to-detail, not in emotional intelligence. Maybe?  
+
 <!--more-->
 In platform engineering, like in any other software engineering role, we tend to reduce people's experience to tractable 'User Stories' in order to try and make useful things, e.g. "as a Developer I want to look at an availability dashboard so I can understand my software better". While this simplification is necessary to  define clear and achievable tasks, in platform engineering (especially) it has the unfortunate side-effect that we don't need to engage with people's values as people, only with the values they express through their roles. The question of whether a process makes me frustrated or angry would not be something that comes up in a user story, only whether the process can be carried out efficiently.  
 
@@ -25,7 +26,7 @@ All software we provide should consider the suffering it can cause users. For ex
 
 And there are many more ways in which the platforms we use impact our experiences. In fact they are too many to number. But if we bring our attention to them, perhaps we can deal with them more skillfully. There is a Zen quote that deals with this beautifully:
 
- > Before Enlightenment chop wood, carry water. After enlightenment chop wood, carry water.
+ > *Before Enlightenment chop wood, carry water. After enlightenment chop wood, carry water.*
 
 Although we must always go through the same process when building software, it is up to us how we interpret the purpose of each task, and how we let that purpose shape our approach to them.
 
