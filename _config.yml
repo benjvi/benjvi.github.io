@@ -4,4 +4,4 @@ permalink: /:year/:month/:day/:title
 categories: [Technology, Thinking, Arts, Science, Fitness]
 excerpt_separator: "<!--more-->"
 destination: _site
-url: http://www.benjvi.com
+url: http://benjvi.com
