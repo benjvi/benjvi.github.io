@@ -1,0 +1,68 @@
+
+
+Securing Kubernetes from the inside out
+
+Motivation:
+- Network perimeters are (outside of specific scenarios) insufficient to control access to services
+  - In google ( + others?) internal services are treated (almost??) identically to external services (post-smileyface)
+- Looking to house multiple (partially trusted) tenants on same cluster
+- Access to the master nodes ultimately means root access to any of the apps running on the cluster
+
+
+Seek to prevent:
+
+- Eavesdropping on communications between components
+  - API server is distributed as is data store
+  - 'Secrets' need to be transmitted from etcd
+- Altering of communications between components
+  - Control plane needs to issue instructions to nodes
+- Potential damage from a container breakout attack
+- Denial of Service
+
+The components + their responsibilities:
+- API Server
+  - Allows users to set desired state
+  - Gives kubelets info about what they should be running
+  - Gives kube-proxy info about services 
+  - Can connect to pods thtrough kubelet for interactive sessions
+  - Controls the cluster => we need to protect this
+  - When horizontally scales - need LB (this isnt standardised?!):
+    - https://github.com/kubernetes/kubernetes/issues/22609
+- etcd
+  - Persistent data store backing API server
+  - ie Stores desired ( + ~current?) state of the cluster
+  - Distributed across master nodes
+  - Part of API service => needs to be protected, accessible only by API server
+  - Dont use this for flannel
+- Controller (manager)
+  - 
+- Scheduler
+- Kubelet ( + kube-proxy)
+- kube-system pods
+- workload pods
+  - https://kubernetes.io/docs/concepts/cluster-administration/access-cluster/#accessing-the-api-from-a-pod
+  - How to set up a pod in a namespace to use a restrcted service account?
+Possible attack vectors
+- Host network access
+- App compromise + container breakout
+- Direct host compromise
+
+Prevention
+
+Restrict access to master node
+Use TLS on all comms
+ - apiserver
+ - https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
+https://www.youtube.com/watch?v=RNhXOJggb_A&list=PLYr80yM7-hzAZ0Z7gTh-h1npnnUPPMEnu&index=82
+Use RBAC for all the things
+ - Limitations in 1.6! - see jess fraz + alex mohr talk
+
+Standardarzed auth mechanism for system components
+- auth with x509 client certs
+- kubeconfig: https://kubernetes.io/docs/concepts/cluster-administration/authenticate-across-clusters-kubeconfig/
+- PKI generation with kube-adm
+
+Auth mechanism for pods access to api server
+- In kube-system namespace (eg kube-dns, heapster)
+
+

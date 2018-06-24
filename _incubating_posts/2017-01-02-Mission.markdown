@@ -21,6 +21,8 @@ image: ibelonghere.png
   - Lack of feedback in the sfotware development process slows down learning and makes the process of developing software both less efficient and less enjoyable
   - We value flow and quick, learnable, composable software can encourage flow. Bloated, unintuitive and arbitary interfaces discourage flow
   - Useful software constructs are like mathemtics in that they are reusable. Jim simmons talks about this on Numberphile in the context of mathematics. A novel but seemingly useless new formulation in mathematics often turns out to have a useful application in the sciences.
-
+ - Does enunciation of our values mean that we should do anything differently?
+   - Focus on the truthiness of the ideas we seek to propagate
+   - 
   http://wakeforestlawreview.com/2012/04/our-continuing-struggle-with-the-idea-that-for-profit-corporations-seek-profit/
   https://mechanicalmarkets.wordpress.com/2016/10/04/high-speed-trading-networks-and-societal-value/
