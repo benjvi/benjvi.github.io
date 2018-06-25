@@ -6,7 +6,7 @@ image: ibelonghere.png
 <div class="content">
   <div id="post">
 	<div class="postcontent">
-                <h2 href="{{ page.url }}">{{ page.title }}</h2>
+                <h2><a href="{{ site.url }}/{{ page.url }}">{{ page.title }}</a></h2>
 		<div class="date">{{ page.date | date: "%B %e, %Y" }}</div>
 		<p>{{ content }}</p>
 	</div>
