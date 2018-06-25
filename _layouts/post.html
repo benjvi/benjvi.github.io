@@ -5,8 +5,8 @@ image: ibelonghere.png
 
 <div class="content">
   <div id="post">
-        <h2>{{ page.title }}</h2>
 	<div class="postcontent">
+                <h2 href="{{ page.url }}">{{ page.title }}</h2>
 		<div class="date">{{ page.date | date: "%B %e, %Y" }}</div>
 		<p>{{ content }}</p>
 	</div>
