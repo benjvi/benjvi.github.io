@@ -1,17 +1,20 @@
 ---
 layout: post
-title: "Finding Meaning in Platform Engineering"
+title: "Putting the Meaning in Platform Engineering"
 categories: [thoughts]
 image: ibelonghere.png
 ---
 
-I have been working for a few years in technology, mostly doing platform engineering. Software engineering is my vocation. When I was little I wanted to be an inventor, and programming is my outlet to make useful gizmos like I always wanted to. In general, its pretty good. With that said, I want to talk about one thing that bothers me: *On a day-to-day basis, few of the challenges I encounter relate to the impact of our work on people's lives*. This is not to say that there is no impact, simply that it is not often the focus of our efforts.  
+I have been working for a few years in technology, mostly doing platform engineering. I've done work for small companies but more often for larger companies. Software engineering is my vocation. When I was little I wanted to be an inventor, and programming is my outlet to make useful gizmos like I always wanted to. So in general, its a pretty good thing to be doing. With that said, I want to talk about one thing that bothers me: 
 
+> **On a day-to-day basis, few tasks relate to the impact of our work on people's lives**. 
 
-This is not something that is specific to platform or software engineering. Rather it should be common to most types of engineering. The traditional view would be something like this: 
+This is not to say that there is no impact of the tasks we do, simply that it is not often the focus of our efforts. We augment our software and remove technical deficiencies, but no-one asks us to question if the system will be useful. 
+
+The problem is not specific to platform or software engineering. In large engineering projects, many people are needed and the individual's work may not be useful in isolation. The traditional view would be something like this: 
  > Engineers do practical, quantifiable things to shape the world, and subjective things like feelings and emotions are nebulous and unquantifiable. Furthermore, there's a division of labour, and the strengths of engineers lie in abstract reasoning and attention-to-detail, not in emotional intelligence. 
 
-There is perhaps some truth to this, but in software engineering this is incomplete. There is too much churn in technologies and too many 'best-practices' rabbit holes to fall down. The purpose of the work is everyone's responsibility. We can all gain if each person can engage more with the outcomes of their work. 
+From what I see in software engineering, this view is incomplete. There is too much churn in technologies and too many 'best-practices' rabbit holes to get lost in. The purpose of the work is everyone's responsibility. We can all gain if each person can engage more with the outcomes of their work. 
 <!--more-->
 
 ## Ghosts In The Machine
@@ -41,11 +44,11 @@ What do values look like? Perhaps a good place to start is "life, liberty, and t
 
 There are certainly some values that we should share as a profession. There have been many attempts to set out an Hippocratic oath for software engineers - or more plainly - a shared code of ethics. Although none seem to have caught on in the mind of engineers, [the IEEE code](https://www.ieee.org/about/corporate/governance/p7-8.html) is a reasonable and thought-provoking place to start. Due to the universal nature of such documents, this only covers the groundwork for ethical decision-making. 
 
-Let's round out this philosophical section by restating things in a simpler way. As a human being you have things you value for their own sake. Asking [sensible questions](http://blog.practicalethics.ox.ac.uk/2015/07/usable-ethics-user-design-and-ethics/) about the impact of your work on the experiences of others and the things you value is one of the most valuable things you can do, and is something that can never be automated.
+Let's round out this philosophical section by restating things in a simpler way. As a human being you have things you value for their own sake. Asking [sensible questions](http://blog.practicalethics.ox.ac.uk/2015/07/usable-ethics-user-design-and-ethics/) about the impact of your work on the things you value is one of the most valuable things you can do. It is also something that can never be automated.
 
 ## In Software
 
-All software we provide should consider the suffering it can cause users. For example - bloated, unintuitive and arbitrary interfaces waste users time and makes them frustrated. On the other hand, users can find elegance and joy in well-designed interfaces. Also, everyone who reads a piece of code can find beauty in an elegant algorithm! Even where this is not the case, responsive and intuitive interfaces and allow users to get into a pleasant state of [flow](https://www.psychologytoday.com/us/articles/199707/finding-flow). 
+While software can be tremendously valuable, it can cause users a lot of suffering. For example - bloated, unintuitive and arbitrary interfaces waste users time and makes them frustrated. On the other hand, users can find elegance and joy in well-designed interfaces. Even where this is not the case, responsive and intuitive interfaces and allow users to get into a pleasant state of [flow](https://www.psychologytoday.com/us/articles/199707/finding-flow). 
 
 For platforms, we can think about pain-points that developers often have:
  - Centralised infrastructure provisioning with long turnaround cycles stymies autonomy and dis-empower people. It can cause alienation     and even lead to conflict. For this reason we should enable self-service wherever possible - up to the point where e.g. it substantially endangers users' data
@@ -55,9 +58,8 @@ There are surely many more ways in which the platforms we use impact our experie
 
 ## Finally
 
-There is a Zen proverb that fits in quite nicely with the theme of trying to embue our actions with meaning:
+There is a Zen proverb that fits in quite nicely with the theme of trying to imbue our actions with meaning:
 
  > *Before Enlightenment chop wood, carry water. After enlightenment chop wood, carry water.*
 
-In programming, we must think of the mechanisms by which our software is to work, we should ensure good quality through our practices and address the requirements in front of us. However, it is up to us how we divine the purpose of each task, and how we let that purpose shape our approach to them.
-
+In programming, we must think about the mechanisms by which our software is to work, we address the requirements in front of us and should ensure good quality. These are our professional duties. It *is not* our duty to question the purpose of a piece of software, but it is useful. It is up to us how we divine the purpose of each task, and how we let that purpose shape our approach to them. This is how we find meaningful actions. 
