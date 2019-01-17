@@ -5,7 +5,7 @@
 
 html 
 {
-	font-family: Georgia, "Times New Roman", Times, serif;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .column
@@ -63,8 +63,7 @@ img.banner:hover
 }
 
 h1
-{
-	font-family: Georgia, "Times New Roman", Times, serif;
+{       
 	font-size: 3em;
 	color: #850a0a;
 	margin: 0 0;
@@ -96,7 +95,6 @@ a:hover {
 
 h2
 {
-	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 1.8em;
 }
 h2 a:visited
@@ -112,13 +110,11 @@ h2 a:hover
 	color: #850a0a;
 }
 h3
-{
-	font-family: Georgia, "Times New Roman", Times, serif;
+{       
 	font-size: 1.5em;
 }
 h4
 {
-	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 1.2em;
 }
 .overlay
@@ -275,12 +271,7 @@ hr
 	padding: 10px;
 	padding-left: 10%;
 	padding-right: 10%;
-	line-height: 1.5;
-}
-
-p
-{
-	font-family: Georgia, "Times New Roman", Times, serif;
+	line-height: 1.75em;
 }
 
 .categories a
@@ -330,7 +321,7 @@ footer
 
 .date
 {
-	font-family: Georgia, "Times New Roman", Times, serif;
+	/*font-family: Georgia, "Times New Roman", Times, serif;*/
 	font-weight: bold;
 }
 
@@ -374,4 +365,13 @@ footer
 .more a:hover
 {
 	color: #850a0a;
+}
+
+code {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #BCBEC0;
+    padding: 2px;
+    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
 }
