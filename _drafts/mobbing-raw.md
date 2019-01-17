@@ -1,0 +1,51 @@
+﻿I have to type about mobbing today. Mobbing is a type of pair programming, at least it is related to pair programming. Clearly it is different because in mob programming you have a mob and not a pair of programmers.
+
+Specifically, in mob programming you have three or more programmers sharing a single screen. You can have as many as you want. If you are going to program on something that it particularly complicated you might choose to do mob programming to ensure that the whole team is able to understand the thing you are working on. In a similar case, mob programming can also be used if you have one person that has a lot more knowledge than the rest of the team and you want to pass on that knowledge effectively.
+
+This is very different that a workshop or a teaching because mob programming ensures that all participants are engaged with the activity. Hoew does it do this? Well, one of the fundamental rules of the way we do mob programming is that there is only one person driving the computer at a time and the rest of the participants are known as navigators. Every 15 minutes (or so) - the specific period can be varied - the role of the driver will rotate and so each person will get hands on the keyboard. The driver must sunthesise the suggestions of the navigators so that we always have consensus and understanding of what is being done before we move forward.
+
+I have ﻿I have had a few experiences with mob programming.
+
+Many years ago, I was working for a large IT service s conultancy company. In that project, if a particularly troublesome or critical problem came up then often my colleagues would call a couple of other people over. Inevitably, afther that, a couple more people would drift over to see what was going on that was so interesting ( I myself, as a relatively junior programmer at the time was usually one of the ones drifting over). Then we would continue working together until various people lost interest, one by one, and the person that encountered the problem was back to soloing again. 
+
+I don't want to criticise this method too much, because it does make sense as a way to tackle an urgent problem. More minds on a problem the better right ! However it does seem to have some problems, the method itself. The first is that very often it is not the right people joining the mob to work on the problem. It is either just the people that are sitting nearby, or the people that are bored, or both. The second problem comes from the lack of rotation I believe. It was hard to keep everyone focused on the problem that was being solved -perhaps because we had the wrong people to start with.﻿So we would have a couple of people highly engaged and deciding most of what was getting done, with a couple of contributions every so often from the other three or four people. This seems a little bit wasteful in general, but for me, at that time it was helpful as a junior to get a better idea of what was going on in the other part of the system.
+
+That was it for mobbing experiences for me for a few years. My following two employers would have regarding mobbing as a highly wasteful use of peoples time, and when we had difficult problems to solve we would have generally just dragged one other person across to the screen, perhaps interrupting others for specific questions. 
+
+Then I joined the PCFS team in Pivotal. Although I have been doing similar kinds of work for the last few years, it is a very different strategy that our team has. And for people that know anything about Pivotal at all, they know that it has its own very specific ways of working.
+
+One of the tenets of the ways of working that Pivotal has ('the Pivotal Way') is XP, and specifically pair programming, as the remaining tenets of XP (extreme programming) seem to have been pretty widely accepted across the industry. 
+
+The reason that we do pair programming at pivotal ﻿One of the main reasons we do pair programming at Pivotal - from the POV of the business - is to make sure that knowledge of how the system works is spread around the team. This sharing of knowledge also produces a collaborative way of working in which various ideas from different people are considered before we move forward.
+
+Another reason why pair programming has continued to be used, and has proven itself effective, is that it is very useful mechanism to keep people involved on the work. If you are on your own you can slack off, browse websites, or get lost in a rabbit-hole of ideas that might be useful to keep improving things. Having an effective pair can help to keep you focussed by asking the right questions, having a different perspective and perhaps a different idea of what is important about the work that you are doing. 
+
+So, in this environment, where we are focussing on spreading knowledge and engagement, and less on raw effectiveness, it makes sense to look at mob programming as a method to achieve the same goals where it might be tricky even with pair programming. 
+
+We come back to the idea of when it would be useful - when an entire team needs to get up to speed *quicky* (you can gradually get people up to speed with pairing by simply rotating the pairs). We have also seen mobbing have a good impact on people in specific cases where a 'soft landing' is helpful rather than being dropped straight into pairing.﻿In my first time doing mob programming at Pivotal, we were using it at the start of a project. Especially if we are looking to set up a new platform in a new environment, it can be difficult (depending on how the preparation for the project went).
+
+In that case, the prerequisites for the project had not all been verified, but time pressures on the client side meant that we had to start anyway. Although we have a thorough process to go through to prepare for a dojo, we also do not want the perfect to let the enemy of the good, so we allow some of them to slip.
+
+This does have the effect that there may be blockers at the start of a project. And indeed in this case there was only a single environment available for us to work in. This means that we are constrained, effectively, to a single track of work to get the basic account configuration and networking setup (we call this kind of thing 'paving').
+
+So, we went through the paving all together as a group of about 6 or 7. Like always we rotated our driver every 15 minutes. With 7 people this was definitely necessary as our drivers found it hard to synthesize the different opinions nad directions of half a dozen different engineers. Some engineers not having English as a first language made things particularly difficult.﻿There were a couple of advantages to this approach. We started the project off doing mobbing so the team was still getting to nkow each other; we were finding out the skills and personalities of the different people. 
+
+So, doing mobbing was a nice way to get people used to the work. Rather than starting immediately pairing, everyone was available at the start to give guidance and feedback on what they were doing.
+
+After the mobbing sessions, the engineers were more confident that (i) the activities we would be doing in building a PAS Cloud Foundry platform would be not so different to things they had done before in working with different platforms (ii) there were resources available that they could draw on and people in the team with different experiences that they could direct questions to.
+
+With that said there were some downsides to the mobbing. Our mobbing session lasted for the first week of our dojo (which was slightly longer than intended). After two or three days, the engineers had more confidence in what they were doing and had started to disengage a bit from the mobbing. 
+
+At some point it becomes﻿At some point it becomes clear that the number of people in the room is not necessary to achieve the task that we are working on. When people are getting up to speed then there isn't the same drive to make sure that everything that someone does is known by all the team. You start to have confidence that it will be picked up the next time another team member comes to work in the area. So once you have a foundational understanding of the environment where you are working and the architecture and topology of the platform you are working on, you can start to split out the team a bit more.
+
+This goes along with what we were talking about earlier, which is that at some point you have too many opinions being given to achieve the task.  At the start a lot of opinions may be useful, but over time you begin to feel that the different voices are only presenting minute differences. This is a sure sign that you don;t need so many minds looking at the problem.
+
+The second time I have done mobbing it was in a different scanario. We had already familiarised ourselves with the environment in pairs and were working on parallel tracks.
+
+There were a couple of things that triggered us to start mobbing. One was the addition of a couple more engineers to be working on the platform with us.﻿Although a rotation does not mean a rest - the navigator has to be focused and contributing as well if mobbing is to be effective - it does count as an important change in activity, which by itself can be revitalising. Navigating is also a little less stressful than driving.
+
+So, our objectives and mode of pairing was different in this case. We tended to be three people, or sometimes four, which meant that the problems of having two many cooks I had experienced before did not occur. However, we still got to the point where the mobbing became less useful. The mobbing was successful in what it set out to do - to ease the engineers in. Once they had got confidence with the mobbing, the act of pairing throughout the day was much less challenging and more rewarding.
+
+In both cases I found the process of mobbing itsensely useful. The result was as we had hoped for. In both cases the result of mobbing was actually to make the mobbing redundant. 
+
+Mobbing is an expensive activity and so it should have significant payoffs. The fact that it makes itself redundant means that the act of mobbing was a concious choice, done for a particular reason. Once the reason is met, we stop mobbing.
