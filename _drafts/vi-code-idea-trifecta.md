@@ -5,22 +5,24 @@ categories: [technology]
 image: ibelonghere.png
 ---
 
-## Text Editing
+Vim is famous for having an initial learning curve, that can put off some novices. But having learnt some basics, its a very effective editor. But the best visual editors also have a bunch of useful keyboard shortcuts for navigation and other useful features. In this post, I compare a small set of simple shortcuts that you can use frequently. Using them, you can have a good basic editing experience in Vim, VSCode or Intellij.
+
+## Navigation
 
 ### Moving by word
 
 Vim (command mode)
- - B/W (uppercase) to move back/forward for 'real' words separated by whitespace. It moves to the start of words 
- - b/w (lowercase) works in the same way but treats words as being separated by any non alphanumeric character. Marginally more useful
- - E/e skips to the next end of word, as defined by whitespace/non-alphanumeric separators 
+ - `B`/`W` (uppercase) to move back/forward for 'real' words separated by whitespace. It moves to the start of words 
+ - `b`/`w` (lowercase) works in the same way but treats words as being separated by any non alphanumeric character. Marginally more useful
+ - `E`/`e` skips to the next end of word, as defined by whitespace/non-alphanumeric separators 
 
-Although all these shortcuts allow for very precise movement, it seems to me that this is unnecessarily complicated.
+Although all these shortcuts allow for very precise movement, and complete control, in 90+ percent of cases this is more complex than it needs to be.
 
-Intellij - Option + <- / -> arrows
+Intellij - `Option + <- / ->` arrows
 
  Navigation skips between the start and end character of each word. Like you are alternately pressing `w` and then `e` in vim. Normally this can be sufficient for what you need to do but it is a bit slow
 
-VSCode - Option + <- / -> arrows
+VSCode - `Option + <- / ->` arrows
 
 Very similar to how navigation works in Intellij, with a subtle but clever improvement. When you navigate forwards you move to the end of a word. When navigating backwards, you skip to the start of a word. This has the effect of making navigation quicker, as compared to intellij, but at the same time still making it easy to position your cursor at either the start or end of a word.
 
@@ -41,7 +43,7 @@ Intellij
 - `fn + up / down` - move to top / bottom of visible page
 - `cmd + <- / ->` - ALTERNATIVE for moving to start / end of line
 
-Again, VS Code is looking awesome! It has cmd as a useful alternative to fn for moving to the start/end of document, which also means it makes sense that you can move to the start and end of a line with cmd.
+Comparing the three, it's clear VS Code is awesome! Here, it has cmd as a useful alternative to fn for moving to the start/end of document, which also means it makes sense that you can move to the start and end of a line with cmd.
 
 ### Undo/Redo
 
@@ -72,7 +74,7 @@ TODO: next instance
 ### Replace search matches
 
 Vim
-- `:%s/search/replacement/c` - inCremental string replacement starting from the beginning of the document (with sed)
+- `:%s/search/replacement/c` - inCremental string replacement starting from the beginning of the document (with sed). TODO: you can customize this by changing % to something else
 - `
 VSCode
 - `Ctrl + r` -  brings up replace dialog. `Enter` incrementally applies the replacement defined (only in the forwards direction). There is a button in the dialog you can press to apply the replacement to all matches
@@ -83,3 +85,7 @@ Vim doesn't have multicursor but does have more complicated alternatives to mult
 https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
 
 ### Meta (shortcuts for finding shortcuts)
+
+## Notable Omissions
+
+
