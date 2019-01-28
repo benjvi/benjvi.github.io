@@ -8,7 +8,7 @@ I had [heard](https://news.ycombinator.com/item?id=11854541) [*this*](https://bl
 
 Well, mobbing takes the idea of pair programming and takes it to the extreme. By putting more minds to a single problem at the same time, it doubles down (or quadruples down?) on building shared understanding as an engineering team. It makes [collaboration and consensus-building](http://sedano.org/toddsedano/2017/10/23/considerate-pair-programming.html)  even more important to your development process.
 
-The main objection to mobbing is that it seems expensive. It's the same objection we hear sometimes about pair programming. People are uncomfortable with the faster consumption of effort when multiple developers work on a single task. For pair programming, there are [many benefits](https://www.slideshare.net/motochan/agile-the-pivotal-way-compressed/89) to the practice which make the approach a productive one. However, mobbing will consume programmer time much quicker even than pairing. So if it to be worthwhile, we should see additional productivity gains.
+The main objection to mobbing is that it seems expensive. It's the same objection we hear sometimes about pair programming. Some people are uncomfortable with the faster consumption of effort when multiple developers work on a single task. For pair programming, there are [many benefits](https://www.slideshare.net/motochan/agile-the-pivotal-way-compressed/89) to the practice which make the approach a productive one. However, mobbing will consume programmer time much quicker even than pairing. So if it to be worthwhile, we should see additional productivity gains.
 
 Given that mobbing is still not a widespread way of working, I want to share some of the experiences I've had with mobbing, the benefits we realized, and some of the pitfalls we've fallen into along the way.
 
@@ -25,6 +25,9 @@ Secondly, when we were working on things other than incident response, we had so
 
 I don't think that anyone ever held up that team as an example of a highly-performing team. But, even without a system, or a clear intention to practice any methodology, we saw some of the benefits that normally come with mob programming. As a junior programmer I found that way of working particularly helpful in coming to an understanding of how the broader system worked. After some time I had learned enough to take charge of designing some new features of the system, which I credit largely to these experiences.
 
+## Antithesis
+
+I've working with a lot of teams since then. Most of those teams were more productive, and in the process I've learned a lot about the process of agile software development (unfortunately, I've also learned about Agile). 
 ## The Jump-Start
 
 My first proper experience of mobbing was at the start of one of our [Pivotal-led] [Dojos](https://medium.com/@dormaindrewitz/secrets-of-successful-cloud-foundry-adopters-232193111b18). The nature of [what we are doing in the PCFS team](https://www.youtube.com/watch?v=ccKy6Np7Jxo), building platforms [with our clients](https://blog.usejournal.com/why-is-pivotals-dojo-so-good-c96cdb497ddf), often implies a critical section at the start of a dojo which is the foundation for all further work. After this, parallel tracks of work are more meaningful. Often careful planning can avoid such bottlenecks but not always. In this case, we had the choice to go through similar tasks in parallel or all together as a mob. 
