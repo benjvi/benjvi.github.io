@@ -5,7 +5,7 @@ categories: [technology]
 image: ibelonghere.png
 ---
 
- In the last six months (somewhat late to the game) I've really startted to adopt VS Code for editing on a regular basis. In the process, I realized how many shortcuts I've come to rely on in my goto editors, Vim and Intellij. Hence, here I try to list useful (basic) features that I use across all three editors I'm now using, as a reference to help in learning a consistent set of commands.
+ In the last six months (somewhat late to the game) I've really started to adopt VS Code for editing on a regular basis. In the process, I realized how many shortcuts I've come to rely on in my goto editors, Vim and Intellij. Hence, here I try to list useful (basic) features that I use across all three editors I'm now using, as a reference to help in learning a consistent set of commands.
 
 
 <!--more-->
