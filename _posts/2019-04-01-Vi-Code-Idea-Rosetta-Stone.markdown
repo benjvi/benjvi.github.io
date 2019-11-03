@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Vim, VSCode & Intellij: A Rosetta Stone" 
+title: "Vim, VSCode & Intellij: A Cheat Sheet" 
 categories: [technology]
 image: ibelonghere.png
 ---
 
- In the last six months (somewhat late to the game) I've really startted to adopt VS Code for editing on a regular basis. One thing that was painful, was a lack of materials on what shortcuts I needed to learn to make myself as productive as I am in vim (or even as I am in intellij). Since lots of features work the same in different editors, its also useful to be able to relate commands in a new editor to those you already know. In the process of doing this I realized that I might use a feature in Vim but not in Intellij, or vice versa - even when they are available and useful in both. *My editing experience would be better if I could do everything I already know how to do in any one editor*. Hence, here I try to list useful (basic) features that I use across all three editors I use, as a reference to help in learning a consistent set of commands.
+ In the last six months (somewhat late to the game) I've really startted to adopt VS Code for editing on a regular basis. In the process, I realized how many shortcuts I've come to rely on in my goto editors, Vim and Intellij. Hence, here I try to list useful (basic) features that I use across all three editors I'm now using, as a reference to help in learning a consistent set of commands.
+
 
 <!--more-->
 
