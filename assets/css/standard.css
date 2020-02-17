@@ -1,3 +1,8 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url('myfont.ttf') format('truetype');
+}
+
 .content
 {
 	position: relative;
@@ -5,7 +10,7 @@
 
 html 
 {
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-family: myFirstFont, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .column
@@ -141,7 +146,7 @@ h4
 	width:100%;
 	#background: #ffffff;
 	font-weight: bold;
-	font-family: Helvetica;
+	font-family: myFirstFont, Helvetica;
 }
 
 .overlaybackground
@@ -172,7 +177,7 @@ img.profile:hover
 
 .menu
 {
-	font-family: arial, helvetica, sans-serif;
+	font-family: myFirstFont, arial, helvetica, sans-serif;
 	font-size: 1em;
 	padding-left:10px;
 	padding-right:10px;
