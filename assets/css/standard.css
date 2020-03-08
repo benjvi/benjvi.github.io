@@ -1,6 +1,6 @@
 @font-face {
   font-family: myFirstFont;
-  src: url('myfont.ttf') format('truetype');
+  src: url('my-handwriting-ipad.ttf') format('truetype');
 }
 
 .content
@@ -69,15 +69,15 @@ img.banner:hover
 
 h1
 {       
-	font-size: 3em;
+	font-size: 2.5em;
 	color: #850a0a;
 	margin: 0 0;
 	margin-top: 35px;
 	z-index: 4;
 	opacity: 0.99;
-	float: right;
-	padding-right: 10%;
-	padding-left: 10%;
+	padding-right: 5%;
+	padding-left: 5%;
+        line-height: 0.9em;
 }
 
 a
@@ -124,11 +124,13 @@ h4
 }
 .overlay
 {
-	margin-top: -160px;
+	margin-left: auto;
+        margin-right: auto;
+        margin-top: -160px;
 	z-index: 7;
 	background-color: #ffffff;
 	height: 160px;
-	width: 100%;
+	width: 90%;
 	display: block;
 	overflow:hidden;
 	line-height: 1;
@@ -254,9 +256,12 @@ hr
 .postcontent img
 {
 	max-width: 96%;
+        width: auto;
 	border-radius: 5px;
 	margin: 5px;
 	max-height: 680px;
+        margin-left: auto;
+        margin-right: auto;
 }
 
 #postlogo
