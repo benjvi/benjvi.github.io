@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Microlearning"
-categories: [Technology]
+categories: [technology]
 image: blank.jpg
 ---
 I've read for some time on the subject of effective learning techniques - one important part of which is the consolidation of knowledge. Two stand out in particular as seeming reasonably well-proven: *spaced repetition* [see Gwern's summary and refs] and *interleaving*[citation needed]. But, for some reason the actual application of these theories in a structured way seems to be a fairly niche occupation. I propose that what is needed is an integration of these techniques with the way we actually encounter and initially learn new information. 

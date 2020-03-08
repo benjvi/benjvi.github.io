@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Servlets and SpringMVC"
-categories: [Technology]
+categories: [technology]
 ---
 On a reecnt project, I was using Java Servlets. The reason was, the prototype for the project was written solely with JSPs, and understanding how those work within the servlet container made it very easy to migrate the controller from being in the JSPs to being in a Java servlet. This enabled me to refactor a lot of the secondary logic and the models to POJOs, which would largely remain unchanged regardless of the Java framework.   
 

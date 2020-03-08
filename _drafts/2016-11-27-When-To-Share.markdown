@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "When To Share And When Not To Share"
-categories: [technology]
+categories: [thoughts]
 image: ibelonghere.jpg
 ---
 

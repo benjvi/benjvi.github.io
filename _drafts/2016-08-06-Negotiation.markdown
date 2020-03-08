@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What I've been reading: Negotiation Edition"
-categories: [Thoughts]
+categories: [thoughts]
 image: blank.jpg
 ---
 
