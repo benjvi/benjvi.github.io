@@ -5,7 +5,7 @@ categories: [technology]
 image: ibelonghere.png
 ---
 
-In this post, we're going to start *designing* a system to query bank and card transaction using the Prometheus Time Series Database (TSDB). This will be based on a [small project I previously created](github.com/benjvi/personal-finance-machine), to do some basic analysis of my personal finances via SQL queries. The project does some basic labelling of transactions, and uses those labels to make some aggregations on incomings and outgoings over time.
+In this post, we're going to start *designing* a system to query bank and card transaction using the Prometheus Time Series Database (TSDB). This is based on a [small project I previously created](github.com/benjvi/personal-finance-machine), to do some basic analysis of my personal finances via SQL queries. The project does some basic labelling of transactions, and uses those labels to make some aggregations on incomings and outgoings over time.
 
 I strongly believe that, in order to understand a technology, you have to understand what you *shouldn't* do with it, as well as what you *can*. This understanding is particularly important when moving from a SQL database to a more specialized form of data storage, as is the case here.
 
@@ -57,9 +57,9 @@ This field cannot be used in Prometheus. Prometheus cannot be used to import his
 
 ### TX Type | Category
 
-Entries may come with a 'TX Type' which distinguish regular card transactions from cash withdrawals, and from Direct Debits, etc. Since there are a small number of possible values, this is a good fit for a label. Every combination of label values on a metric causes a separate time-series to be created in Prometheus, which is why it is recommended to select only a small number of labels. 
+Entries may come with a 'TX Type' which distinguishes regular card transactions from cash withdrawals, and from Direct Debits, etc. Since there are a small number of possible values, this is a good fit for a label. Every combination of label values on a metric causes a separate time-series to be created in Prometheus, which is why it is recommended to select only a small number of labels. 
 
-One complication here is that this field (/label) may not be present across all our data sources, while we would like to be able to query all our data using the same expressions. We can do this, at the cost of [adding some complexity to our query](https://www.robustperception.io/existential-issues-with-metrics).
+The category field may also be present to denote categories of spending. Similarly, it can be represented with a label in Prometheus, One complication here is that this field (/label) may not be present across all our data sources, while we would like to be able to query all our data using the same expressions. We can do this, at the cost of [adding some complexity to our query](https://www.robustperception.io/existential-issues-with-metrics).
 
 ### Description
 
@@ -69,7 +69,7 @@ This field is rather different from the previous two. Most transactions have a d
 
 Now we get to the meat of the matter. Transactions, ultimately, are all about the amount. But this is where we really run into trouble. Prometheus primarily expects data to be expressable as a *counter* or a *gauge*. A counter is an amount that always increases over time, like a count of HTTP requests received. A gauge is a single number representing the state of a system, which may increase or decrease over time. An example would be the amount of memory in use. 
 
-Transactions, as a type of event data, do not fall into either category. Prometheus does give us some additional data types we can use to model this time of data: [*histograms*](https://www.robustperception.io/how-does-a-prometheus-histogram-work) and [*summary*](https://www.robustperception.io/how-does-a-prometheus-summary-work) types. Both present a count of events, but uses an extra dimension to count data within buckets or quartiles, respectively. In our case, this would allow us to bucket transactions by amount; to count the number of small transactions vs medium or large transactions. This may give interesting results, but its wasn't the type of query I was intending to do. 
+Transactions, as a type of event data, do not fall into either category. Prometheus does give us some additional data types we can use to model this time of data: [*histograms*](https://www.robustperception.io/how-does-a-prometheus-histogram-work) and [*summary*](https://www.robustperception.io/how-does-a-prometheus-summary-work) types. Both present a count of events, but uses an extra dimension to count data within buckets or quartiles, respectively. In our case, this would allow us to bucket transactions by amount; to count the number of small transactions vs medium or large transactions. This may give interesting results, but isn't the type of query we intend to do. 
 
 We cannot fit our raw data into Prometheus primitives and manipulate them to do our queries based on categorisation. However, to query against transaction categories, we could still pre-compute the categories on each sources and scrape aggregations made on those categories. 
 
