@@ -5,11 +5,13 @@ categories: [technology]
 image: ibelonghere.png
 ---
 
-In this post, we're going to start *designing* a system to query bank and card transaction using the Prometheus Time Series Database (TSDB). This will be based on a small project I previously creted with SQL ([github.com/benjvi/personal-finance-machine](github.com/benjvi/personal-finance-machine)) to do some basic analysis on the state of my personal finances. The project does some basic labelling of transactions, and uses those labels to make some aggregations on incomings and outgoings over time.
+In this post, we're going to start *designing* a system to query bank and card transaction using the Prometheus Time Series Database (TSDB). This will be based on a [small project I previously created](github.com/benjvi/personal-finance-machine), to do some basic analysis of my personal finances via SQL queries. The project does some basic labelling of transactions, and uses those labels to make some aggregations on incomings and outgoings over time.
 
 I strongly believe that, in order to understand a technology, you have to understand what you *shouldn't* do with it, as well as what you *can*. This understanding is particularly important when moving from a SQL database to a more specialized form of data storage, as is the case here.
 
 While Prometheus is a TSDB, *this* is not the use case that Prometheus was designed to solve. It is designed specifically to enable querying & alerting on *system metrics*. While it's possible for technologies to work well outside their original use-case, it will not be surprising that, along the way, we run into some problems. At what point do we decide that we chose the wrong tool for the job?
+
+<!--more-->
 
 ## Data Ingestion
 
@@ -35,9 +37,11 @@ With our default Prometheus config, this means we will always be able to query f
 
 *However*, using a program to connect to a banking API - if one is even available - will be difficult. Moreover, such a highly automated process is not necessary for analysis of personal finances. It's perfectly adequate to manually export data and then run a batch job to load it into Prometheus. 
 
-To get data from batch jobs, Prometheus requires us to use the PushGateway:
+To get data from batch jobs, Prometheus requires us to use the [PushGateway](https://prometheus.io/docs/practices/pushing/):
 
 ![Push Gateway]({{site.url}}/img/push-gateway.png)
+
+So, we can download all the required data, then run a script, which pushes metrics to the PushGateway. And Prometheus is scraping the PushGateway. There are more details to get into, but this is fundamentally a workable approach to ingestion.
 
 ## Data Model
 
@@ -73,4 +77,4 @@ More straightforwardly, there is one useful aggregation in our data already. The
 
 ## Fin
 
-And this is where I call it a day. We noticed already that there will be problems with the ingestion, getting the timestamps we desire, there will be problems doing keyword-search on our fields, and now we see that the event-centric nature of the data is not a fit for Prometheus. Even without looking at the queries, its dear that we didn't choose the right tool to solve this problem. At what point would you have decided this wasn't the right tool? What would you have used instead?
+And this is where I call it a day. We noticed already that there will be problems with the ingestion, getting the timestamps we desire, there will be problems doing keyword-search on our fields, and now we see that the event-centric nature of the data is not a fit for Prometheus. We didn't look directly at the queries yet, and surely there's some way we can get them to work, but for me its already clear that Prometheus isn't the right tool to solve this problem. At what point would you have decided this wasn't the right tool? What would you have used instead?
