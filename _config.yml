@@ -5,3 +5,5 @@ categories: [Technology, Thinking, Arts, Science, Fitness]
 excerpt_separator: "<!--more-->"
 destination: _site
 url: http://benjvi.com
+plugins:
+ - jemoji

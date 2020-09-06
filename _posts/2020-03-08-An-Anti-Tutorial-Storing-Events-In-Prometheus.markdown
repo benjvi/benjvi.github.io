@@ -7,7 +7,7 @@ image: ibelonghere.png
 
 In this post, we're going to start *designing* a system to query bank and card transaction using the Prometheus Time Series Database (TSDB). This is based on a [small project I previously created](github.com/benjvi/personal-finance-machine), to do some basic analysis of my personal finances via SQL queries. The project does some basic labelling of transactions, and uses those labels to make some aggregations on incomings and outgoings over time.
 
-I strongly believe that, in order to understand a technology, you have to understand what you *shouldn't* do with it, as well as what you *can*. This understanding is particularly important when moving from a SQL database to a more specialized form of data storage, as is the case here.
+I believe that, in order to understand a technology, you have to understand what you *shouldn't* do with it, as well as what you *can*. This understanding is particularly important when moving from a SQL database to a more specialized form of data storage, as is the case here.
 
 While Prometheus is a TSDB, *this* is not the use case that Prometheus was designed to solve. It is designed specifically to enable querying & alerting on *system metrics*. While it's possible for technologies to work well outside their original use-case, it will not be surprising that, along the way, we run into some problems. At what point do we decide that we chose the wrong tool for the job?
 
