@@ -25,35 +25,35 @@ image: ibelonghere.png
 
 ## Operations / Deep Dives
 
-### TALK: [Kubernetes DNS Horror Stories (And How to Avoid Them)](https://www.youtube.com/watch?v=Yq-SVNa_W5E)
+#### TALK: [Kubernetes DNS Horror Stories (And How to Avoid Them)](https://www.youtube.com/watch?v=Yq-SVNa_W5E)
 I was inspired to know more about this as I read in a twitter thread a few days ago that DNS is one of the components that can cause challenges on cluster updates. In general, rock-solid DNS is very important in operations. This was a very clear run-through of the different failure modes they'd encountered, in line with the best of [k8s.af](https://k8s.af). It also had a hidden message, that observability is important - in particular here, the metrics on per-app DNS resolution failures looked very handy. You have to give kudos when a talk is not only a great one, but on-brand too
 
-### TALK: [Kubernetes on Cgroup v2](https://www.youtube.com/watch?v=u8h0e84HxcE)
+#### TALK: [Kubernetes on Cgroup v2](https://www.youtube.com/watch?v=u8h0e84HxcE)
 
 A talk ostensibly about how the cgroups integration will be improved by moving to cgroups v2, the value I got out of it was in the depth it went into describing the structure of cgroups and how it is works in the filesystem, as well as how that relates to how Kubernetes does OOM-scoring and QoS classes on pods. I would be interested in how the new features of cgroupsv2 could translate to new features in Kubernetes
 
-### TALK: [20,000 Upgrades Later](https://www.youtube.com/watch?v=apt8FUhrJiw)
+#### TALK: [20,000 Upgrades Later](https://www.youtube.com/watch?v=apt8FUhrJiw)
 
 Everything you need to know about upgrades in the real world, beyond what your CKA studies will teach you. Comes from a service provider perspective, with the need to keep users’ clusters available.
 
-### THEME: Autoscaling
+#### THEME: Autoscaling
 
 I attended a few talks on autoscaling. Although these features have been around for a while, its interesting to see that there are people using VPA, HPA and Cluster Autoscaling effectively, to optimise cluster costs and improve behaviour under load. If you’re implementing these features, the following talks are a useful reference, first [this one](https://www.youtube.com/watch?v=XTUsVK9F_Ds) which gives an detailed take on how to use the different autoscalers in production. Next, [this talk](https://www.youtube.com/watch?v=6RZNx58GKsg) is also recommendable. It goes in maybe too hard with the math for most, but ultimately will help a lot in understanding how (horizontal) autoscaling behaviour depends on a few different variables.
 
-### THEME: Bare metal and edge case studies
+#### THEME: Bare metal and edge case studies
 
 This seemed to be a popular topic, and some of the talks touched on some interesting topics, that become more important when Kubernetes is closer to the metal and/or more tightly integrated into datacenter networks. I sadly didn’t end up seeing all the talks I wanted to on this topic, but [this one](https://kccnceu20.sched.com/event/ZeqL/k8s-in-the-datacenter-integrating-with-preexisting-bare-metal-environments-max-stritzinger-bloomberg) from a Bloomberg engineer (unfortunately I can't currently find the uploaded video) expanded my brain a little, giving an idea of the challenges you might face with a complicated network setup, with lots of BGP and the need to peer deep into the Linux network stack with eBPF. One caveat: some of the problems faced in such scenarios are very specific to the underlying infra/network setup
 
-### TALK: [Speed Racer: Local Persistent Volumes in Production](https://www.youtube.com/watch?v=6RjjtSpLar0) 
+#### TALK: [Speed Racer: Local Persistent Volumes in Production](https://www.youtube.com/watch?v=6RjjtSpLar0) 
 This was an interesting talk, although it exposed the still slightly disappointing state of local volume support. It helped me think through questions like: if a node fails, how will I recover the stateful pods on that node? How long would I wait before deciding the data they held had been lost? Local volumes don't help much with this and the upshot is that, despite the extra latency, it is still better to rely on external storage providers, like vSAN, or a cloud provider's persistent disks. 
 
 ## Kubernetes extensions
 
-### THEME: Cluster API
+#### THEME: Cluster API
 
 Both of the talks about Cluster API were great, but especially the [deep dive](https://www.youtube.com/watch?v=9SfuQQeeK6Q). The extra detail about how the controller model can be used to reconcile the state of individual workers and worker pools, and how this enables a robust cluster upgrade process, makes this approach seem very powerful. The other talk, ["A Guide To Get Started"](https://www.youtube.com/watch?v=EgMNy-wAm4A) is also worthwhile, although naturally less detailed.
 
-### TALK: [Hierarchical namespaces](https://www.youtube.com/watch?v=j5x6NumP21c)
+#### TALK: [Hierarchical namespaces](https://www.youtube.com/watch?v=j5x6NumP21c)
 
 This is a new (alpha) feature that allows inheritance of limits and roles from one namespace to another. Unfortunately the feature as described seemed a little complicated to me, but having this capability available with nonetheless be very useful.
 
@@ -61,29 +61,29 @@ This is a new (alpha) feature that allows inheritance of limits and roles from o
 
 In general, I got the impression that Envoy is currently where Kubernetes was in 2017. It has a large number of adopters, many of whom are fully bought in and using it, with success, in production. But there's still some challenges to doing so and still a need to decide on best practices in certain areas.
 
-### THEME: Migration to Service Mesh
+#### THEME: Migration to Service Mesh
 
 There were a few interesting case studies of migration to Envoy / Service Mesh, such as [Migrating Transactions Worth Billions of $ to Service Mesh With No Downtime](https://www.youtube.com/watch?v=OY0CxiKbX2o). and ["Keynote: Building a Service Mesh From Scratch - The Pinterest Story"](https://www.youtube.com/watch?v=CoLionpKa9c). 
 
 [This talk](https://www.youtube.com/watch?v=-20SUP6IWUs) covered a more specific migration challenge: migrating all apps to use mutual TLS, considering the different communication types that might occur between non-mTLS and mTLS enabled services. The talk was a little unclear at times, but the framework and approach described is very valuable
 
-### TALK: [Envoy, Take the Wheel: Real-time Adaptive Circuit Breaking](https://www.youtube.com/watch?v=CQvmSXlnyeQ)
+#### TALK: [Envoy, Take the Wheel: Real-time Adaptive Circuit Breaking](https://www.youtube.com/watch?v=CQvmSXlnyeQ)
 
 If I had to pick just one, *this was probably my favorite talk of the conference*. The ability to put resilience features around inter-microservice comms is one of the main wow factors of a service mesh, but one of the major drawbacks can be the need for application-specific tuning of the mesh. Here, it was clearly shown how tuning circuit breaking can be made easy. This inspired me to look more into the state of the art of autoscaling (described in a previous section), a related subject as it can make capacity incidents less frequent.
 
-### THEME: Canary Releases / Progressive Delivery
+#### THEME: Canary Releases / Progressive Delivery
 
 Although some basic forms of canary releases can be done with only Kubernetes, it doesn't necessarily have the tools to do all you would want. Envoy thus comes into the picture, to manage traffic splitting independently of the deployment process. There seemed to be a few talks touching on this, the one I attended and liked most was ["Progressive Delivery in Kubernetes"](https://www.youtube.com/watch?v=Jf29YXu1Q48)
 
 ## Other Stuff
 
-### THEME: Observability
+#### THEME: Observability
 
 I didn’t attend much in this track, although it seemed there was plenty going on. There seems to be lots of people using Thanos after having run into the limitations of Prometheus. I suppose OPA, also popular, semi-fits into the observability category too. 
 
 The one talk I did attend, was [one talking about improving Prometheus histograms](https://www.youtube.com/watch?v=HG7uzON-IDM). I was very interested in this because they [are difficult](https://linuxczar.net/blog/2019/10/28/prometheus-histograms-part-3-using-something-else/). This was a deep-dive, talking about a proposed approach to improve the handling of histograms. I didn’t get any immediate practical takeaways, but the talk is nevertheless recommendable.
 
-### TALK: ["Keynote: How to Love K8s and Not Wreck the Planet"](https://www.youtube.com/watch?v=j5jql3e6hTA)
+#### TALK: ["Keynote: How to Love K8s and Not Wreck the Planet"](https://www.youtube.com/watch?v=j5jql3e6hTA)
 
 A genuinely concious and meaningful talk, reminding us that there's not just a financial cost to the compute resources we use, and imploring us to do better. I'm glad that it seemed to resonate with many Kubecon attendees
 
