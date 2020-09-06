@@ -1,10 +1,9 @@
 ---
 layout: post
-title: "Kubecon EU 2020 Notes: Still going strong :muscle:"
+title: "Kubecon EU 2020 Notes: Still going strong"
 categories: [technology]
 image: ibelonghere.png
 ---
-
 ## General Thoughts
 
 - This is the third Kubecon I’ve attended, the other two being in 2016 & 2017. This was quite different from both
@@ -17,6 +16,7 @@ image: ibelonghere.png
 - Certain CNCF projects seem to be gaining momentum on their own account. In particular, Envoy has quite a few migration/production use stories, and OPA seemed to be showing up a lot. Migration to envoy particularly interesting theme ( + Istio, although its not mentioned much)
 - There's quite a bit to say about each of those themes, and quite a few talks I'd highlight...
 
+<!--more-->
 ## Virtual Conference
 
 - This was my first virtual conference, and it was much better than I expected. I still had the feeling I was part of an event, and was able to pick up some things about the zeitgeist of the community
@@ -26,7 +26,7 @@ image: ibelonghere.png
 ## Operations / Deep Dives
 
 ### TALK: [Kubernetes DNS Horror Stories (And How to Avoid Them)](https://www.youtube.com/watch?v=Yq-SVNa_W5E)
-I was inspired to know more about this as I read in a twitter thread a few days ago that DNS is one of the components that can cause challenges on cluster updates. In general, rock-solid DNS is very important in operations. This was a very clear run-through of the different failure modes they'd encountered, in line with the best of [k8s.af](k8s.af). It also had a hidden message, that observability is important - in particular here, the metrics on per-app DNS resolution failures looked very handy. You have to give kudos when a talk is not only a great one, but on-brand too
+I was inspired to know more about this as I read in a twitter thread a few days ago that DNS is one of the components that can cause challenges on cluster updates. In general, rock-solid DNS is very important in operations. This was a very clear run-through of the different failure modes they'd encountered, in line with the best of [k8s.af](https://k8s.af). It also had a hidden message, that observability is important - in particular here, the metrics on per-app DNS resolution failures looked very handy. You have to give kudos when a talk is not only a great one, but on-brand too
 
 ### TALK: [Kubernetes on Cgroup v2](https://www.youtube.com/watch?v=u8h0e84HxcE)
 
@@ -77,7 +77,7 @@ Although some basic forms of canary releases can be done with only Kubernetes, i
 
 ## Other Stuff
 
- ### THEME: Observability
+### THEME: Observability
 
 I didn’t attend much in this track, although it seemed there was plenty going on. There seems to be lots of people using Thanos after having run into the limitations of Prometheus. I suppose OPA, also popular, semi-fits into the observability category too. 
 
