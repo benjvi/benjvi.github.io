@@ -254,6 +254,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jemoji
+  kramdown (>= 2.3.0)
 
 BUNDLED WITH
    1.16.6

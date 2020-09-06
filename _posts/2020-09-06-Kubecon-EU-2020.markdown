@@ -5,7 +5,7 @@ categories: [technology]
 image: ibelonghere.png
 ---
 
-# General Thoughts
+## General Thoughts
 
 - This is the third Kubecon I’ve attended, the other two being in 2016 & 2017. This was quite different from both
   - I have notes from Kubecon 2016 [here](http://benjvi.com/2016/03/13/tldr-kubecon) and a couple of sketch notes for talks in 2017: [1](https://twitter.com/bvkrs/status/847497893875503104?s=20)  - [2](https://twitter.com/bvkrs/status/848174735917764608?s=20)
@@ -17,13 +17,13 @@ image: ibelonghere.png
 - Certain CNCF projects seem to be gaining momentum on their own account. In particular, Envoy has quite a few migration/production use stories, and OPA seemed to be showing up a lot. Migration to envoy particularly interesting theme ( + Istio, although its not mentioned much)
 - There's quite a bit to say about each of those themes, and quite a few talks I'd highlight...
 
-# Virtual Conference
+## Virtual Conference
 
 - This was my first virtual conference, and it was much better than I expected. I still had the feeling I was part of an event, and was able to pick up some things about the zeitgeist of the community
 - Pre-recorded talks were mostly fine. In theory, live talks are better but it would probably have lead to more frustrations - fiddling with mics and problems with internet connections
 - The format was more convenient, with talks being made available for on-demand playback only an hour or two after they had finished, and it being very easy to switch talk
 
-# Operations / Deep Dives
+## Operations / Deep Dives
 
 ### TALK: [Kubernetes DNS Horror Stories (And How to Avoid Them)](https://www.youtube.com/watch?v=Yq-SVNa_W5E)
 I was inspired to know more about this as I read in a twitter thread a few days ago that DNS is one of the components that can cause challenges on cluster updates. In general, rock-solid DNS is very important in operations. This was a very clear run-through of the different failure modes they'd encountered, in line with the best of [k8s.af](k8s.af). It also had a hidden message, that observability is important - in particular here, the metrics on per-app DNS resolution failures looked very handy. You have to give kudos when a talk is not only a great one, but on-brand too
@@ -47,7 +47,7 @@ This seemed to be a popular topic, and some of the talks touched on some interes
 ### TALK: [Speed Racer: Local Persistent Volumes in Production](https://www.youtube.com/watch?v=6RjjtSpLar0) 
 This was an interesting talk, although it exposed the still slightly disappointing state of local volume support. It helped me think through questions like: if a node fails, how will I recover the stateful pods on that node? How long would I wait before deciding the data they held had been lost? Local volumes don't help much with this and the upshot is that, despite the extra latency, it is still better to rely on external storage providers, like vSAN, or a cloud provider's persistent disks. 
 
-# Kubernetes extensions
+## Kubernetes extensions
 
 ### THEME: Cluster API
 
@@ -57,7 +57,7 @@ Both of the talks about Cluster API were great, but especially the [deep dive](h
 
 This is a new (alpha) feature that allows inheritance of limits and roles from one namespace to another. Unfortunately the feature as described seemed a little complicated to me, but having this capability available with nonetheless be very useful.
 
-# Envoy and Service Mesh
+## Envoy and Service Mesh
 
 In general, I got the impression that Envoy is currently where Kubernetes was in 2017. It has a large number of adopters, many of whom are fully bought in and using it, with success, in production. But there's still some challenges to doing so and still a need to decide on best practices in certain areas.
 
@@ -75,7 +75,7 @@ If I had to pick just one, *this was probably my favorite talk of the conference
 
 Although some basic forms of canary releases can be done with only Kubernetes, it doesn't necessarily have the tools to do all you would want. Envoy thus comes into the picture, to manage traffic splitting independently of the deployment process. There seemed to be a few talks touching on this, the one I attended and liked most was ["Progressive Delivery in Kubernetes"](https://www.youtube.com/watch?v=Jf29YXu1Q48)
 
-# Other Stuff
+## Other Stuff
 
  ### THEME: Observability
 
