@@ -4,7 +4,7 @@ permalink: /:year/:month/:day/:title
 categories: [Technology, Thinking, Arts, Science, Fitness]
 excerpt_separator: "<!--more-->"
 destination: _site
-url: http://benjvi.com
+url: https://blog.pi.bjv.me
 plugins:
  - jemoji
-css_flavour: standard
+css_flavour: solar
