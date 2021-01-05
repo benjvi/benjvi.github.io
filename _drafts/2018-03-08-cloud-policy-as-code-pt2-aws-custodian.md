@@ -2,7 +2,7 @@
 layout: post
 title: "Cloud Policy As Code Pt 2: Applying Policies to AWS with Cloud Custodian"
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 In the previous post we looked at the motivations for Cloud-Policy-As-Code, we made an informal taxonomy of the different types of policy that exist, and we made a survey of some of the different tools for applying policy that exist. If you want some broader context on Policy-As-Code, you should read that now. In this post we are going to look at how to apply a few policies on AWS using Cloud Custodian. As mentioned last time, this is an open source tool that you will run, typically as a Lambda, to analyse preexisting resources and apply some policies. It has a simple json DSL for writing policies, generally good coverage of AWS resource types, and seems generally useful in the area of policies that are just a bit too complex to express with something like AWS config. And, since its open source, if there is some feature you want that's missing you can just add it. Speaking as a contributor, PRs have been welcomed and it is (generally) easy to add new resources and actions.

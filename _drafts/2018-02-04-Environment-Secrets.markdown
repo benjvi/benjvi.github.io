@@ -2,7 +2,7 @@
 layout: post
 title: "Automating Deployments with environment-specific config and secrets"
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 An interesting part of working as a consultant is that the challenges described to you by a client at the start of a project always turnout to be different to the challenges that you actually face during a project. One of the themes that always seems to pop up unexpectedly is continuous delivery. I see a lot of companies that think Continuous Delivery is not strategically important. Or, at least, it is not important enough or challenging enough to devote an intiative to improving. The reason perhaps being, if you have a simple setup with a single target environment, a simple `circle.yml` or `travis.yml` file which maybe calls a couple of custom build and deploy scripts, usually suffices to build and deploy into the target environment. So it really doesn't look difficult. 

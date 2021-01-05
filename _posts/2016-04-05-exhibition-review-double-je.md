@@ -2,7 +2,7 @@
 layout: post
 title: "Exhibition Review: Double Je (Le Palais de Tokyo)"
 categories: [arts]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 On my visit to Paris, I luckily had a free day before running the marathon on the Sunday. My brother recommended to me that the Palais de Tokyo was one of the best places in Paris to see a nice exhibition or two. And it did not disappoint - there were a few good exhibitions on when I visited but the best of all was [Double Je](http://www.palaisdetokyo.com/en/exhibition/double-je). The concept of this exhibition was pretty interesting - to tell the story of the mystery behind the apparent murder of an artist through a series of installed spaces containing the work of artists and artisans.

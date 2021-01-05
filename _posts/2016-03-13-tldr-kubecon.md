@@ -2,7 +2,7 @@
 layout: post
 title: "TL/DR: Kubecon"
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 It was a great couple of days at Kubecon - so much going on, so many great speakers and so much to process! Surely I missed quite a lot, given that there was four tracks, but this is my summary and synthesis of some of the major (and minor) points that I learned. 

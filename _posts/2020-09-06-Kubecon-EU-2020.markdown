@@ -2,7 +2,7 @@
 layout: post
 title: "Kubecon EU 2020 Notes: Still going strong  :chart_with_upwards_trend::muscle:"
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 ## General Thoughts
 

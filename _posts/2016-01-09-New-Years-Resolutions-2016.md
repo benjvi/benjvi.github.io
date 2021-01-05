@@ -2,7 +2,7 @@
 layout: post
 title: "New Year's Resolutions 2016"
 categories: [thoughts]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 Instead of new year's resolutions in 2015, I looked at different ways to do behavioural changes. The idea was that, when making resolutions we are only thinking about the destination and not about the journey [1]. We look more at the goals and less at how we get there. It seemed interesting to look at things very much the opposite way - to think only about habits, how I had been spending time, and how I could improve that. Going into 2016, it's a good time to review that approach and to look forward.

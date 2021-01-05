@@ -2,7 +2,7 @@
 layout: post
 title: "mission"
 categories: [thoughts]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 "begin with the end in mind" - stephen covey

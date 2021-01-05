@@ -2,7 +2,7 @@
 layout: post
 title: "Putting the Meaning in Platform Engineering"
 categories: [thoughts]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 I have been working for a few years in technology, mostly doing platform engineering. I've done work for small companies but more often for larger companies. Software engineering is my vocation. When I was little I wanted to be an inventor, and programming is my outlet to make useful gizmos like I always wanted to. So in general, its a pretty good thing to be doing. With that said, I want to talk about one thing that bothers me: 

@@ -2,7 +2,7 @@
 layout: post
 title: "Terraform Provider Development: My Approach To Resource Modelling"
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 One of the nice things about terraform, and one of the reasons that it has been so successful is in how easy it is to plug  new (cloud) APIs into. Terraform offers scaffolding you can easily build upon to create new Providers and new Resources (also Data Sources). For a new resource, you just need to create:

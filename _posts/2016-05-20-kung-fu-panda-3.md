@@ -2,7 +2,7 @@
 layout: post
 title: "Kung-Fu Panda 3, Identity, and the Not-Self"
 categories: [thoughts]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 On my long flight to Indonesia I was watching the film Kung Fu Panda 3, which did a great job of keeping me entertained for a couple of hours. Like the previous films, it is a lighthearted take on kung-fu that nevertheless (generally) manages to seriously engage with the buddhist/taoist/confucian themes that are important in that culture. The format is that the eponymous panda has to master an esoteric kung-fu technique in order to defeat an evil demon and save everyone he cares about. His mastery is driven by a personal revelation which enables him to "level up" just in time to beat the demon.

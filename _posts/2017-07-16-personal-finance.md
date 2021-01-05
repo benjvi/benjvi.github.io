@@ -2,7 +2,7 @@
 layout: post
 title: "Managing personal finances like a developer with SQL"
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 

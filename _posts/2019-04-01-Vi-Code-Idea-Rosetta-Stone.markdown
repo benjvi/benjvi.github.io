@@ -2,7 +2,7 @@
 layout: post
 title: "Vim, VSCode & Intellij: A Cheat Sheet" 
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
  In the last six months I've really started to adopt VS Code for editing on a regular basis. In the process, I realized how many shortcuts I've come to rely on in my goto editors, Vim and Intellij. Hence, here I list useful  features that I use across all three editors, as a reference to help in learning a consistent set of commands.

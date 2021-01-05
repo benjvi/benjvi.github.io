@@ -2,7 +2,7 @@
 layout: post
 title: "Is Jenkins Still A Good Choice for Delivery Pipelines?" 
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 Over the years I have worked on projects utilising all sorts of different technologies, but there is one tool that has been almost omnipresent: Jenkins. Yet in most projects the administration of Jenkins has been problematic and ended up consuming a lot more time than we expected. As a platform engineer, Jenkins may be the tool that I heard coworkers complaining about the most. It's best to ignore a lot of this negativity, but there are real issues behind the complaints here, and we should talk about them. 

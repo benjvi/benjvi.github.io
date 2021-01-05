@@ -2,7 +2,7 @@
 layout: post
 title: "Using mindfulness and self-talk to control the darkness in system 1"
 categories: [thoughts]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 In the piece I'm going to talk about my experience, about how  I have grappled like many other people with a sense of dissatisfsaction that lingered just beyond by concious mind, and also I will internd to tyalk about how it is posssible to be your own worste enemy without even realizing it, and while ratiopnalizing this relationship to yourself as being something that is normal and an unavoidable part of life.
