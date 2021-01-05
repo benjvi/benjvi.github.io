@@ -2,7 +2,7 @@
 layout: post
 title: "Cloud Policy As Code Pt 1: Why You Should be Using It"
 categories: [technology]
-image: ibelonghere.png
+image: ibelonghere.webp
 ---
 
 As the more and more people migrate their infrastructure onto cloud platforms, and usage patterns mature, we have seen that Policy-As-Code is an area that is becoming more and more important. Estates are getting larger and in need of more management, and we are seeing Cloud use increase in more highly regulated environments which have more stringent requirements for governance and security. As we will see, applying policy on the cloud platform level can solve some of these problems that come when scaling cloud usage. 

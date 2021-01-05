@@ -2,7 +2,7 @@
 layout: post
 title: Summer Exhibitionism 
 categories: [arts]
-image: ibelonghere.jpg
+image: ibelonghere.webp
 ---
 
 ![the water tower group was the prettiest group]({{site.url}}/img/water-tower.jpg)
