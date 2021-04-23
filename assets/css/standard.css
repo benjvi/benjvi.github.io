@@ -443,3 +443,11 @@ code {
 .solarelem {
   display: none;
 }
+
+ul {
+        padding-left: 20px;
+}
+
+ul ul {
+        padding-left: 20px;
+}
