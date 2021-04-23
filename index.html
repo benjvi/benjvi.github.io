@@ -8,8 +8,8 @@ image: ibelonghere.webp
       {% for post in site.posts %}
 		  <div class="postpreview">
 			<div class="postcontent">
-				<div class="date">{{ post.date | date: "%B %e, %Y" }}</div>
 				<h2><a href="{{site.url}}{{ post.url }}">{{ post.title }}</a></h2>
+				<div class="date">{{ post.date | date: "%B %e, %Y" }}</div>
 				<p>{{ post.excerpt }}</p>
 				<div class="more"><a href="{{site.url}}{{ post.url }}"><em>View Full Post ></em></a></div>
 			</div>
@@ -20,7 +20,7 @@ image: ibelonghere.webp
 			{% endfor %}
 			</div>
 		  </div>
-		  <hr>
+                  <hr class="bluehr"/>
       {% endfor %}
   </div>
 </div>

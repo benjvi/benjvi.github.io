@@ -1,3 +1,17 @@
+/* https://stackoverflow.com/a/17595596 */
+:root {
+    --green-highlights:#0db687;
+    --blue-visited:#005dbd;
+    --title-color:#850a0a;
+    --h2-color: #002D5C;
+    --overlay-color:#E6EDEA;
+    --hr-color:#5c615c;
+    --menu-divider: #1d5e48;
+    --more-a-color: #d51010;
+    --background-grey: ##e1e4e8;
+    --solar: #393946;
+}
+
 @font-face {
   font-family: myFirstFont;
   src: url('my-handwriting-ipad.ttf') format('truetype');
@@ -11,6 +25,7 @@
 html 
 {
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
+        background-color: var(--solar);
 }
 
 .column
@@ -23,7 +38,9 @@ html
 	-webkit-box-shadow: 1px 2px 5px 0 #000000;	
 	-moz-box-shadow: 1px 2px 5px 0 #000000;
    	box-shadow: 0px 0px 5px 0 #000000;
+        background-color: white;
 }
+
 </*
 @media all and (max-width: 1000px) {
 	.column
@@ -83,13 +100,10 @@ h1
 a
 {
 	color: #0db687;
-	text-decoration: none;
+	text-decoration: underline;
 	font-weight: bold;
 }
-a:visited
-{
-	color:  #005dbd;
-}
+
 a:visited:hover
 {
 	color:  #850a0a;
@@ -100,23 +114,26 @@ a:hover {
 
 h2
 {
-	font-size: 1.8em;
+	font-size: 1.6em;
+        margin: 0.8em 0;
+        line-height: 1em;
 }
-h2 a:visited
+
+h2.posttitle
 {
-	color: #002D5C;
+	font-size: 2em;
+        margin: 1.5em 0 0.1em 0;
+        line-height: 1.0em;
+        color: var(--green-highlights)
 }
-h2 a:visited:hover
-{
-	color: #850a0a;
-}
+
 h2 a:hover
 {
 	color: #850a0a;
 }
 h3
 {       
-	font-size: 1.5em;
+	font-size: 1.4em;
 }
 h4
 {
@@ -181,16 +198,18 @@ img.profile:hover
 {
 	font-family: myFirstFont, arial, helvetica, sans-serif;
 	font-size: 1em;
+	max-height: 700px;
 	padding-left:10px;
 	padding-right:10px;
-	width:98%;
+	width:100%;
 	padding-top: 10px;
 	padding-bottom: 5px;
 	overflow: auto;
+        display: block;
+        margin: 0 auto;
 	background-color: black;
 	color: white;
 	text-transform: uppercase;
-	position: fixed;
 	min-width: 300px;
 	max-width: 1080px;
 	z-index: 10;
@@ -207,6 +226,26 @@ img.profile:hover
 	color: #850a0a;
 	font-weight: bold;
 }
+
+.divider
+{
+	font-family: myFirstFont, arial, helvetica, sans-serif;
+	width:100%;
+	padding-left:10px;
+	padding-right:10px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	overflow: auto;
+        display: block;
+        margin: 0 auto;
+	background-color: var(--h2-color);
+	color: white;
+	text-transform: uppercase;
+	min-width: 300px;
+	max-width: 1080px;
+	z-index: 10;
+}
+
 section
 {
 	margin: 0 auto;
@@ -218,14 +257,23 @@ section
 hr
 {
 	width: 100%;
-	background: #5c615c;
-	color: #5c615c;
-	margin: 2% 0 0 0;
-	height: 4px;
+	background: var(--green-highlights);
+	margin: 0 0 0 0;
+	height: 20px;
 	text-align: left;
 	border-width: 0;
-	
 }
+
+hr.bluehr
+{
+	width: 100%;
+	background: var(--h2-color);
+	margin: 0 0 0 0;
+	height: 10px;
+	text-align: left;
+	border-width: 0;
+}
+
 #menudivider
 {
 	background: #1d5e48;
@@ -277,11 +325,18 @@ hr
 .postcontent
 {
 	display: block;
-	width: 80%;
+	width: 92%;
 	padding: 10px;
-	padding-left: 10%;
-	padding-right: 10%;
-	line-height: 1.75em;
+	padding-left: 4%;
+	padding-right: 4%;
+	line-height: 1.25em;
+        margin: 0 0 2em 0;
+}
+
+li
+{
+       padding-top: 0.3em;
+       padding-bottom: 0.3em;
 }
 
 .categories a
@@ -337,8 +392,7 @@ footer
 
 .postcontent div.date
 {
-	padding-bottom: 30px;
-	padding-top: 30px;
+        margin-bottom: 2.5em
 }
 
 .projects
