@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Managing personal finances like a developer with SQL"
+title: "SQL Superpowers for Managing Personal Finances"
 categories: [technology]
 image: ibelonghere.webp
 ---
