@@ -387,3 +387,19 @@ code {
     padding: 2px;
     font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
 }
+
+.solarelem {
+        display: block;
+	opacity: 0.3;
+	#color: #E6EDEA;
+	#z-index:2;
+	display: block-inline;	
+	float: left;
+	overflow:hidden;
+	width:100%;
+	#background: #ffffff;
+	font-weight: bold;
+	font-family: Courier, myFirstFont, Helvetica;
+        padding-left: 5%;
+        padding-right: 5%;
+}

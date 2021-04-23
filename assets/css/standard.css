@@ -385,3 +385,7 @@ code {
     padding: 2px;
     font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
 }
+
+.solarelem {
+  display: none;
+}
