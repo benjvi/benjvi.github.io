@@ -4,7 +4,6 @@ title: "Kubecon EU 2020 Notes: Still going strong  :chart_with_upwards_trend::mu
 categories: [technology]
 image: ibelonghere.webp
 ---
-## General Thoughts
 
 - This is the third Kubecon I’ve attended, the other two being in 2016 & 2017. This was quite different from both
   - I have notes from Kubecon 2016 [here](http://benjvi.com/2016/03/13/tldr-kubecon) and a couple of sketch notes for talks in 2017: [1](https://twitter.com/bvkrs/status/847497893875503104?s=20)  - [2](https://twitter.com/bvkrs/status/848174735917764608?s=20)
