@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Monorepos just dont work everywhere
+title: Choosing a Better Solution for Dependency Management in Golang
 categories: [technology]
 image: ibelonghere.webp
 ---
