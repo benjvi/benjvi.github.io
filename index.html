@@ -5,22 +5,13 @@ image: ibelonghere.webp
 
 <div class="content">
   <div class="related">
-      {% for post in site.posts %}
-		  <div class="postpreview">
-			<div class="postcontent">
-				<h2><a href="{{site.url}}{{ post.url }}">{{ post.title }}</a></h2>
-				<div class="date">{{ post.date | date: "%B %e, %Y" }}</div>
-				<p>{{ post.excerpt }}</p>
-				<div class="more"><a href="{{site.url}}{{ post.url }}"><em>View Full Post ></em></a></div>
-			</div>
-			<div class="categories">
-			Category: 
-			{% for tag in post.categories   %}
-				<a href="{{site.url}}/Categories/{{ tag }}.html">{{tag}}</a>
-			{% endfor %}
-			</div>
-		  </div>
-                  <hr class="bluehr"/>
+    <div class="postcontent">
+	<p>Welcome to my blog! I'm Ben. I'm a platform engineer, software developer, having diverted from becoming a physicist to a more practical profession. Mostly I write here about tech, and pet projects.</p>
+	      {% for post in site.posts %}
+                <p>
+                  <em>{{ post.date | date: "%B %e, %Y" }}</em> - <a href="{{site.url}}{{ post.url }}">{{ post.title }}</a>
+                </p>
       {% endfor %}
+    </div> 
   </div>
 </div>
