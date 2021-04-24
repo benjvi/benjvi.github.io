@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Vim, VSCode & Intellij: A Cheat Sheet" 
+title: "Vim, VSCode & Intellij: A Rosetta Stone" 
 categories: [technology]
 image: ibelonghere.webp
 ---
 
- In the last six months I've really started to adopt VS Code for editing on a regular basis. In the process, I realized how many shortcuts I've come to rely on in my goto editors, Vim and Intellij. Hence, here I list useful  features that I use across all three editors, as a reference to help in learning a consistent set of commands.
+ In the last six months I've really started to adopt VS Code for editing on a regular basis. In the process, I realized how many shortcuts I've come to rely on in my goto editors, Vim and Intellij. Hence, here I list useful features that I exist across all three editors, as a reference to help in learning a consistent set of commands.
 
 
 <!--more-->
@@ -71,7 +71,7 @@ Intellij
 Vim
 - `:%s/search/replacement/gc` - inCremental string replacement starting from the beginning of the document (with sed). 
 - `:.,$s/search/replacement/gc` - replace from the current line to the end of the file, rater than starting at the start of the file. You can customize this by changing . and $ to the start/finish line numbers you want
-- `:%s/search/replacement/c` - changes all matches without prompting for each 
+- `:%s/search/replacement/g` - changes all matches without prompting for each 
 
 VSCode
 - `Opt + Cmd + f` -  brings up replace dialog. `Enter` incrementally applies the replacement defined (only in the forwards direction). There is a button in the pop up box you can press to apply the replacement to all matches

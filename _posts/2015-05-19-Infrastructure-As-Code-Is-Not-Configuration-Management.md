@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Infrastructure as Code is not Configuration Management"
+title: "Go Beyond Configuration Management with Terraform"
 categories: [technology]
 ---
 
