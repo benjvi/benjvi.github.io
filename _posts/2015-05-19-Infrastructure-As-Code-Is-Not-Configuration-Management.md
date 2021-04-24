@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Go Beyond Configuration Management with Terraform"
+title: "Terraform: Go Beyond Configuration Management"
 categories: [technology]
 ---
 
@@ -8,7 +8,7 @@ For the past few months, I have been concerned with deploying complex applicatio
  
 <!--more--> 
 
-###1. Advanced Graph Abstraction
+### 1. Advanced Graph Abstraction
 
 The infrastructure provisioning process is quite a complex one: many different kinds of resources need to be created, and very often one resource must be instantiated before another can start to be built. It is desirable that the resource provisionings that don't depend on each other are performed in parallel, as some provisioning actions can take quite a long time. This sequence of dependency relations can be naturally described as a directed acyclic graph. Let's see the graphs for a couple of example infrastructure configurations:
 
@@ -49,13 +49,13 @@ Configuration management tools like Puppet and Ansible are aimed at a different 
 
 By contrast, infrastructure provisioning can be a lengthy process, and so Terraform must apply all the actions it can in parallel (given the constraints of the graph). Given the graph can be generated from a set of resource configuration, we must still make sure to use this graph at runtime to determine the ordering of actions. This is where the <em>Communicating Sequential Processes</em> of Go come in. This approach to concurrency is powerful enough to capture the graph abstraction, and therefore when a graph of resources is provisioned by Terraform, it acts as though it is stepping through the leaves of the graph in parallel. The result is a powerful and efficient approach to concurrently provisioning resources. 
 
-###2. Being Node-less
+### 2. Being Node-less
 
 Configuration management tools are designed to ensure the correct configuration exists on a set of pre-existing computers that are under your management. Each computer is treated as a node, which has a particular target configuration. The CM tool performs actions on each node to ensure that its state converges to the desired configuration.
 
 For infrastructure provisioning this seems like nonsense, because it is completely foreign to our use-case. Our resource graph might well contain 'nodes' (VMs) but equally it might not. Nodes don't have a first-class status - indeed our configuration usually only needs to be applied once [2]. While we can work around this with the agent-less Ansible and even with Puppet or Chef, we don't actually need this construct at all. Nevermind all the extra concepts that these systems have for managing and classifying those nodes(classes, roles, etc.). Indeed Terraform, as a specialised and focussed tool, doesn't have any of this and so we won't get distracted by this baggage. [3]
 
-###3. Safe Convergence
+### 3. Safe Convergence
 
 A CM system (rightly) assumes that it can do anything it likes on nodes that it owns. Once a node is added into a configuration manager, it 'manages' the system without regard to the initial state. It simply performs some checks and performs the according actions to converge the state. 
 
@@ -63,11 +63,11 @@ In the infrastructure domain, we do not have the same freedom. In this world, we
 
 The other much-touted feature of Terraform is its plan system. Based on the current state of the provisioned infrastructure, it can calculate the actions it will need to perform in order to reach the desired configuration. This is much like the no-op modes of Puppet and Salt. The innovation is that these plans can be used to restrict the provisioning - i.e. only the actions specified by the plan can be performed when it comes time to really apply the configuration. I have not used this too much, so I won't comment on its effectiveness, but this seems like a very useful feature to have in a more mature and/or mission-critical system.
 
-###Conclusion
+### Conclusion
 
 We have seen how Terraform, in choosing to focus on the provisioning aspect of Infrastructure as Code, has been able to make some new abstractions and different design choices compared to configuration management tools. These make the system faster, more understandable, and safer. In doing so, it expands a new niche, performing the management functions needed to co-ordinate IaaS for 'a modern datacenter' - expanding the remit of what we are able to do with Infrastructure as Code and acting as a complement to the other tools that are available.
 
-###Notes
+### Notes
 
 [1] What's more, by most common definitions, Configuration Management <em>is</em> Infrastructure as Code. (i.e. it is a contained-by relation)
 
@@ -77,7 +77,7 @@ We have seen how Terraform, in choosing to focus on the provisioning aspect of I
 
 [4] Unfortunately, import of resources into Terraform is not currently available. There is a rather inelegant workaround of going to get resource ids and writing them manually into your state file. But the core developers say that an import feature is on the roadmap so hopefully it is coming soon!
 
-###More Info
+### More Info
 
 <a href='https://www.terraform.io/'>Terraform</a>
 
