@@ -2,3 +2,4 @@ thumbs.db
 _site
 *.swp
 _drafts/*.local.markdown
+.jekyll-cache
