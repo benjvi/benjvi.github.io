@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Electric Dreams or Electric Relaxation?
+title: How Close is Our Electric Car Future?
 categories: [technology]
 
 ---
@@ -11,7 +11,7 @@ This is a story that can be illustrated with two simple graphics.
 
 <!--more-->
 
-###1. Maximum Range of Electric Car Models (in Km)
+### 1. Maximum Range of Electric Car Models (in Km)
 
 <div id='chart'>
   <svg style='height:500px'> </svg>
@@ -21,7 +21,7 @@ This first chart tells the story of the company called Tesla Motors, the upstart
 
 The thing that is striking about this picture is how little any other company seems to have done to advance the state of the art in electric cars. Aside from Tesla, the ONLY advancement we see came in the form of the GM EV1. The sad story of that model was well covered by the documentary "Who Killed the Electric Car?" (In brief - The development was driven by the need to comply with Californian regulations to provide zero-emissions cars, and once that regulation was dropped, the cars were herded up and hidden away to protect the more profitable core business).
 
-###2. Retail Price of Electric Car Models (in inflation-adjusted 2014 dollars)
+### 2. Retail Price of Electric Car Models (in inflation-adjusted 2014 dollars)
 
 <div id='chart2'>
   <svg style='height:500px'> </svg>
@@ -34,7 +34,7 @@ However, auto makers have not changed the positioning of electric cars. They are
 
 The second component to this strategy is the hybrid product range. These hybrids are targeted at a more premium market, and they conceive the electric drive as an add-on. The electric motor is an additional feature which makes the car more energy efficient on short trips and it also gives the car a certain amount of eco-cred. And, this is not entirely a bad thing. Working solely within the restriction of current infrastructure, this works quite well - although it necessarily means the cars are slightly over-complicated in engineering terms, it does give the all-important reassurance on range. If I'm going on a road trip, it would probably be one of these cars I would want to be in.
 
-###The Showdown
+### The Showdown
 
 This boils down to a battle of two business models. One is more simple. It only relies on the capabilities of electric cars as they are today - it sees them as a (relatively) low cost, low guilt proposition that can replace traditional city run-around cars. In the high-end market, the electric motor and battery are added to a petrol engine as an additional feature. 
 
@@ -44,13 +44,13 @@ In contrast, the electric vehicle is mechanically <a href="http://siepr.stanford
 
 Therefore, if a newcomer designs a electric car from the ground up using best practices from the ICE industry in the aerodynamics, suspension etc, then the task of building a car from individual components them is made easier. So, it is sustainable for an electric company to continue to be competitive on traditional market differentiators (Acceleration, Top Speed, Handling Characteristics, Noise, Vibration, Hardness etc...) while keeping its main focus on overcoming the deficiencies of current battery technology and charging infrastructure. And, as always, a start-up must improve operational efficiency by realising economies of scale. This reasoning forms the basis of Tesla's strategy. 
 
-###The Lithium-Ion Battery
+### The Lithium-Ion Battery
 
 Interestingly, the products of this strategy does not fall under the traditional definition of disruptive innovations. This innovation is primarily "sustaining", as cars like the Tesla models seek to compete across all established competitive dimensions for luxury cars.
 
 The truly disruptive technology here is the lithium-ion battery. As the technology has advanced, it has been able to incrementally supplant batteries across various applications - first in laptops and camcorders, next in cameras and cordless power tools. It is still a relatively expensive option in all of these markets, but has come to dominate them due to its higher energy density. Given the improvement rate in energy density, averaging 10% per year, it seems a safe bet that lithium ion batteries have the potential to disrupt the ICE automotive market in the near future. It seems as though the challenges on recharging time have already been addressed reasonably well.
 
-###Conclusion
+### Conclusion
 
 It is still a matter of considerable debate whether the battery on any electric car would fulfil a consumers expectations on range for a petrol-powered car. And there is still a significant up-front premium for electric cars which results from the cost of the electric battery. But, as demand for Tesla cars seems to indicate, it seems that these drawbacks are more than compensated for by the  performance and eco-friendly nature of a luxury electric car. 
 

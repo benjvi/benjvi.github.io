@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Repeat Sales means House Prices"
+title: "Using Repeat Sales to Predict House Prices"
 categories: [science] 
 ---
 <p>
-There is a problem with the way houses are traded. Since houses are so heterogeneous, it is hard to estimate what they are worth according to any consistent methodology - and it is hard to place them into a trend. If I look at a stock, for example, it is frequently traded so I know that the price I would buy at reflects the market value. The history of its price growth is available and hence we have some clues as to whether this value seems to reflect an underconfident or alternatively an overinflated market (one overinflated might currently growing at 20% per year, for example). However, this is currently not the case for those looking to buy a house - the asking price is the single price point available, and whether it is market value can normally be only determined by the level of interest, by ad hoc comparisons, or by an expensive valuation process. We need a method to be able to value houses on a local basis, whilst taking into account their heterogeneous nature.
+For a potential buyer, the way houses are traded is a problem. Since houses are so heterogeneous, it is hard to estimate what they are worth according to any consistent methodology - and it is hard to place them into a trend. If I look at a stock, for example, it is frequently traded so I know that the price I would buy at reflects the market value. The history of its price growth is available and hence we have some clues as to whether this value seems to reflect an underconfident or alternatively an overinflated market (one overinflated might currently growing at 20% per year, for example). However, this is currently not the case for those looking to buy a house - the asking price is the single price point available, and whether it is market value can normally be only determined by the level of interest, by ad hoc comparisons, or by an expensive valuation process. We need a method to be able to value houses on a local basis, whilst taking into account their heterogeneous nature.
 </p>
 <!--more-->
 <h2>Background</h2>
@@ -87,7 +87,7 @@ A few notes on these graphs:
 	</li>
 </ul>
 
-<h2>Upcoming Work</h2>
+<h2>Further Work</h2>
 
 On the basis of this information we can also calculate some more concrete (perhaps more directly useful) metrics: most important would be the predicted price of a house that was already transacted in our dataset. To do this we can now simply input the calculated index values, along with the previous transaction price, into the model equation (step 3 in the construction). We also need to investigate the variance, by lengthening the index periods slightly to reduce model volatility and then making a calculation of the remaining variance. 
 

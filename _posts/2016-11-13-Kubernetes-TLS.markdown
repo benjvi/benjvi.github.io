@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Securing communications in Kubernetes"
+title: "Securing Communications in Kubernetes"
 categories: [technology]
 image: ibelonghere.webp
 ---

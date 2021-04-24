@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Terraform: Go Beyond Configuration Management"
+title: "Terraform: Going Beyond Configuration Management"
 categories: [technology]
 ---
 

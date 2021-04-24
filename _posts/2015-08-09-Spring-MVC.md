@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Servlets and SpringMVC"
+title: "Migrating From Servlets to SpringMVC"
 categories: [technology]
 ---
 On a reecnt project, I was using Java Servlets. The reason was, the prototype for the project was written solely with JSPs, and understanding how those work within the servlet container made it very easy to migrate the controller from being in the JSPs to being in a Java servlet. This enabled me to refactor a lot of the secondary logic and the models to POJOs, which would largely remain unchanged regardless of the Java framework.   
@@ -9,7 +9,7 @@ Separately, I was working on a Spring project in my spare time, and have come to
 
 ### Servlets
 
-For the Servlet, the situation is fairly simple. The webapp's eb.xml defines a mapping from a URL to a servlet, then the Servlet itself contains two methods: doGEt and doPost. Both of these methods take in two objects, an HttpServletRequest and an HttpServletResponse. the first contains details of the request we received, and the second is where we will write our model details to. In fact, anything we send to standard out from these methods will be part of the HTML response, although it is normal to use a requestdispatcher to render the response via a jsp (with our request/response objects included). In effect the normal flow should look like this:
+For the Servlet, the situation is fairly simple. The webapp's `web.xml` defines a mapping from a URL to a servlet, then the Servlet itself contains two methods: `doGet` and `doPost`. Both of these methods take in two objects, an HttpServletRequest and an HttpServletResponse. The first contains details of the request we received, and the second is where we will write our model details to. In fact, anything we send to standard out from these methods will be part of the HTML response, although it is normal to use a requestdispatcher to render the response via a jsp (with our request/response objects included). In effect the normal flow should look like this:
 
 1. Servlet method invoked
 2. Create Service object to parse input
@@ -20,13 +20,13 @@ This doesn't seem too bad, but there is a potential problem. Because all our wor
 
 ### Spring MVC
 
-Enter Spring MVC. Here our controller is just a normal POJO (with some annotations). This enables us to inject the controller's dependencies from the Spring IoC container (and therefore we are allowed to populate instance variables for each request). similarly o with servlets, we must write our model details to an object in a method which is annotated as being the request dispatcher. We have some flexibility in the exact object class used to do this; we may choose to use the same HttpServletREquest & Response as the Servlets use. However, we do not construct the mechanism used to return the HTML response, nor do we construct it directly. Instead, we can specify only a string that is an internal identifier for the template that will be used to render the model data that we have provided.  
+Enter Spring MVC. Here our controller is just a normal POJO (with some annotations). This enables us to inject the controller's dependencies from the Spring IoC container (and therefore we are allowed to populate instance variables for each request). Similarly to with servlets, we must write our model details to an object in a method which is annotated as being the request dispatcher. We have some flexibility in the exact object class used to do this; we may choose to use the same HttpServletRequest & Response as the Servlets use. However, we do not construct the mechanism used to return the HTML response, nor do we construct it directly. Instead, we can specify only a string that is an internal identifier for the template that will be used to render the model data that we have provided.  
 
-This internal identifier is picked up by another java object, a ViewResolver. This performs the mapping between the internal String identifier and the physical path of the template to be rendered. Finally, there is a view object that picks up the physical template path and renders it, along with the model, as an html page to be returne.
+This internal identifier is picked up by another java object, a ViewResolver. This performs the mapping between the internal String identifier and the physical path of the template to be rendered. Finally, there is a view object that picks up the physical template path and renders it, along with the model, as an html page to be returned.
 
 ### Comparision
 
 So, this is all very nice. All the restrictions we should normally put on the Servlets (not using physical path names, not directly building html there, etc) are now enforced by the framework. However, we did introduce a bit of opacity: namely, in how the java beans are instanciated. In the servlet we know that only the state we specifically add to the session will be persisted beyond the request; everything else is constructed within the servlet method and therefore should be gone after that method returns.
 
-In Spring we may easily make an error so that beans are accidentally shared between requests (although of course we are able to configure it so that each time a bean is injected it is with a new instance).
+One downside is that, in Spring, we may easily make an error so that beans are accidentally shared between requests (although of course we are able to configure it so that each time a bean is injected it is with a new instance). Overall, SpringMVC is a big benefit in giving a clear structure to the request handling process, and a clear interface to inject dependencies. 
 

@@ -1,18 +1,18 @@
 ---
 layout: post
-title: A Quick Review Of HTTP Essentials
+title: HTTP - Essential Knowledge for Developers
 categories: [technology] 
 ---
 
-<h3>Request and Response</h3>
+### Request and Response
 
-The paradigm conceives of two actors: a client and a server. The client sends a request to the server, of a particular type, and with certain parameters. In reply the server returns a response message. The response message includes a status code in the header - giving information about the requested information, and will also include a body which is the content at the requested URI. Lets look at the process in more detail.
+The HTTP paradigm conceives of two actors: a client and a server. The client sends a request to the server, of a particular type, and with certain parameters. In reply the server returns a response message. The response message includes a status code in the header - giving information about the requested information, and will also include a body which is the content at the requested URI. Lets look at the process in more detail.
 
 <!--more-->
 
-<h3>The first step: finding the server to connect to (DNS)</h3>
+### Before The Request: finding the server to connect to (DNS)
 
-Lets take the normal case (at least it used to be). the user goes to his browser and enters something like: <a href="http://en.wikipedia.org/HTTP">en.wikipedia.org/HTTP</a>. The first step is that the website name needs to be translated into a specific IP address we can address. This process is <em>DNS resolution</em>. It is not necessary to go into all the details here but we do need to know one or two things: 
+The user goes to his browser and enters something like: "<a href="http://en.wikipedia.org/HTTP">en.wikipedia.org/HTTP</a>". The first step is that the website name needs to be translated into a specific IP address we can address. This process is <em>DNS resolution</em>. It is not necessary to go into all the details here but we do need to know one or two things: 
 <ol>
 	<li>The first time we connect to a website the URL is forwarded first to a DNS server (a recursive name caching server) which would typically be hosted by the ISP. This nameserver forwards the request to the root nameserver, which contains information about the Top Level Domains' nameservers. which then forwards it on the the nameserver responsible for the sub-domain which is given in the website address. This then returns the IP address to the client.</li>
 	<li>DNS zones are the areas that are managed - a zone is a continguous area of the namespace that has a nameserver responsible for it. Technically, a zone is comprised of DNS resource entries . There are different types of entries in each zone:
@@ -24,14 +24,15 @@ Lets take the normal case (at least it used to be). the user goes to his browser
 			<li>MX - mail exchanger for the domain</li>
 			<li>NS - the name server for the domain or delegated subdomain</li>
 		</ul>
+        </li>
 	<li>Local nameserver - the client needs to know which server to connects to in order to access the DNS resolution service (although it may be self-hosted, it rarely is). This piece of information is typically configured by DHCP</li>
 </ol>
 
-<h3>Setting up the connection</h3>
+### Setting up the connection
 
 Before any requests or responses can be made, a TCP connection needs to be set up. TCP is the lower level on the network stack - which handles data transfer across the networks by splitting the data up into packets and ameliorating problems such as packet loss or duplication.
 
-<h3>Making the request</h3>
+### Making the request
 
 Now we have the connection to the target server via TCP. So, we can send our first HTTP request. This request takes the format:
 
@@ -44,7 +45,7 @@ There are some important parameters in here. First up is the request method - he
 
 Here, we also send the name of the host to connect to. This can be useful in situations where multiple hosts are sharing the same IP address. We also send the user-agent, which is used to identify the requestor (eg type of browser) so that the server can send the appropriate type of resource back.
 
-<h3>First Response</h3>
+### First Response
 
 In return, the server will send an HTTP response. This contains the status - whether the content was found or not, or whether it moved, etc. As well, the response will contain the content we requested (if it is indeed there!). This content will usually be the html form containing the main body of the page. A typical HTTP response looks like this:
 <pre><code>
@@ -62,7 +63,8 @@ Content-Length: 1354
   .
 &lt;/body&gt;
 &lt;/html&gt;
-</pre></code>
+</code></pre>
+
 Based on this, we need to perform additional GET requests to retrieve the additional resources referenced on the page such as images, javascript, css, and so on. 
 
 However, what exactly will be done depends on the HTTP code that is returned. This can be broken down in broad terms:
@@ -86,7 +88,7 @@ More specifically, we are likely to see and/or use these codes - which are a ver
 
 <h3>Performance considerations for secondary HTTP request/responses</h3>
 
-There are two main ways we achieve this - by persistance, and by pipelining(parallelism). Persistence is simple, the tcp connection we used is not closed after the first request/response cycle, we keep it open and reuse it for the additional request/responses. This way we save the network round trips that are necessary to set up the connection. Pipelining means that when we have a number of resources we want to fetch, we can send the GET requests in parallel - then the server can start to process them at the same time. Again, we reduce the amount of time we spend waiting for data to travel across the network.
+There are two main ways we achieve this - by persistance, and by pipelining (parallelism). Persistence is simple, the tcp connection we used is not closed after the first request/response cycle, we keep it open and reuse it for the additional request/responses. This way we save the network round trips that are necessary to set up the connection. Pipelining means that when we have a number of resources we want to fetch, we can send the GET requests in parallel - then the server can start to process them at the same time. Again, we reduce the amount of time we spend waiting for data to travel across the network.
 
 <h3>Why developers need to know about HTTP</h3>
 

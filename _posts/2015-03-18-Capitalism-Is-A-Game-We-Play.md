@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Capitalism is a Game we Play"
+title: "Capitalism Is a Game We Play"
 categories: [technology]
 ---
 

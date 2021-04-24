@@ -9,11 +9,11 @@ image: tube.jpg
 I have been working with lists in the Android app I'm working on, and I found that they have a bit of a learning curve. Its always the case in programming - there are some things, that seem like they should be easy, which can often be quite complicated. And, lists are one of those things in Android: not that intuitive; you have to learn to do things the "Android way". However, after coming to understand the tools that the Android framework gives us, we can quite quickly construct a flexible and robust solution.
 <!--more-->
 
-###Background - Basic UX 
+### Background - Basic UX 
 
 In keeping with UI patterns on mobile platforms, we should try to keep the screens very simple. So, as a simple phone-centric solution, I created one `Activity` class which would perform all the activities associated with displaying and updating the multivalued attribute. The object containing the list can be passed in and out quite simply as an extra in the `Intent`, as this object implements the `Parcelable` interface.
 
-###Activity Overview
+### Activity Overview
 
 At the top level, the solution breaks down into two parts:  
 1. Loading a `ListView` with a customised item view containing `EditText`'s  
@@ -21,7 +21,7 @@ At the top level, the solution breaks down into two parts:
 
 Now, let's break the problem down in more detail.
 
-###Implementing a `ListView`
+### Implementing a `ListView`
 
 
 Implementing the `ListView` in itself is not so difficult. First we will define a top level layout for our `Activity` to use, which must contain the `ListView` that we will customize. This `ListView` object by itself only can specify how the items in the list are to be presented (eg the alignment of the list) and not the layout of the individual items in the list. As usual, we use `setContentView()` to load the class in our `Activity`. So in my layout resource file below, I take a standard list, and attach to it a header and a footer (defined in external layout files), which will ensure that a button to add additional entries to the list is always present, as well as save and cancel buttons:
@@ -48,7 +48,7 @@ Implementing the `ListView` in itself is not so difficult. First we will define 
 				  android:layout_above="@id/footer"/>
 	</RelativeLayout>
 
-###A Custom Adapter
+### A Custom Adapter
 
 After loading the layout file, we must find the `ListView` object that is defined here so that we can attach a custom `Adapter` to it in our `Activity`. This `Adapter` will define the layout of the items in the list, and it will take care of initialising and updating those layouts. This class can initially seem a little opaque, though we can come to understand it by analysing the contents. There are some boilerplate methods we must add, but of primary importance is the following method that is used to load the layout of individual items in the list:
 
@@ -134,15 +134,15 @@ Finally, once we have added in the initial list value to the `EditText` and adde
 - `setFocusOnChangeListener()` on the `EditText`, which will write any altered value back into the underlying list whenever the `EditText` loses focus  
 - `setOnClickListener()` on the `Button`, which removes the value at that position and then calls `notifyDataSetChanged()` to force the `ListView` to refresh, in order to reflect the changes  
 
-###What's Left
+### What's Left
 
 That covers almost everything - the only thing we have to do now is to decide whether to persist our changes or not. Since changes are being made to our list in realtime as we update the GUI, all we would need to do is save our object and pass it to the next activity - or to cancel changes we can just `Finish()` our `Activity` without needing to do anything else.
 
-###Further Improvements
+### Further Improvements
 
 If we wanted to extend this to make the view format more re-usable, this would be a good feature to include in an Android `Fragment` - it could match the recommended use of fragments for list and details views quite well. Then we could extend this phone-centric solution to make it more suited to tablets as well. But that will be a topic for another day.
 
-##More Reading
+## More Reading
 
 [A Comprehensive Guide to ListViews](http://www.vogella.com/articles/AndroidListView/article.html) - with lots of nice diagrams!
 

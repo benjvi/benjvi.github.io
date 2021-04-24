@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Becoming a Certified Java Person
+title: "Java Certification: What You Need to Know"
 categories: [technology] 
 ---
 
@@ -10,9 +10,9 @@ First off, I have to say, this is not an easy exam. I do not work with Java ever
 
 <!--more-->
 
-There are certainly some pre-requisities: you should have a solid understanding of basic object oriented principles - what are objects, and their variables and methods, what is inheritance, etc. I don't think it would be feasible to pass this exam without having previously seen these concepts and used them in practice. Neither should this exam be the first goal of a newcomer to programming in my opinion - common imperative constructs and flow control need to be second nature to work out what's going on in the code samples that form the questions.  
+There are certainly some pre-requisites: you should have a solid understanding of basic object oriented principles - what are objects, and their variables and methods, what is inheritance, etc. I don't think it would be feasible to pass this exam without having previously seen these concepts and used them in practice. Neither should this exam be the first goal of a newcomer to programming in my opinion - common imperative constructs and flow control need to be second nature to work out what's going on in the code samples that form the questions.  
 
-###Tackling the exam
+### Tackling the exam
 
 The exam format is centred around the presentation of many different samples of code, which you typically have to evaluate and predict what will happen when the code is run. These samples are quite short, no more than 40 lines, but the scope of these questions should cover the full set of Java syntax and also the use of core Java APIs (common classes in the java.util and System.io packages, amongst others).  
 
@@ -25,9 +25,9 @@ Beyond reading the textbook, I found the most useful two activities to be:
 </ol>
 Writing code is also an important activity, but it will be tricky to find meaningful projects where all the edge cases you will run into on the exam will be applicable. Ideally relevant exercises would be included in your textbook - but the SCJP6 book only has one or two. I therefore found it slightly more productive to focus on the conceptual basis and the reasoning behind the language design.  
 
-###Learning Points 
+### Learning Points 
 
-That idea, of having a conceptual basis, also tended to divide the useful topics from the unuseful topics of the exam. For me the most interesting learning points were:  
+That idea, of having a conceptual basis, also tended to divide the useful topics from the less useful topics of the exam. For me the most interesting learning points were:  
 <ul>
 <li><em>Getting in-detail with Polymorphism</em>. this is a profoundly useful concept in program design. Perhaps most commonly, this forms a basis for the Dependency Injection pattern, whereby we are able to cast an object to an interface and keep encapsulation whilst still ensuring the necessary dependencies are captured by our object. Similarly it is valuable to be able to realise that instance variables and static methods are still accessible through objects but are not subject to polymorphism.</li>
 
@@ -46,7 +46,7 @@ And the least useful:
 
 In general, I would say that the interesting points are where we can identify language features as enabling good program design, and less interesting is when we have to memorize seemingly arbitrary (or poorly thought-out) choices in language or API design. The main thing I was left wanting was guidance as to correct usage of patterns beyond that enforced by the language. Although we are provided with many code samples, we are left to reason them out on our own. This is the most important next step to build upon this qualification, to synthesize understanding of the language vocabulary with the abstract design patterns theories (like those from GoF/POSA1).
 
-###References
+### References
 
 <ul>
 <li><a href="http://www.amazon.co.uk/Certified-Programmer-Study-Guide-CX-310-065/dp/0071591060/ref=sr_1_1?ie=UTF8&qid=1402743264&sr=8-1&keywords=scjp6">SCJP6 book by Kathy Bates</a></li>

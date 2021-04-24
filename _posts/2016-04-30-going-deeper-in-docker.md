@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Going Deeper in Docker"
+title: "Docker: Understanding the Runtime and Limitations"
 categories: [technology]
 image: ibelonghere.webp
 ---
