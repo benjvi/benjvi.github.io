@@ -238,12 +238,33 @@ ul ul {
 
 code {
     border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border: 1px solid #BCBEC0;
-    padding: 2px;
-    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
+    padding: 5px;
+    margin: inherit;
+    margin-left: 2px;
+    margin-right: 2px;
+    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace;
+    background-color: var(--solar);
+    color: white;
+    line-height: inherit;
 }
+
+pre {
+    background-color: var(--solar);
+    border: 1px solid #ddd;
+    border-left: 3px solid var(--green-highlights);
+    color: white;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+
 /* END STYLES: MAIN CONTENT */
 
 /* STYLES: FOOTER */
