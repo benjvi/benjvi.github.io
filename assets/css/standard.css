@@ -1,8 +1,9 @@
+/* GLOBAL VARIABLES */
 /* https://stackoverflow.com/a/17595596 */
 :root {
     --green-highlights:#0db687;
     --blue-visited:#005dbd;
-    --title-color:#850a0a;
+    --red-hover:#850a0a;
     --h2-color: #002D5C;
     --overlay-color:#E6EDEA;
     --hr-color:#5c615c;
@@ -16,12 +17,9 @@
   font-family: myFirstFont;
   src: url('my-handwriting-ipad.ttf') format('truetype');
 }
+/* END: GLOBAL VARIABLES */
 
-.content
-{
-	position: relative;
-}
-
+/* STYLES: SITE-WIDE */
 html 
 {
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -41,157 +39,46 @@ html
         background-color: white;
 }
 
-</*
-@media all and (max-width: 1000px) {
-	.column
-	{
-		width: 100%;
-	}
+a
+{
+	color: var(--green-highlights);
+	text-decoration: underline;
+	font-weight: bold;
+}
+a:hover {
+	color: var(--red-hover);
 }
 
-@media all and (min-width: 1001px) and (max-width: 1200px) {
-	.column
-	{
-		width: 90%;
-	}
+/* currently used at end of header and end of post div */
+hr
+{
+	width: 100%;
+	background: var(--green-highlights);
+	margin: 0 0 0 0;
+	height: 20px;
+	text-align: left;
+	border-width: 0;
 }
-*/
+
+hr.bluehr
+{
+	width: 100%;
+	background: var(--h2-color);
+	margin: 0 0 0 0;
+	height: 10px;
+	text-align: left;
+	border-width: 0;
+}
+/* END STYLES: SIDE-WIDE */
+
+/* STYLES: SITE-WIDE HEADER */
+/* header is the same on all pages */
+/* structure: header -> menu -> menu elements */
 header 
 { 
 	display: block;
     margin: 0 auto;
 	width: 100%;
-}
-
-.bannerholder
-{
-	width: 100%;
-	display: container;
-	max-height: 700px;
-}
-
-img.banner
-{
-	display:block;
-	width:100%;
-	margin: 0 auto;
-	max-height: 700px;
-	overflow: hidden;
-}
-
-img.banner:hover
-{
-	-webkit-filter: hue-rotate(60deg);
-}
-
-h1
-{       
-	font-size: 2.5em;
-	color: #850a0a;
-	margin: 0 0;
-	margin-top: 35px;
-	z-index: 4;
-	opacity: 0.99;
-	padding-right: 5%;
-	padding-left: 5%;
-        line-height: 0.9em;
-}
-
-a
-{
-	color: #0db687;
-	text-decoration: underline;
-	font-weight: bold;
-}
-
-a:visited:hover
-{
-	color:  #850a0a;
-}
-a:hover {
-	color: #850a0a;
-}
-
-h2
-{
-	font-size: 1.6em;
-        margin: 0.8em 0;
-        line-height: 1em;
-}
-
-h2.posttitle
-{
-	font-size: 2em;
-        margin: 1.5em 0 0.1em 0;
-        line-height: 1.0em;
-        color: var(--green-highlights)
-}
-
-h2 a:hover
-{
-	color: #850a0a;
-}
-h3
-{       
-	font-size: 1.4em;
-}
-h4
-{
-	font-size: 1.2em;
-}
-.overlay
-{
-	margin-left: auto;
-        margin-right: auto;
-        margin-top: -160px;
-	z-index: 7;
-	background-color: #ffffff;
-	height: 160px;
-	width: 90%;
-	display: block;
-	overflow:hidden;
-	line-height: 1;
-}
-
-.overlaytext
-{
-	font-size: 200px;
-	opacity: 0.55;
-	color: #E6EDEA;
-	z-index:2;
-	display: block-inline;	
-	float:left;
-	overflow:hidden;
-	width:100%;
-	#background: #ffffff;
-	font-weight: bold;
-	font-family: myFirstFont, Helvetica;
-}
-
-.overlaybackground
-{
-	background: #ffffff;
-	width: 100%;
-	height:130px;
-	z-index:0;
-	display: block;
-	float:left;
-	margin: 0 0;
-	margin-top: -150px;
-}
-
-img.profile
-{
-	max-height:55px;
-	margin-left: 20px;
-	margin-right: 20px;	
-	vertical-align:middle;
-	border-radius: 5px;
-}
-
-img.profile:hover
-{
-	-webkit-filter: blur(1px);
 }
 
 .menu
@@ -218,34 +105,33 @@ img.profile:hover
 .menu a
 {
 	color: white;
-	font-weight: bold;
+        font-weight: bold;
+}
+.menu a:hover {
+	color: var(--red-hover);
 }
 
-.menu a:hover
+/* TODO: do I still want to use this? */
+img.profile
 {
-	color: #850a0a;
-	font-weight: bold;
+	max-height:55px;
+	margin-left: 20px;
+	margin-right: 20px;	
+	vertical-align:middle;
+	border-radius: 5px;
 }
 
-.divider
+img.profile:hover
 {
-	font-family: myFirstFont, arial, helvetica, sans-serif;
-	width:100%;
-	padding-left:10px;
-	padding-right:10px;
-	padding-top: 10px;
-	padding-bottom: 5px;
-	overflow: auto;
-        display: block;
-        margin: 0 auto;
-	background-color: var(--h2-color);
-	color: white;
-	text-transform: uppercase;
-	min-width: 300px;
-	max-width: 1080px;
-	z-index: 10;
+	-webkit-filter: blur(1px);
 }
+/* end : TODO */
+/* END STYLES: SITE-WIDE HEADER */
 
+/* STYLES: MAIN CONTENT */
+/* home page: section -> content -> more -> postcontent
+ * post pages: section -> content -> post -> postcontent
+ * despite the name, postcontent div is also used on the home page */
 section
 {
 	margin: 0 auto;
@@ -254,72 +140,9 @@ section
 	font-size: 1.2em
 }
 
-hr
+.content
 {
-	width: 100%;
-	background: var(--green-highlights);
-	margin: 0 0 0 0;
-	height: 20px;
-	text-align: left;
-	border-width: 0;
-}
-
-hr.bluehr
-{
-	width: 100%;
-	background: var(--h2-color);
-	margin: 0 0 0 0;
-	height: 10px;
-	text-align: left;
-	border-width: 0;
-}
-
-#menudivider
-{
-	background: #1d5e48;
-	color: #1d5e48;
-	margin: 0 0;
-	height: 4px;
-	text-align: left;
-
-}
-#menudividertop
-{
-	background: #000000;
-	color: #1d5e48;
-	margin: 0 0;
-	height: 4px;
-	text-align: left;
-}
-.postpreview
-{
-	display: container;
-	width: 100%;
-	height: 10%;
-	margin: 0 0;
-	padding-bottom: 10px;
-	padding-left: 5px;
-}
-
-.postcontent img
-{
-	max-width: 96%;
-        width: auto;
-	border-radius: 5px;
-	margin: 5px;
-	max-height: 680px;
-        margin-left: auto;
-        margin-right: auto;
-}
-
-#postlogo
-{
-	max-height:50px;
-	padding-top: 40px;
-	padding-left: 20px;
-	padding-right: 20px;
-	vertical-align:middle;
-	float:right;
+	position: relative;
 }
 
 .postcontent
@@ -333,39 +156,89 @@ hr.bluehr
         margin: 0 0 2em 0;
 }
 
+/* TODO: could possibly repurpose h1s for post titles */
+/* this is specifically for use on post pages */
+h2.posttitle
+{
+	font-size: 2em;
+        margin: 1.5em 0 0.1em 0;
+        line-height: 1.0em;
+        color: var(--green-highlights)
+}
+
+/* all headers are primarily styled for use with post markdown content */
+h2
+{
+	font-size: 1.6em;
+        margin: 0.8em 0;
+        line-height: 1em;
+}
+h2 a:hover
+{
+	color: #850a0a;
+}
+h3
+{       
+	font-size: 1.4em;
+}
+h4
+{
+	font-size: 1.2em;
+}
+
+.postcontent img
+{
+	max-width: 96%;
+        width: auto;
+	border-radius: 5px;
+	margin: 5px;
+	max-height: 680px;
+        margin-left: auto;
+        margin-right: auto;
+}
+
+/* TODO: currently unused, reuse or delete this */
+#postlogo
+{
+	max-height:50px;
+	padding-top: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	vertical-align:middle;
+	float:right;
+}
+
 li
 {
        padding-top: 0.3em;
        padding-bottom: 0.3em;
 }
-
-.categories a
-{
-	color: #1d5e48;
+ul {
+        padding-left: 20px;
 }
 
-.categories a:visited
-{
-	color: #002D5C;
+ul ul {
+        padding-left: 20px;
 }
 
-.categories a:visited:hover
+/* note: date in main page doesn't use this style */
+.date
 {
-	color: #850a0a;
+	font-weight: bold;
+        margin-bottom: 2.5em
 }
 
-.categories a:hover
-{
-	color: #850a0a;
+code {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #BCBEC0;
+    padding: 2px;
+    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
 }
-.categories
-{
-	margin-left: 10%;
-	margin-right: 10%;
-	margin-top: 2%;
-	margin-bottom: 2%;
-}
+/* END STYLES: MAIN CONTENT */
 
+/* STYLES: FOOTER */
 footer
 {
 	width: 100%;
@@ -383,23 +256,9 @@ footer
 	text-align: right;
 	margin-right: 2%;
 }
+/* END STYLES: FOOTER */
 
-.date
-{
-	/*font-family: Georgia, "Times New Roman", Times, serif;*/
-	font-weight: bold;
-}
-
-.postcontent div.date
-{
-        margin-bottom: 2.5em
-}
-
-.projects
-{
-	float: right;
-}
-
+/* only used in scienTUBEism post -  TODO: move to separate stylesheet */
 .picturepost
 {
 	padding-left:5%;
@@ -414,40 +273,25 @@ footer
 	margin: 0 0;
 }
 
-.more a
+img.banner
 {
-	color: #d51010;
-}
-.more a:visited 
-{
-	color: #850a0a;
-}
-.more a:visited :hover
-{
-	color: #d51010;
-}
-.more a:hover
-{
-	color: #850a0a;
+       display:block;
+       width:100%;
+       margin: 0 auto;
+       max-height: 700px;
+       overflow: hidden;
 }
 
-code {
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border: 1px solid #BCBEC0;
-    padding: 2px;
-    font:12px Monaco,Consolas,"Andale  Mono","DejaVu Sans Mono",monospace
+img.banner:hover
+{
+       -webkit-filter: hue-rotate(60deg);
 }
 
+/* end: scienTUBEism stuff TODO */
+
+/* for elements that are only meant to show up when the site runs on solar power */
 .solarelem {
   display: none;
 }
 
-ul {
-        padding-left: 20px;
-}
 
-ul ul {
-        padding-left: 20px;
-}
