@@ -197,6 +197,14 @@ h4
         margin-right: auto;
 }
 
+/* the above messes up emojis */
+img.emoji
+{
+        max-width: 100%;
+        margin: 0 2px 0 2px;
+        border-radius: 0px;
+}
+
 /* TODO: currently unused, reuse or delete this */
 #postlogo
 {
