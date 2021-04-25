@@ -5,7 +5,7 @@ COPY Gemfile.lock /srv/jekyll
 RUN bundle install --frozen
 
 COPY . /srv/jekyll/
-RUN bundle exec jekyll build --config solar-config.yml --trace
+RUN jekyll build --config solar-config.yml
 
 FROM --platform=$TARGETPLATFORM arm32v6/nginx:alpine
 COPY nginx-config/nginx.conf /etc/nginx/nginx.conf
