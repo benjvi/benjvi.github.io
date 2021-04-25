@@ -10,6 +10,7 @@ RUN export PATH=$PATH:/usr/gem/bin/
 RUN jekyll --version
 
 COPY . /srv/jekyll/
+RUN rm /srv/jekyll/robots.txt
 RUN jekyll build --config mains-config.yml
 
 FROM --platform=$TARGETPLATFORM nginx:alpine
