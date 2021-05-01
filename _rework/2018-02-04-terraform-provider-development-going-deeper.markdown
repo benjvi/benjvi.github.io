@@ -5,6 +5,8 @@ categories: [technology]
 image: ibelonghere.webp
 ---
 
+NOTE: rework this to focus on more general lessons of what I learned doing provider development, possibililities for auto-generation, reference [this crossplane post](https://blog.crossplane.io/adding-vmware-support-to-crossplane-using-terraform/amp/?__twitter_impression=true&s=03) and move specific gotchas to appendices
+
 One of the nice things about terraform, and one of the reasons that it has been so successful is in how easy it is to plug  new (cloud) APIs into. Terraform offers scaffolding you can easily build upon to create new Providers and new Resources (also Data Sources). For a new resource, you just need to create:
  - a resource schema definition
  - a set of CRUD methods that wrap API methods for the relevant resources 
