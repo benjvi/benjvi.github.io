@@ -238,7 +238,7 @@ ul ul {
 
 code {
     border-radius: 5px;
-    padding: 5px;
+    padding: 4px;
     margin: inherit;
     margin-left: 2px;
     margin-right: 2px;
@@ -246,6 +246,7 @@ code {
     background-color: var(--solar);
     color: white;
     line-height: inherit;
+    font-size: 0.7em;
 }
 
 pre {
