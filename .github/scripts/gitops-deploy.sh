@@ -4,10 +4,13 @@ echo 'Deploying....'
 
 export KEYFILE="$(mktemp)"
 echo "$RPI_GIT_DEPLOY_KEY" > "$KEYFILE"
-cd / && GIT_SSH_COMMAND='ssh -i "$KEYFILE" -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/rpi-k8s.git
+cd /
+GIT_SSH_COMMAND='ssh -i "$KEYFILE" -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/rpi-k8s.git
+cd -
 
 IMG_VERSION="$(git rev-parse --short=8 HEAD)"
 # TODO: add kshard in here
+echo "$IMG_VERSION"
 cd deploy/k8s
 kustomize edit set image "benjvi/blog-arm=benjvi/blog-arm:${IMG_VERSION}"
 kustomize build . > /rpi-k8s/sync/prod/blog/k8s-blog/package.yml
