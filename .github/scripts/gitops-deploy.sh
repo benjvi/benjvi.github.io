@@ -22,5 +22,5 @@ pwd
 ls
 git config user.email "benjvi.github.io@ghactions"
 git config user.name "GH Actions CI Bot - Blog"
-GIT_SSH_COMMAND=\'ssh -i "$KEYFILE" -o IdentitiesOnly=yes -o StrictHostKeyChecking=no\' prify run
+GIT_SSH_COMMAND='ssh -i "$KEYFILE" -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' prify run
 rm $KEYFILE 
