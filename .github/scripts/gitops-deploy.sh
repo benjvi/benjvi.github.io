@@ -2,7 +2,7 @@
 set -euo pipefail
 echo 'Deploying....'
 
-KEYFILE=mktemp
+export KEYFILE="$(mktemp)"
 echo "$RPI_GIT_DEPLOY_KEY" > "$KEYFILE"
 cd / && GIT_SSH_COMMAND='ssh -i "$KEYFILE" -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/rpi-k8s.git
 
