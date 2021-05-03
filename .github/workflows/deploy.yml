@@ -13,6 +13,7 @@ jobs:
     environment: default
     env:
       GH_REPO_PAT_TOKEN: ${{ secrets.GH_REPO_PAT_TOKEN }}
+      DOCKERHUB_LOGIN_TOKEN: ${{ secrets.DOCKERHUB_LOGIN_TOKEN }}
     runs-on:
     - ubuntu-latest
     steps:
