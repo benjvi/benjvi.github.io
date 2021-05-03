@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 echo 'Deploying....'
-cd / && GIT_SSH_COMMAND='ssh -i $SSH_KEY_FOR_GITOPS -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/rpi-k8s.git
+
+cd / && GIT_SSH_COMMAND='ssh -i <(echo "$RPI_GIT_DEPLOY_KEY") -o IdentitiesOnly=yes -o StrictHostKeyChecking=no' git clone git@github.com:benjvi/rpi-k8s.git
 
 IMG_VERSION="$(git rev-parse --short=8 HEAD)"
 # TODO: add kshard in here

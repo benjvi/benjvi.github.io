@@ -14,6 +14,7 @@ jobs:
     env:
       GH_REPO_PAT_TOKEN: ${{ secrets.GH_REPO_PAT_TOKEN }}
       DOCKERHUB_LOGIN_TOKEN: ${{ secrets.DOCKERHUB_LOGIN_TOKEN }}
+      RPI_GIT_DEPLOY_KEY: ${{ secrets.RPI_GIT_DEPLOY_KEY }}
     runs-on:
     - ubuntu-latest
     steps:
