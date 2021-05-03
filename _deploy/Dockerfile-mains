@@ -11,9 +11,11 @@ RUN jekyll --version
 
 COPY . /srv/jekyll/
 RUN rm /srv/jekyll/robots.txt
-RUN jekyll build --config mains-config.yml
+RUN rm /srv/jekyll/README.md
+RUN rm /srv/jekyll/Makefile
+RUN jekyll build --config _config_prod.yml
 
 FROM --platform=$TARGETPLATFORM nginx:alpine
-COPY nginx-config/nginx.conf /etc/nginx/nginx.conf
-COPY nginx-config/jekyll.conf /etc/nginx/conf.d/jekyll.conf
+COPY _deploy/nginx-config/nginx.conf /etc/nginx/nginx.conf
+COPY _deploy/nginx-config/jekyll.conf /etc/nginx/conf.d/jekyll.conf
 COPY --from=0 /srv/jekyll/_site /usr/share/nginx/html
