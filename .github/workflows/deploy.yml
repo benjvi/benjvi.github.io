@@ -26,7 +26,7 @@ jobs:
           token: ${{ secrets.GH_REPO_PAT_TOKEN }}
 
       - name: Publish docker image
-        run: 'make publish-image'
+        run: 'echo $DOCKERHUB_LOGIN_TOKEN | docker login -u benjvi --password-stdin; make publish-image'
 
       - name: Promote manifests
         with:
