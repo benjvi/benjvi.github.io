@@ -4,35 +4,62 @@ title: "Spring Boot: A Hitchhiker's Guide"
 categories: [technology]
 ---
 
-After some years of doing minimal Java and Spring Boot development, recently, I have once again been developing a project with Spring Boot. It's a powerful framework but one of the difficult things about it is keeping the bigger picture in mind. In particular, it takes some time to understand where annotations are needed and why.
+After some years of doing minimal Java and Spring Boot development, recently, I have once again been developing a project with Spring Boot. It's a powerful framework, but one of the difficult things about it is understanding the structure it imposes on programs. For this reason, it has a bit of a reputation for magic, as it can be hard to grasp everything that your code is doing. In particular, it takes some time to understand where annotations are needed and why.
 
 Without this understanding, you'll pick up a bad habit it can be hard to break out of: when encountering a problem, you assume there is an annotation to solve the problem. So you google your precise problem, and then copy in the first annotation you find. You get an error, so you iterate through the search results until you find the syntax that works. Eventually, this produces a working program, but what its actually doing remains mysterious.
 
-Trying to avoid this, I thought back to the concepts that I've seen experienced developers use as a guide. Spring has a lot of documentation. But it can be difficult to find the important concepts amongst the details. Expert-level details can be discarded when you just want to produce an MVP. For that you need just the core concepts, enough to understand the choices you're making. So here's what *I've* learned in my time writing Spring Boot programs.
+![a mysterious system]({{site.url}}/img/mysterious-system.png)
+
+Trying to avoid this, I thought back to the concepts that I've seen experienced developers use as a guide. Spring has a lot of documentation. But it can be difficult to find the important concepts amongst the details. Expert-level details can be discarded when you just want to produce an MVP. For that you need just the core concepts, enough to understand the consequences of the choices you're making. So here's what I've learned in my time writing Spring Boot programs.
 
 ## Inversion of Control ("IoC") container
 
-This, the core concept of Spring, builds on the [Dependency Injection pattern](https://martinfowler.com/articles/injection.html). Although sometimes used to extract things that don't need to be widely available, this is generally a great pattern to use in your code. Each object declares the objects it needs, ideally in its constructor, and in this way the program can be initialized in an understandable way, with a sequence of object creations defining a clear object graph.
+This is the core concept of Spring, and builds on the [Dependency Injection pattern](https://martinfowler.com/articles/injection.html) - for constructing objects by explicitly passing dependencies to them. Although sometimes used to extract things that don't need to be widely available, this is generally a great pattern to use in your code. Each object declares the objects it needs, ideally in its constructor, and in this way the program can be initialized in an understandable way, with a sequence of object creations defining a clear object graph.
 
-The "[IoC container](https://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/)" (or "[dependency injection container](https://blog.ploeh.dk/2012/11/06/WhentouseaDIContainer/)") reifies this pattern, removing the imperative, sequential, creation of objects, and "[inverting the control](https://en.wikipedia.org/wiki/Inversion_of_control)". It makes object definition declarative, either through XML config or annotations in the code. Once declared, the "IoC container" knows how to link the objects together and construct everything in the correct order. Next, we'll look more concretely at the kinds of configuration Spring needs to be given to achieve this.
+The "[IoC container](https://kozmic.net/2012/10/23/ioc-container-solves-a-problem-you-might-not-have-but-its-a-nice-problem-to-have/)" (or "[dependency injection container](https://blog.ploeh.dk/2012/11/06/WhentouseaDIContainer/)") reifies this pattern, removing the imperative, sequential, object-creation code you have to write, and "[inverting the control](https://en.wikipedia.org/wiki/Inversion_of_control)". It makes object definition declarative, either through XML config or annotations in the code. Once declared, the "IoC container" knows how to link the objects together and construct everything in the correct order. Next, we'll look more concretely at the kinds of configuration Spring needs to be given to achieve this.
 
 ### Annotations
 
-Although XML is still a possibility for Spring configuration, it is now very rarely used. Instead now everything is done by annotations. The most important thing to understand about annotations is that [they don't contain any behaviour, they are metadata only](https://dzone.com/articles/how-annotations-work-java). The processing of annotations happens somewhere else entirely, by an annotation processor that is part of the framework. In Spring, the processing typically occurs at runtime via reflection. For the sake of understanding how the sausage is made, it would be nice to understand in more detail how this processing [is done in general](http://hannesdorfmann.com/annotation-processing/annotationprocessing101) and [in Spring specifically](https://dzone.com/articles/spring-annotation-processing-how-it-works). However, truth be told, for regular ([business stream-aligned](https://teamtopologies.com/key-concepts)) development knowing this stuff is not necessary. Processing the annotations is solely the responsibility of Spring, and can *generally* be treated as a black box.
+Although XML is still a possibility for Spring configuration, it is now very rarely used. Instead now everything is done by annotations. The most important thing to understand about annotations is that [they don't contain any behaviour, they are metadata only](https://dzone.com/articles/how-annotations-work-java). The processing of annotations happens somewhere else entirely, by an annotation processor that is part of the framework. In Spring, the processing typically occurs at runtime via reflection.  
+
+For the sake of understanding how the sausage is made, it would be nice to understand in more detail how this processing [is done in general](http://hannesdorfmann.com/annotation-processing/annotationprocessing101) and [in Spring specifically](https://dzone.com/articles/spring-annotation-processing-how-it-works). However, truth be told, for regular ([business stream-aligned](https://teamtopologies.com/key-concepts)) development knowing this stuff is not necessary. Processing the annotations is solely the responsibility of Spring, and can generally be treated as a black box.
 
 #### Using Dependencies: `@Config` and `@Bean`'s
 
-`@Config` is used to annotate a class with methods that return objects (or "[beans](https://www.tutorialspoint.com/spring/spring_bean_definition.htm)") to the Spring container. Each of those methods should be annotated with `@Bean`. So you would use this when constructing an object from a dependency you import.
+`@Config` is used to annotate a class with methods that return objects (or "[beans](https://www.tutorialspoint.com/spring/spring_bean_definition.htm)") to the Spring container. Each of those methods should be annotated with `@Bean`. So you would use this when constructing an object from a dependency you import. This will look something like this:
+
+```
+@Configuration
+public class SecurityConfiguration {
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+}
+```
 
 #### Instantiating Your Classes: `@Autowired` and `@Component`
 
-The `@Component` annotation on a class instructs Spring to construct an object of that class in the Spring container. Other annotations, such as `@Autowired` on the constructor, can be used on such classes to instruct Spring exactly how to initialize that object. Other annotations such as `@Controller`, `@Service` and `@Repository` will do the same as `@Component`, but they also are used for different functions too. They represent different "stereotypes", which we will come back to. For now we just need to know that generically to put objects in the IoC container we should use `@Component`.
+The `@Component` annotation on a class instructs Spring to construct an object of that class in the Spring container. Other annotations, such as `@Autowired`, can be used on such classes to instruct Spring exactly how to initialize that object. The `@Autowired` annotation specifically would be placed on the constructor, telling Spring to call the constructor, passing dependencies of the correct types from the Spring container:
+
+```
+@Component
+public class ExampleClass {
+        private PasswordEncoder encoder;
+	@Autowired
+	public ExampleClass(PasswordEncoder encoder) {
+		this.encoder = encoder;
+	}
+}
+```
+
+Other annotations such as `@Controller`, `@Service` and `@Repository` will do the same as `@Component`, but they also are used for different functions too. They represent different "stereotypes", which we will come back to. For now we just need to know that generically to put objects in the IoC container we should use `@Component`.
 
 ## AutoConfiguration and Starters
 
 There is another layer of abstraction that comes with Spring Boot - classpath scanning. This is different to the scanning that will be performed by Spring applications to process the annotations previously mentioned. With Spring Boot, you don't need to define all the beans that you want to use in your application, instead, you import some "spring-boot-starter"s that contain the functionality you need. These 'starters' also typically include dependencies of the corresponding Spring project, that you would otherwise have to add manually.  
 
-When you add `@SpringBootApplication` to your main class in the root module, this autoconfiguration will be enabled (via `@EnableAutoConfiguration`). Spring libraries contain rules to trigger the addition of relevant beans to the IoC container based on what Spring finds scanning the classpath, as described in [this video](https://www.youtube.com/watch?v=Sw7I70vjN0E).
+When you add `@SpringBootApplication` to your main class in the root module, this enables autoconfiguration (via `@EnableAutoConfiguration`, which is included in the `@SpringBootApplication` annotation). Spring libraries contain rules to trigger the addition of relevant beans to the IoC container based on what Spring finds scanning the classpath, as described in [this video](https://www.youtube.com/watch?v=Sw7I70vjN0E).
 
 For the same reason, in certain cases these starters will change their behaviour depending on the dependencies you have available. For this they typically use the `@Conditional` annotation on the relevant class. For each starter, you will have to look up the specifics of what they are doing, but [this article](https://dzone.com/articles/how-springboot-autoconfiguration-magic-works) gives a good intro to the mechanics of this and where to start looking into the details of how individual rules governing the AutoConfiguration is specified.
 

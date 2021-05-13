@@ -186,13 +186,15 @@ h4
 	font-size: 1.2em;
 }
 
-.postcontent img
+.postcontent img:not(.emoji)
 {
 	max-width: 96%;
         width: auto;
 	border-radius: 5px;
-	margin: 5px;
-	max-height: 680px;
+	margin-top: 20px;
+        margin-bottom: 20px;
+        display: block;
+	max-height: 580px;
         margin-left: auto;
         margin-right: auto;
 }
@@ -266,6 +268,9 @@ pre {
     word-wrap: break-word;
 }
 
+pre code {
+    font-size: 1em; 
+}
 /* END STYLES: MAIN CONTENT */
 
 /* STYLES: FOOTER */
