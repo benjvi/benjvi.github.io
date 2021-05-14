@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "An Anti-Tutorial: Storing Events in Prometheus"
+title: "How Not to Use Prometheus: Storing Events"
 categories: [technology]
 image: ibelonghere.webp
 ---
