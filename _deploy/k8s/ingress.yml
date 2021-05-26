@@ -6,7 +6,7 @@ metadata:
   name: blog
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/ingress.allow-http: "false"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/ingress.class: contour
     # removing the ingress-class means this object is ignored by contour
     kubernetes.io/tls-acme: "true"
