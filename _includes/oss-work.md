@@ -1,4 +1,10 @@
-
+## Open-Source Projects 
+ 
+I put most of my experiments and side-projects on Github. Here are a few of those projects that have ended up in a good state, and might be useful and/or interesting for a reader:
+* [__yshard__](https://github.com/benjvi/yshard) - Splits YAML documents using a `GROUP BY` on its fields. Useful in 'GitOps'/'Infrastructure As Code' workflows
+* [__PRify__](https://github.com/benjvi/PRify) - A utility tool to simplify interactions with pull requests, again useful in GitOps workflows
+* [__terraform-consumer-driven-contracts__](https://github.com/benjvi/terraform-consumer-driven-contracts) - Pipeline tasks to allow validation of terraform outputs based on the outputs used by consumers
+* [__interleaved__](https://github.com/benjvi/interleaved) - Python script to interleave matching utterances from two matching audio files in different languages. I used this script with English/Spanish audiobook chapters of "The Little Prince" and "100 Years of Solitude" to produce bilingual audio, which helped me to learn Spanish
 
 ## Open-Source Work
 
