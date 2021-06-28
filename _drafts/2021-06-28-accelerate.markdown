@@ -6,7 +6,7 @@ categories: [technology]
 
 _Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations, Nicole Forsgren PhD, Jez Humble, Gene Kim_
 
-I read this as part of a book club at work. Having a broad scope, it made a good jumping off point for a general discussion of 'DevOps', which is reflected in the philosophical nature of these notes. 
+I read this as part of a book club at work. Having a broad scope, it made a good jumping off point for a general discussion of 'DevOps', which is reflected in the expansive and questioning nature of these notes. 
 
 It is a particularly good book for those of us that work on software projects with a 'Transformation' aspect. It could help guide you when bringing practices from the modern 'DevOps' movement, in particular for large organizations that have gotten stuck in a local optimum in their approach to technology. With that said, in 2021 it reads as being quite conservative and I would suggest to cast a critical eye on ideas that may go unquestioned in the DevOps movement. Overall though, a lot of good stuff here.
 
@@ -14,17 +14,17 @@ In particular, I liked:
 - Decomposition of "DevOps" / "Continuous Delivery" into separate capabilities that could be adopted (to some degree!) incrementally e.g. automated delivery vs continuous delivery
 - Inclusion of security in here, has often been neglected in devops discussions
 - Inclusion of architecture, which also has been neglected previously and has been problematic in practices ("distributed monolith")
-- Explicitly called out practices that don't contribute to delivery ( although sometimes it seemed a bit contradictory / unclear e.g. with CABs )
-- Focus on measurement, and DORA metrics seem like things that actually can be measured too
-- I don't read the state of devops reports, so a lot of this stuff is new to me, particularly on the side of measurements / proof
-- Small batches. I love small batches, for me its the core of the whole Continuous Delivery thing
+- Explicitly called out practices that don't contribute to delivery ( although sometimes it seemed a bit contradictory / unclear e.g. with Change Approval Boards (CABs) )
+- Focus on measurement, and [DORA (DevOps Research and Assessment) metrics](https://www.blueoptima.com/blog/how-to-measure-devops-success-why-dora-metrics-are-important) seem like things that actually can be measured too
+- I don't read the "State of DevOps" reports, so a lot of this stuff is new to me, particularly on the side of measurements / proving the impact of practices
+- [Small batches](https://queue.acm.org/detail.cfm?id=2945077). I love small batches, for me its the core of the whole Continuous Delivery thing
 
 Didn't like: 
 - In concluding, would say things like: "quality doesn't need to be traded off against speed" - which is true, eventually. However, along the journey, and with a limited level of investment, you might need to make those tradeoffs. In general the book is about the endpoint and not the journey (it's a small book!)
 - Didn't talk about when shouldn't you do Continuous Delivery? Again, tradeoffs
-- View of the world is still quite dev-centric, less about operations/SRE. SRE book is complementary but also contradictory in some things
+- View of the world is still quite dev-centric, less about operations / Site Reliability Engineering. SRE book is complementary but also contradictory in some things
 - Nothing massively new here, very aligned to the "lean principles, bringing dev practices / automation to delivery & ops" school of DevOps which has been around for some time (almost 15 years?) now
-- Talk about practices could have tied things back more to how this specifically improves the metrics we're interested in. In general, they just say there's a correlation
+- Discussion of practices could have tied things back more to how this specifically improves the metrics we're interested in. In general, they just say there's a correlation
 - Too many buzzwords and too much self-promotion (ideas-wise), this is written in a way that's a bit too business-y for my tastes
 
 Questions:
@@ -40,14 +40,13 @@ Questions:
 
 ## Ch 2: Measurement
 
-- Calls out the problematic nature of using velocity for comparison or a measurement of productivity, which is nice. This happens a lot
+- Calls out the problematic nature of using velocity for comparing teams or as a measurement of productivity, which is nice. This happens a lot
 - Talks about the relationship between utilization (efficiency) vs lead time (for unplanned work/events), which is a really interesting topic. A very high utilization causes lead time to diverge (to infinity)
-- Talks about the different metrics
 - The idea is to focus (these practices) on strategic software. Use Wardley maps to determine this
-- Wardley maps - does anyone actually know how to use them? Its a thing I've heard people talk about a lot but never used
+  - Wardley maps - does anyone actually know how to use them? Its a thing I've heard people talk about a lot but never used
 - Metrics to be used for learning, not evaluation/comparison/control! Books like "weapons of math destruction" are interesting on the problems of management by metrics
 
-## Ch3: Culture
+## Ch 3: Culture
 
 Two ideas I found valuable here:
 - Westrum model of culture identifies three types: Pathological, Bureaucratic and Generative. [This GCP page](https://cloud.google.com/architecture/devops/devops-culture-westrum-organizational-culture) has a nice summary of this aspect of things
@@ -60,8 +59,8 @@ Yuval Noah Harari's [ideas about collective myths](https://fs.blog/2016/01/why-h
 ## Ch 4: Technical Practices
 
 - "computers perform repetitive tasks; people solve problems". A very simple phrase for what we're trying to do with continuous delivery as a whole, really persuasive phrase
-- "everyone is responsible" [ for holistic system-level outcomes ] - to what extent is this realistic?
-- Nice that trunk-based development is one of the practices, it's a modern practice, and solves a number of problems I've seen teams struggle with 
+- "everyone is responsible" [ for holistic system-level outcomes ] - its super important that teams work together towards a shared goal, although I ask, what are the limits of this?
+- Nice that [trunk-based development](https://trunkbaseddevelopment.com/) is one of the practices, it's a modern practice, and solves a number of problems I've seen teams struggle with 
 - Emphasis placed on version control of system configuration as well as application code, which is important. 
 - Interesting that the ability for teams to choose their own tools is also in here, and measured to be associated with high performance for continuous delivery
 - Section on quality is unconvincing, surely this is just availability / RED metrics? They measure by time spent on unplanned work, which is important but I don't see it as being a good measure of the product itself
@@ -80,7 +79,7 @@ Yuval Noah Harari's [ideas about collective myths](https://fs.blog/2016/01/why-h
 
 - Chapter is a bit short but had a couple of good prompts for further thought
 - Talks about scarcity of security professions / limited capacity which is a big problem
-- Main idea in to make security practices easy to consume, in various ways - mostly by setting standards, libraries and automated checking
+- Main idea is to make security practices easy to consume, in various ways - mostly by setting standards, libraries and automated checking
 - Doesn't negate the need for security reviews on substantial new features. But this can be at the design level at not necessarily at the code level 
 
 Questions
@@ -106,7 +105,7 @@ Questions
 
 ## Ch 10: Employee Satisfaction, Identity, and Engagement
 
-- Mostly skim-read this section, NPS is (more-or-less) fine  but not that interesting a topic for me
+- Mostly skim-read this section, Net Promoter Score is (more-or-less) fine  but not that interesting a topic for me
 - DevOps can provide better conditions for autonomy, mastery and purpose so it makes sense that there's a correlation with satisfaction
 
 ## Ch 11: Leaders and Managers
@@ -125,9 +124,9 @@ This chapter seems most relevant to upper management, as such, I didn't find muc
 
 ## Other thoughts
 
-When "digitally transforming" analogue services, how much do people care about higher availability?
-With these topics, especially in regard to architecture and organization structure, I always wonder if there's some connection to chaos theory, if at some point there's a critical transition where the nature of how things get done fundamentally changes (see [NOTE: Chaos In Organizations and IT Engineering](Chaos%20In%20Organizations%20and%20IT%20Engineering))
-Where's the discussion of how MTTR is improved by various practices?
+- When "digitally transforming" _analogue_ services, how much do people care about higher availability?
+- With these topics, especially in regard to architecture and organization structure, I always wonder if there's some connection to chaos theory, if at some point there's a critical transition where the nature of how things get done fundamentally changes (see [NOTE: Chaos In Organizations and IT Engineering](Chaos%20In%20Organizations%20and%20IT%20Engineering))
+- Where's the discussion of how MTTR is improved by various practices?
 
 ## Reference
 
